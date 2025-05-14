@@ -74,9 +74,9 @@
     ncurses6
   ];
 
-  system.autoUpgrade = {
-    enable = true;
-  };
+  #system.autoUpgrade = {
+  #  enable = true;
+  #};
 
   #nix.gc = {
   #  automatic = true;

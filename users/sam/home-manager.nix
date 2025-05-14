@@ -38,10 +38,10 @@ in {
     '';
   };
 
-  programs.kitty = {
-    enable = !isWSL;
-    extraConfig = builtins.readFile ./kitty;
-  };
+  #programs.kitty = {
+  #  enable = !isWSL;
+  #  extraConfig = builtins.readFile ./kitty;
+  #};
 
   gtk = {
     enable = true;
