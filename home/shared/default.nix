@@ -19,19 +19,23 @@ let
     tree
     kubectl
     wget
-    (with dotnetCorePackages; combinePackages [
-      dotnet_9.sdk
-    ])
     ffmpeg-headless
     yt-dlp
     watch
     nano
     _1password
+    nixfmt-rfc-style
+
+    # Dotnet
+    (with dotnetCorePackages; combinePackages [
+      dotnet_9.sdk
+    ])
+    unstable.jetbrains.rider
+
+    # Python
     python3
     hatch
-
     unstable.jetbrains.pycharm-professional
-    unstable.jetbrains.rider
   ];
 in
 {
