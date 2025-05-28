@@ -59,5 +59,7 @@ in
   #../programs/signal
   #../programs/yubikey
   #../programs/zathura
+  ../programs/statix
+  #nix-index-database.hmModules.nix-index
   more
 ]

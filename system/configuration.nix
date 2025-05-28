@@ -43,6 +43,7 @@
     wget
     cifs-utils
     killall
+    #jetbrains.rider
   ];
 
   environment = {
