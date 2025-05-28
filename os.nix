@@ -1,10 +1,19 @@
-{ extraSystemConfig, inputs, system, pkgs, ... }:
+{
+  extraSystemConfig,
+  inputs,
+  system,
+  pkgs,
+  ...
+}:
 
 let
   inherit (inputs.nixpkgs.lib) nixosSystem;
   inherit (pkgs) lib;
 
-  hosts = [ "argon" "minos" ];
+  hosts = [
+    "argon"
+    "minos"
+  ];
 
   modules' = [
     ./system/configuration.nix
