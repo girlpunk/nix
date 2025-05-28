@@ -23,8 +23,10 @@ let
     yt-dlp
     watch
     nano
-    _1password
+    _1password-cli
     nixfmt-rfc-style
+    terraform
+    comma
 
     # Dotnet
     (with dotnetCorePackages; combinePackages [
@@ -36,6 +38,15 @@ let
     python3
     hatch
     unstable.jetbrains.pycharm-professional
+
+    # Rust
+    rustPlatform.rustcSrc
+    rustc
+    rustfmt
+    cargo
+    pkg-config
+    gcc
+    unstable.jetbrains.rust-rover
   ];
 in
 {
@@ -72,7 +83,33 @@ in
       PAGER = "less -FirSwX";
       # https://github.com/NixOS/nixpkgs/issues/24311#issuecomment-980477051
       GIT_ASKPASS = "";
+
+      # https://github.com/rust-lang/rust-bindgen#environment-variables
+      #LIBCLANG_PATH = pkgs.lib.makeLibraryPath [ pkgs.llvmPackages_latest.libclang.lib ];
+      #LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (buildInputs ++ nativeBuildInputs);
+      # Add precompiled library to rustc search path
+      #RUSTFLAGS = (builtins.map (a: ''-L ${a}/lib'') [
+      #  # add libraries here (e.g. pkgs.libvmi)
+      #]);
+      # Add glibc, clang, glib, and other headers to bindgen search path
+      #BINDGEN_EXTRA_CLANG_ARGS =
+      #  # Includes normal include path
+      #  (builtins.map (a: ''-I"${a}/include"'') [
+      #    # add dev libraries here (e.g. pkgs.libvmi.dev)
+      #    pkgs.glibc.dev
+      #  ])
+      #  # Includes with special directory paths
+      #  ++ [
+      #    ''-I"${pkgs.llvmPackages_latest.libclang.lib}/lib/clang/${pkgs.llvmPackages_latest.libclang.version}/include"''
+      #    ''-I"${pkgs.glib.dev}/include/glib-2.0"''
+      #    ''-I${pkgs.glib.out}/lib/glib-2.0/include/''
+      #  ];
+      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     };
+
+    sessionPath = [
+      "$HOME/.dotnet/tools"
+    ];
   };
 
   # garbage collection
