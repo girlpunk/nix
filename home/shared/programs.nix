@@ -10,7 +10,7 @@ let
         enable = true;
         enableFishIntegration = true;
         enableNixCommand = true;
-        database = pkgs.nix-index-small-database;
+        database = pkgs.nix-index-database;
       };
 
       # command-not-found only works with channels
@@ -42,6 +42,13 @@ let
       #  ncurses6
       #];
     };
+
+#    programs.nix-index-database.comma.enable = true;
+
+#    modules = [
+#      pkgs.nix-index-database.hmModules.nix-index
+#    ];
+
   };
 in
 [
