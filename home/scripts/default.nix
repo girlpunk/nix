@@ -1,5 +1,11 @@
 let
-  scripts = { config, lib, pkgs, ... }:
+  scripts =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       #gsk = pkgs.callPackage ./gen-ssh-key.nix { };
       #kls = pkgs.callPackage ./keyboard-layout-switch.nix { };

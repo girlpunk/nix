@@ -1,12 +1,11 @@
 { pkgs, config, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      #../../wm/hyprland.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    #../../wm/hyprland.nix
+  ];
 
   # Bootloader.
   boot = {
@@ -48,7 +47,10 @@
 
       address = [ "192.168.42.24/24" ];
       gateway = [ "192.168.42.254" ];
-      dns = ["192.168.42.200"  "192.168.42.201"];
+      dns = [
+        "192.168.42.200"
+        "192.168.42.201"
+      ];
 
       networkConfig = {
         IPv6AcceptRA = true;

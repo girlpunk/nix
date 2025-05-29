@@ -1,4 +1,11 @@
-{ config, pkgs, lib, currentSystem, currentSystemName,... }:
+{
+  config,
+  pkgs,
+  lib,
+  currentSystem,
+  currentSystemName,
+  ...
+}:
 
 {
   imports = [
