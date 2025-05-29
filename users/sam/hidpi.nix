@@ -27,9 +27,7 @@ in
     programs = {
       browser.settings.dpi = mkOption {
         type = types.str;
-        default =
-          if hyprland.enable then (if config.hidpi then "0" else "1.7")
-          else "0";
+        default = if hyprland.enable then (if config.hidpi then "0" else "1.7") else "0";
       };
 
       foot.fontsize = mkOption {
@@ -46,12 +44,15 @@ in
     services = {
       hypridle.dpms = mkOption {
         type = types.attrs;
-        default = if config.hidpi then { } else
-        {
-          timeout = 1200;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        };
+        default =
+          if config.hidpi then
+            { }
+          else
+            {
+              timeout = 1200;
+              on-timeout = "hyprctl dispatch dpms off";
+              on-resume = "hyprctl dispatch dpms on";
+            };
       };
 
       polybar.fontsizes = {

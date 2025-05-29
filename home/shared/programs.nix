@@ -1,59 +1,61 @@
 let
-  more = { pkgs, ... }: {
-    programs = {
-      gpg.enable = true;
+  more =
+    { pkgs, ... }:
+    {
+      programs = {
+        gpg.enable = true;
 
-      jq.enable = true;
+        jq.enable = true;
 
-      # generate index with: nix-index --filter-prefix '/bin/'
-      nix-index-fork = {
-        enable = true;
-        enableFishIntegration = true;
-        enableNixCommand = true;
-        database = pkgs.nix-index-database;
+        # generate index with: nix-index --filter-prefix '/bin/'
+        nix-index-fork = {
+          enable = true;
+          enableFishIntegration = true;
+          enableNixCommand = true;
+          database = pkgs.nix-index-database;
+        };
+
+        # command-not-found only works with channels
+        command-not-found.enable = false;
+
+        ssh = {
+          enable = true;
+          controlMaster = "auto";
+          controlPersist = "5m";
+        };
+
+        zoxide = {
+          enable = true;
+          enableZshIntegration = true;
+          options = [ ];
+        };
+
+        #nano.enable = true;
+
+        #_1password = {
+        #  enable = true;
+        #};
+
+        #nix-ld.enable = true;
+        #nix-ld.libraries = with pkgs; [
+        #  # Add any missing dynamic libraries for unpackaged programs
+        #  # here, NOT in environment.systemPackages
+        #  icu
+        #  ncurses6
+        #];
       };
 
-      # command-not-found only works with channels
-      command-not-found.enable = false;
+      #    programs.nix-index-database.comma.enable = true;
 
-      ssh = {
-        enable = true;
-        controlMaster = "auto";
-        controlPersist = "5m";
-      };
-
-      zoxide = {
-        enable = true;
-        enableZshIntegration = true;
-        options = [ ];
-      };
-
-      #nano.enable = true;
-
-      #_1password = {
-      #  enable = true;
-      #};
-
-      #nix-ld.enable = true;
-      #nix-ld.libraries = with pkgs; [
-      #  # Add any missing dynamic libraries for unpackaged programs
-      #  # here, NOT in environment.systemPackages
-      #  icu
-      #  ncurses6
-      #];
+      #    modules = [
+      #      pkgs.nix-index-database.hmModules.nix-index
+      #    ];
     };
-
-#    programs.nix-index-database.comma.enable = true;
-
-#    modules = [
-#      pkgs.nix-index-database.hmModules.nix-index
-#    ];
-
-  };
 in
 [
   #../programs/dconf
   ../programs/git
+  ../programs/zsh
   #../programs/firefox
   #../programs/fish
   #../programs/khal

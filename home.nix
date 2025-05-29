@@ -1,4 +1,10 @@
-{ extraHomeConfig, inputs, system, pkgs, ... }:
+{
+  extraHomeConfig,
+  inputs,
+  system,
+  pkgs,
+  ...
+}:
 
 let
   modules' = [
@@ -8,26 +14,41 @@ let
     extraHomeConfig
   ];
 
-  mkHome = { mut ? false, mods ? [ ] }:
+  mkHome =
+    {
+      mut ? false,
+      mods ? [ ],
+    }:
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       #extraSpecialArgs = pkgs.xargs;
-      modules = modules' ++ mods ++ [
-        { dotfiles.mutable = mut; }
-      ];
+      modules =
+        modules'
+        ++ mods
+        ++ [
+          { dotfiles.mutable = mut; }
+        ];
     };
 
-  mkHyprlandHome = { hidpi, mut ? false }: mkHome {
-    inherit hidpi mut;
-    mods = [
-      inputs.hypr-binds-flake.homeManagerModules.${system}.default
-      ../home/wm/hyprland/home.nix
-    ];
-  };
+  mkHyprlandHome =
+    {
+      hidpi,
+      mut ? false,
+    }:
+    mkHome {
+      inherit hidpi mut;
+      mods = [
+        inputs.hypr-binds-flake.homeManagerModules.${system}.default
+        ../home/wm/hyprland/home.nix
+      ];
+    };
 in
 {
-  cli  = mkHome {};
+  cli = mkHome { };
   hyprland-edp = mkHyprlandHome { hidpi = false; };
   hyprland-hdmi = mkHyprlandHome { hidpi = true; };
-  hyprland-hdmi-mutable = mkHyprlandHome { hidpi = true; mut = true; };
+  hyprland-hdmi-mutable = mkHyprlandHome {
+    hidpi = true;
+    mut = true;
+  };
 }

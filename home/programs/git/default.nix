@@ -10,7 +10,8 @@ let
     core.askPass = ""; # needs to be empty to use terminal for ask pass
     credential.helper = "store"; # want to make this more secure
   };
-in {
+in
+{
   programs.git = {
     enable = true;
     userName = "Foxocube";

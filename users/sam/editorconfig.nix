@@ -1,8 +1,13 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   editorconfig = {
     enable = true;
-    settings = {};
+    settings = { };
   };
 }
