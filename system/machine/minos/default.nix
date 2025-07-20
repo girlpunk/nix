@@ -5,6 +5,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../programs/sunshine.nix
       #../../wm/hyprland.nix
     ];
 

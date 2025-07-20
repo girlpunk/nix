@@ -26,12 +26,6 @@ let
     _1password-cli
     nixfmt-rfc-style
 
-    # Dotnet
-    (with dotnetCorePackages; combinePackages [
-      dotnet_9.sdk
-    ])
-    unstable.jetbrains.rider
-
     # Python
     python3
     hatch
@@ -60,9 +54,6 @@ in
 
   home = {
     inherit username homeDirectory packages;
-
-    #unstable.jetbrains.rider
-    #unstable.jetbrains.pycharm-professional
 
     changes-report.enable = true;
 
