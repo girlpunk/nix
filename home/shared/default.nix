@@ -79,12 +79,7 @@ in
     };
   };
 
-  # garbage collection
-  #nix.gc = {
-  #  automatic = true;
-  #  frequency = "weekly";
-  #  options = "--delete-older-than 7d";
-  #};
+  manual.html.enable = true;
 
   # restart services on change
   #systemd.user.startServices = "sd-switch";
