@@ -20,6 +20,12 @@ let
         enable = true;
         controlMaster = "auto";
         controlPersist = "5m";
+
+        matchBlocks = {
+          "192.168.42.24" = {
+            forwardAgent = true;
+          };
+        };
       };
 
       zoxide = {

@@ -20,5 +20,20 @@ in {
     #  signByDefault = true;
     #};
     extraConfig = gitConfig;
+    lfs.enable = true;
+    #delta.enable = true;
+    #diff-highlight.enable = true;
+    #diff-so-fancy.enable = true;
+    #difftastic.enable = true;
+  };
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper = {
+      enable = true;
+    };
+    settings.git_protocol = "ssh";
+  };
+  programs.ssh = {
+    matchBlocks."*".identityAgent = "~/.1password/agent.sock";
   };
 }
