@@ -4,11 +4,6 @@
   # Add ~/.local/bin to PATH
   environment.localBinInPath = true;
 
-  programs.zsh = {
-    enable = true;
-    ohMyZsh.enable = true;
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sam = {
     isNormalUser = true;
@@ -22,6 +17,11 @@
     shell = pkgs.zsh;
   };
 
+  programs = {
+    zsh = {
+      enable = true;
+      ohMyZsh.enable = true;
+    };
 
   programs.steam = {
     enable = true;

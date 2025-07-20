@@ -52,6 +52,10 @@ in
   xdg = {
     inherit configHome;
     enable = true;
+    autostart.enable = true;
+    userDirs.enable = true;
+    userDirs.createDirectories = true;
+    portal.enable = true;
   };
 
   home = {
@@ -86,7 +90,7 @@ in
   #systemd.user.startServices = "sd-switch";
 
   # notifications about home-manager news
-  #news.display = "silent";
+  news.display = "show";
 
   home.stateVersion = "24.05";
 }
