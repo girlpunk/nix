@@ -1,20 +1,21 @@
 let
-  more = { pkgs, ... }: {
+  more = { inputs, pkgs, ... }: {
     programs = {
       gpg.enable = true;
 
       jq.enable = true;
 
       # generate index with: nix-index --filter-prefix '/bin/'
-      nix-index-fork = {
-        enable = true;
-        enableFishIntegration = true;
-        enableNixCommand = true;
-        database = pkgs.nix-index-small-database;
-      };
+      #nix-index-fork = {
+      #  enable = true;
+      #  #enableFishIntegration = true;
+      #  enableNixCommand = true;
+      #  database = pkgs.nix-index-database;
+      #};
 
       # command-not-found only works with channels
       command-not-found.enable = false;
+      nix-index.enable = true;
 
       ssh = {
         enable = true;
