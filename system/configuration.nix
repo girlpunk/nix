@@ -29,8 +29,9 @@
   fonts = {
     fontDir.enable = true;
 
-    packages = [
-      pkgs.fira-code
+    packages = with pkgs; [
+      fira-code
+      nerd-fonts.fira-code
       #pkgs.jetbrains-mono
     ];
   };
@@ -43,6 +44,8 @@
     wget
     cifs-utils
     killall
+    home-manager
+    comma
   ];
 
   environment = {

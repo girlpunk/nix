@@ -53,12 +53,15 @@ let
       #  icu
       #  ncurses6
       #];
+
+      nh.enable = true;
     };
   };
 in
 [
   #../programs/dconf
   ../programs/git
+  ../programs/statix
   #../programs/firefox
   #../programs/fish
   #../programs/khal
