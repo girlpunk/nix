@@ -22,13 +22,13 @@
     shell = pkgs.zsh;
   };
 
-  programs._1password.enable = true;
 
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
   };
+    _1password.enable = true;
 
   programs.git = {
     enable = true;
@@ -111,9 +111,6 @@
       "gid=100"
       "x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s"];
   };
-
-  programs.hyprland.enable = true;
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   #nixpkgs.overlays = import ../lib/overlays.nix ++ [
   #  (import ./vim.nix { inherit inputs; })

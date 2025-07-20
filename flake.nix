@@ -45,6 +45,10 @@
       inputs.fenix.follows = "fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    _1password-shell-plugins.url = "github:1Password/shell-plugins";
+    opnix.url = "github:brizzbuzz/opnix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: let
@@ -55,6 +59,7 @@
     pkgs = import nixpkgs {
       inherit overlays system;
       config.allowUnfree = true;
+
     };
   in {
     homeConfigurations = pkgs.builders.mkHome {};

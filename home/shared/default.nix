@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ inputs, pkgs, lib, ... }:
 
 let
   username = "sam";
@@ -23,7 +23,7 @@ let
     yt-dlp
     watch
     nano
-    _1password
+    _1password-cli
     nixfmt-rfc-style
 
     # Dotnet
