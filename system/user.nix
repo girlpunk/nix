@@ -10,6 +10,7 @@
     extraGroups = [
       "wheel"
       "docker"
+      "i2c"
     ];
     openssh = {
       authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFygf49qzrMruoAeB/Y0RcpkTFGpTVpRr+bwRhDQIZzI sam@argon"];
@@ -23,25 +24,16 @@
       ohMyZsh.enable = true;
     };
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
     _1password.enable = true;
 
-  programs.git = {
-    enable = true;
-  };
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+    };
 
-  services.sunshine = {
-    enable = true;
-    capSysAdmin = true;
-    openFirewall = true;
-    settings = {
-      locale = "en_GB";
-      adapter_name = "/dev/dri/renderD128";
-      origin_web_ui_allowed = "wan";
+    git = {
+      enable = true;
     };
   };
 
