@@ -12,7 +12,7 @@ let
   };
 
   overlays = f: p: {
-    inherit (inputs.nix-index-database.packages.${system}) nix-index-database nix-index-small-database;
+    #inherit (inputs.nix-index-database.packages.${system}) nix-index-database nix-index-small-database;
 
     #inherit (inputs.nixpkgs-unstable.packages.${system}) jetbrains.resharper;
 
@@ -67,7 +67,7 @@ in
 [
   libOverlay
   overlays
-  inputs.nix-index.overlays.${system}.default
+  #inputs.nix-index.overlays.${system}.default
   #inputs.nurpkgs.overlays.default
   #inputs.neovim-flake.overlays.${system}.default
   inputs.statix.overlays.default
