@@ -20,11 +20,13 @@ let
       ];
     };
 
-  mkHyprlandHome = { hidpi, mut ? false }: mkHome {
-    inherit hidpi mut;
+  mkHyprlandHome = { hidpi, monitors, mut ? false }: mkHome {
+    inherit mut;
     mods = [
-      inputs.hypr-binds-flake.homeManagerModules.${system}.default
-      ../home/wm/hyprland/home.nix
+      #inputs.hypr-binds-flake.homeManagerModules.${system}.default
+      ./home/programs/hyprland
+    ] ++ [
+      { hyprland.monitors = monitors; }
     ];
   };
 in
@@ -33,4 +35,14 @@ in
   hyprland-edp = mkHyprlandHome { hidpi = false; };
   hyprland-hdmi = mkHyprlandHome { hidpi = true; };
   hyprland-hdmi-mutable = mkHyprlandHome { hidpi = true; mut = true; };
+
+  "sam@argon" = mkHyprlandHome {
+    hidpi = true;
+
+    monitors = [
+      # See https://wiki.hyprland.org/Configuring/Monitors/
+      "eDP-1,preferred,auto,1"
+      "HDMI-A-2,preferred,auto-left,1"
+    ];
+  };
 }
