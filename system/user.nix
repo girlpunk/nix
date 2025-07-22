@@ -109,6 +109,8 @@
     ];
   };
 
+  nix.settings.trusted-users = ["root" "sam"];
+
   #nixpkgs.overlays = import ../lib/overlays.nix ++ [
   #  (import ./vim.nix { inherit inputs; })
   #];
