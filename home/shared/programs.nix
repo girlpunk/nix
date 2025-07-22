@@ -63,6 +63,7 @@ let
 
       nh.enable = true;
     };
+  };
 in
 [
   #../programs/dconf

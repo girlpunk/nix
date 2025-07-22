@@ -60,7 +60,6 @@ in
     autostart.enable = true;
     userDirs.enable = true;
     userDirs.createDirectories = true;
-    portal.enable = true;
   };
 
   home = {

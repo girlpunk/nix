@@ -19,7 +19,10 @@
     pkgs.rofi
   ];
 
-  xdg.enable = true;
+  xdg = {
+    enable = true;
+    portal.enable = true;
+  };
 
   services = {
     arrpc.enable = true;
