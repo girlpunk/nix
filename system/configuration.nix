@@ -46,8 +46,9 @@
   fonts = {
     fontDir.enable = true;
 
-    packages = [
-      pkgs.fira-code
+    packages = with pkgs; [
+      fira-code
+      nerd-fonts.fira-code
       #pkgs.jetbrains-mono
     ];
   };
@@ -60,7 +61,8 @@
     wget
     cifs-utils
     killall
-    #jetbrains.rider
+    home-manager
+    comma
   ];
 
   environment = {
@@ -72,25 +74,29 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = "no";
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
   };
 
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/sam/programs/nix";
-  };
+  programs = {
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/sam/programs/nix";
+    };
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-    icu
-    ncurses6
-  ];
+    nix-ld.enable = true;
+    nix-ld.libraries = with pkgs; [
+      # Add any missing dynamic libraries for unpackaged programs
+      # here, NOT in environment.systemPackages
+      icu
+      ncurses6
+    ];
+  };
 
   #system.autoUpgrade = {
   #  enable = true;
@@ -100,12 +106,4 @@
   #  automatic = true;
   #  options = "--delete-older-than 14d";
   #};
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
 }
