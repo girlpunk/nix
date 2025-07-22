@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ inputs, pkgs, lib, ... }:
 
 let
   username = "sam";
@@ -27,15 +27,6 @@ let
     nixfmt-rfc-style
     terraform
     comma
-
-    # Dotnet
-    (
-      with dotnetCorePackages;
-      combinePackages [
-        dotnet_9.sdk
-      ]
-    )
-    unstable.jetbrains.rider
 
     # Python
     python3
@@ -66,13 +57,14 @@ in
   xdg = {
     inherit configHome;
     enable = true;
+    autostart.enable = true;
+    userDirs.enable = true;
+    userDirs.createDirectories = true;
+    portal.enable = true;
   };
 
   home = {
     inherit username homeDirectory packages;
-
-    #unstable.jetbrains.rider
-    #unstable.jetbrains.pycharm-professional
 
     changes-report.enable = true;
 
@@ -115,18 +107,13 @@ in
     ];
   };
 
-  # garbage collection
-  #nix.gc = {
-  #  automatic = true;
-  #  frequency = "weekly";
-  #  options = "--delete-older-than 7d";
-  #};
+  manual.html.enable = true;
 
   # restart services on change
   #systemd.user.startServices = "sd-switch";
 
   # notifications about home-manager news
-  #news.display = "silent";
+  news.display = "show";
 
   home.stateVersion = "24.05";
 }

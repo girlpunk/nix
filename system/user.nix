@@ -4,17 +4,13 @@
   # Add ~/.local/bin to PATH
   environment.localBinInPath = true;
 
-  programs.zsh = {
-    enable = true;
-    ohMyZsh.enable = true;
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sam = {
     isNormalUser = true;
     extraGroups = [
       "wheel"
       "docker"
+      "i2c"
     ];
     openssh = {
       authorizedKeys.keys = [
@@ -24,26 +20,22 @@
     shell = pkgs.zsh;
   };
 
-  programs._1password.enable = true;
+  programs = {
+    zsh = {
+      enable = true;
+      ohMyZsh.enable = true;
+    };
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
+    _1password.enable = true;
 
-  programs.git = {
-    enable = true;
-  };
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+    };
 
-  services.sunshine = {
-    enable = true;
-    capSysAdmin = true;
-    openFirewall = true;
-    settings = {
-      locale = "en_GB";
-      adapter_name = "/dev/dri/renderD128";
-      origin_web_ui_allowed = "wan";
+    git = {
+      enable = true;
     };
   };
 
@@ -116,9 +108,6 @@
       "x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s"
     ];
   };
-
-  programs.hyprland.enable = true;
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   #nixpkgs.overlays = import ../lib/overlays.nix ++ [
   #  (import ./vim.nix { inherit inputs; })

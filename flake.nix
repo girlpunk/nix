@@ -45,6 +45,10 @@
       inputs.fenix.follows = "fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    _1password-shell-plugins.url = "github:1Password/shell-plugins";
+    opnix.url = "github:brizzbuzz/opnix";
   };
 
   outputs =
