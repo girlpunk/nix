@@ -58,4 +58,6 @@ in
       "HDMI-A-2,preferred,auto-left,1"
     ];
   };
+
+  "sam@minos" = mkHome { };
 }
