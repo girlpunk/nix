@@ -66,8 +66,30 @@
   hardware = {
     bluetooth.enable = lib.mkDefault true;
     sensor.iio.enable = true;
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.intel.updateMicrocode = true;
+    enableRedistributableFirmware = true;
+    opengl = {
+      enable = true;
+      #driSupport = true;
+    
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      libvdpau-va-gl
+    ];
+};
   };
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      # your Open GL, Vulkan and VAAPI drivers
+      #vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable
+      # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
+      intel-media-sdk   # for older GPUs
+    ];
+  };
+
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 
   # VP9 decoding not supported when using intel-media-driver
   # https://github.com/intel/media-driver/issues/1024
