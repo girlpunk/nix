@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../programs/rider
+      #../../programs/rider
       ../../programs/1password-gui.nix
       ../../modules/gui
     ];
@@ -31,6 +31,7 @@
   environment.systemPackages = [
     pkgs.cryptsetup
     pkgs.kubectl
+    pkgs.terraform
   ];
 
   # Configure network proxy if necessary
