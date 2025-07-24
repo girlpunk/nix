@@ -106,6 +106,11 @@ in
     ];
   };
 
+  programs.nh = {
+    enable = true;
+    flake = "/home/sam/programs/nix";
+  };
+
   manual.html.enable = true;
 
   # restart services on change
