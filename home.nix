@@ -60,4 +60,5 @@ in
   };
 
   "sam@minos" = mkHome { };
+  "sam@home-assistant" = mkHome { };
 }
