@@ -55,9 +55,6 @@
     autoPrune.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  #users.mutableUsers = false;
-
   # Manage fonts. We pull these from a secret directory since most of these
   # fonts require a purchase.
   fonts = {
