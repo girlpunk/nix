@@ -10,6 +10,7 @@ let
     core.askPass = ""; # needs to be empty to use terminal for ask pass
     credential.helper = "store"; # want to make this more secure
     pager.branch = false;
+    commit.gpgsign = true;
 
     credential = {
       "https://dev.azure.com" = {
@@ -18,14 +19,8 @@ let
     };
 
     gpg = {
-      "" = {
-        format = "ssh";
-      };
-      "ssh" = {
-        program = "${pkgs._1password-cli}/bin/op-ssh-sign";
-      };
+      format = "ssh";
     };
-    commit.gpgsign = true;
   };
 in
 {
@@ -53,9 +48,6 @@ in
         enable = true;
       };
       settings.git_protocol = "ssh";
-    };
-    ssh = {
-      matchBlocks."*".identityAgent = "~/.1password/agent.sock";
     };
   };
 }
