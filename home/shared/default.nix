@@ -75,7 +75,7 @@ in
     language.base = "en_GB";
 
     sessionVariables = {
-      DOTNET_ROOT = "${pkgs.dotnet-sdk_9}/share/dotnet";
+      #DOTNET_ROOT = "${pkgs.dotnet-sdk_9}/share/dotnet";
       #LANG = "en_GB.UTF-8";
       LC_CTYPE = "en_GB.UTF-8";
       LC_ALL = "en_GB.UTF-8";
