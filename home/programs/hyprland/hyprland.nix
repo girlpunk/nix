@@ -287,6 +287,8 @@ in
             ## Navigate // Move Focused Window to Workspace // <Super> <Shift> [0-9] ##
             "$mainMod SHIFT, ${toString workspace}, movetoworkspace, ${toString workspace}"
 
+            # Move active workspace to a monitor
+            "$mainMod CONTROL, ${toString workspace}, exec, hyprctl dispatch moveworkspacetomonitor ${toString workspace} $(hyprctl activewindow | egrep \"monitor: [[:digit:]]+\" | egrep -o \"[[:digit:]]+\") && hyprctl dispatch workspace ${toString workspace}"
           ]) 9
         )
       );
@@ -328,9 +330,15 @@ in
       windowrulev2 = [
         "suppressevent maximize, class:.*" # You'll probably like this.
 
+        "workspace 1,class:kitty"
+
         "workspace 2, class:firefox"
 
         "workspace 3,title:^(.*)(VSCodium)$"
+        "workspace 3,   class:^jetbrains-.*$"
+        "noinitialfocus,class:^jetbrains-.*$,floating:1" # ,title:^win\d*$
+        #"dimaround,     class:^jetbrains-.*$,floating:1"
+        #"minsize 300 400,class:^jetbrains-.*$"
 
         "workspace 5,title:^(Cinny)(.*)$"
         "workspace 5,title:^(.*)(Discord)$"

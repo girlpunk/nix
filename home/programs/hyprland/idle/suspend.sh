@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-# inhibited?
-~/.config/hypr/scripts/idle/inhibitors/ac.sh || exit 1
-~/.config/hypr/scripts/idle/inhibitors/pulse.sh || exit 1
+# Skip AC check for longer timeout periods
+if [[ $* != *--always* ]]; then
+    # If on AC power, don't suspend
+    ./inhibitors/ac.sh || exit 1
+fi
 
-sudo systemctl suspend
+# If pulse says something is playing, don't suspend
+./inhibitors/pulse.sh || exit 1
+
+# Suspend
+systemctl suspend-then-hibernate

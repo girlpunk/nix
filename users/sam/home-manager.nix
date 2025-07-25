@@ -9,16 +9,12 @@
 
 let
   sources = import ../../nix/sources.nix;
-
+x
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
   #manpager = (pkgs.writeShellScriptBin "manpager" ''cat "$1" | col -bx | bat --language man --style plain'');
 in
 {
-  # Home-manager 22.11 requires this be set. We never set it so we have
-  # to use the old state version.
-  home.stateVersion = "24.05";
-
   #---------------------------------------------------------------------
   # Programs
   #---------------------------------------------------------------------
@@ -43,17 +39,4 @@ in
       run-shell ${sources.tmux-dracula}/dracula.tmux
     '';
   };
-
-  #programs.kitty = {
-  #  enable = !isWSL;
-  #  extraConfig = builtins.readFile ./kitty;
-  #};
-
-  gtk = {
-    enable = true;
-    cursorTheme.name = "";
-    cursorTheme.size = 16;
-    #theme = "";
-  };
-
 }
