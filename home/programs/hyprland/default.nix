@@ -48,7 +48,7 @@
     hyprpolkitagent.enable = true;
     network-manager-applet.enable = true;
     poweralertd.enable = true;
-    ssh-agent.enable = true;
+    ssh-agent.enable = false;
 
     wob = {
       enable = true;
@@ -58,5 +58,9 @@
 
   #config.systemd.user.sockets.wob.Socket.ListenFIFO = "${config.xdg.dataHome}/wob.sock";
 
-  programs.firefox.languagePacks = [ "en-GB" ];
+  programs = {
+    firefox.languagePacks = [ "en-GB" ];
+    ssh.matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+    git.extraConfig.gpg.ssh.program = "${pkgs._1password}/bin/op-ssh-sign";
+  };
 }
