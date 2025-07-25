@@ -61,6 +61,6 @@
   programs = {
     firefox.languagePacks = [ "en-GB" ];
     ssh.matchBlocks."*".identityAgent = "~/.1password/agent.sock";
-    git.extraConfig.gpg.ssh.program = "${pkgs._1password}/bin/op-ssh-sign";
+    git.extraConfig.gpg.ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
   };
 }
