@@ -16,7 +16,14 @@
 
   boot = {
     initrd = {
-      availableKernelModules = [ "uhci_hcd" "ehci_pci" "ahci" "vmw_pvscsi" "sd_mod" "sr_mod" ];
+      availableKernelModules = [
+        "uhci_hcd"
+        "ehci_pci"
+        "ahci"
+        "vmw_pvscsi"
+        "sd_mod"
+        "sr_mod"
+      ];
       kernelModules = [ ];
     };
 

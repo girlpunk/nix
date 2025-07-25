@@ -88,7 +88,8 @@ let
     };
 
     package = inputs.hyprland.packages.${inputs.pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${inputs.pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${inputs.pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
   };
 in

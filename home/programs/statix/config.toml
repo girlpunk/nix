@@ -1,5 +1,5 @@
-nix_version = '2.4'
+nix_version = '2.28.4'
 ignore = ['.direnv']
-disabled = [
-  "unquoted_uri"
-]
+#disabled = [
+#  "unquoted_uri"
+#]

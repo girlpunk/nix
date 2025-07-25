@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   services.wluma = {
     enable = true;
     settings = {
@@ -23,51 +22,51 @@
         }
       ];
       output = {
-    backlight = [
-      {
-        capturer = "wayland";
-        name = "eDP-1";
-        path = "/sys/class/backlight/intel_backlight";
-      }
-    ];
-    ddcutil = [
-      { name = "HDMI Monitor"; }
-    ];
-  };
-};
-#    settings = builtins.fromTOML ''
-#      [als.iio]
-#      path = "/sys/bus/iio/devices"
-#      thresholds = { 0 = "night", 20 = "dark", 80 = "dim", 250 = "normal", 500 = "bright", 800 = "outdoors" }
-#
-#      # [als.webcam]
-#      # video = 0
-#      # thresholds = { 0 = "night", 15 = "dark", 30 = "dim", 45 = "normal", 60 = "bright", 75 = "outdoors" }
-#
-#      # [als.time]
-#      # thresholds = { 0 = "night", 7 = "dark", 9 = "dim", 11 = "normal", 13 = "bright", 16 = "normal", 18 = "dark", 20 = "night" }
-#
-#      # [als.none]
-#
-#      [[output.backlight]]
-#      name = "eDP-1"
-#      path = "/sys/class/backlight/intel_backlight"
-#      capturer = "wayland"
-#
-#      [[output.ddcutil]]
-#      name = "HDMI Monitor"
-#
-#      # [[output.ddcutil]]
-#      # name = "Dell Inc. DELL P2415Q"
-#      # capturer = "none"
-#
-#      #[[keyboard]]
-#      #name = "keyboard-dell"
-#      #path = "/sys/bus/platform/devices/dell-laptop/leds/dell::kbd_backlight"
-#
-#      [[keyboard]]
-#      name = "keyboard-thinkpad"
-#      path = "/sys/bus/platform/devices/thinkpad_acpi/leds/tpacpi::kbd_backlight"
-#    '';
+        backlight = [
+          {
+            capturer = "wayland";
+            name = "eDP-1";
+            path = "/sys/class/backlight/intel_backlight";
+          }
+        ];
+        ddcutil = [
+          { name = "HDMI Monitor"; }
+        ];
+      };
+    };
+    #    settings = builtins.fromTOML ''
+    #      [als.iio]
+    #      path = "/sys/bus/iio/devices"
+    #      thresholds = { 0 = "night", 20 = "dark", 80 = "dim", 250 = "normal", 500 = "bright", 800 = "outdoors" }
+    #
+    #      # [als.webcam]
+    #      # video = 0
+    #      # thresholds = { 0 = "night", 15 = "dark", 30 = "dim", 45 = "normal", 60 = "bright", 75 = "outdoors" }
+    #
+    #      # [als.time]
+    #      # thresholds = { 0 = "night", 7 = "dark", 9 = "dim", 11 = "normal", 13 = "bright", 16 = "normal", 18 = "dark", 20 = "night" }
+    #
+    #      # [als.none]
+    #
+    #      [[output.backlight]]
+    #      name = "eDP-1"
+    #      path = "/sys/class/backlight/intel_backlight"
+    #      capturer = "wayland"
+    #
+    #      [[output.ddcutil]]
+    #      name = "HDMI Monitor"
+    #
+    #      # [[output.ddcutil]]
+    #      # name = "Dell Inc. DELL P2415Q"
+    #      # capturer = "none"
+    #
+    #      #[[keyboard]]
+    #      #name = "keyboard-dell"
+    #      #path = "/sys/bus/platform/devices/dell-laptop/leds/dell::kbd_backlight"
+    #
+    #      [[keyboard]]
+    #      name = "keyboard-thinkpad"
+    #      path = "/sys/bus/platform/devices/thinkpad_acpi/leds/tpacpi::kbd_backlight"
+    #    '';
   };
 }

@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   programs.oh-my-posh = {
     enable = true;
     enableZshIntegration = true;
@@ -188,119 +187,119 @@
               type = "aws";
               style = "powerline";
               background_templates = [
-               "{{if contains \"default\" .Profile}}#FFA400{{end}}"
-               "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
+                "{{if contains \"default\" .Profile}}#FFA400{{end}}"
+                "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
+              ];
+            }
+            {
+              properties = {
+                always_enabled = true;
+                cache_duration = "none";
+                style = "round";
+              };
+              template = "<transparent></>  {{ .FormattedMs }} ";
+              foreground = "#ffffff";
+              background = "#83769c";
+              type = "executiontime";
+              style = "plain";
+            }
+            {
+              properties = {
+                always_enabled = true;
+                cache_duration = "none";
+              };
+              trailing_diamond = "";
+              template = "<parentBackground></> {{ if gt .Code 0 }}{{ else }}{{ end }} ";
+              foreground = "#ffffff";
+              background = "#00897b";
+              type = "exit";
+              style = "diamond";
+              background_templates = [
+                "{{ if ne .Code 0 }}#e91e63{{ end }}"
+              ];
+            }
           ];
         }
         {
-          properties = {
-            always_enabled = true;
-            cache_duration = "none";
-            style = "round";
-          };
-          template = "<transparent></>  {{ .FormattedMs }} ";
-          foreground = "#ffffff";
-          background = "#83769c";
-          type = "executiontime";
-          style = "plain";
-        }
-        {
-          properties = {
-            always_enabled = true;
-            cache_duration = "none";
-          };
-          trailing_diamond = "";
-          template = "<parentBackground></> {{ if gt .Code 0 }}{{ else }}{{ end }} ";
-          foreground = "#ffffff";
-          background = "#00897b";
-          type = "exit";
-          style = "diamond";
-          background_templates = [
-            "{{ if ne .Code 0 }}#e91e63{{ end }}"
+          type = "rprompt";
+          segments = [
+            {
+              properties = {
+                cache_duration = "none";
+              };
+              template = "<#546E7A,transparent></> {{.Icon}}{{ if .WSL }} on {{ end }} <transparent,#546E7A></>";
+              foreground = "#26C6DA";
+              background = "#546E7A";
+              type = "os";
+              style = "plain";
+            }
+            {
+              properties = {
+                cache_duration = "none";
+                paused_icon = " ";
+                playing_icon = " ";
+              };
+              template = "  {{ .Icon }}{{ if ne .Status \"stopped\" }}{{ .Artist }} - {{ .Track }}{{ end }} ";
+              foreground = "#111111";
+              powerline_symbol = "";
+              background = "#1BD760";
+              type = "ytm";
+              style = "powerline";
+              invert_powerline = true;
+            }
+            {
+              properties = {
+                cache_duration = "none";
+                charged_icon = " ";
+                charging_icon = " ";
+                discharging_icon = " ";
+                display_error = true;
+              };
+              template = " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }} ";
+              foreground = "#ffffff";
+              powerline_symbol = "";
+              background = "#f36943";
+              type = "battery";
+              style = "powerline";
+              background_templates = [
+                "{{if eq \"Charging\" .State.String}}#40c4ff{{end}}"
+                "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}"
+                "{{if eq \"Full\" .State.String}}#4caf50{{end}}"
+              ];
+              invert_powerline = true;
+            }
+            {
+              properties = {
+                cache_duration = "none";
+                template = "{{ if .Error }}{{ .Error }}{{ else }} {{ .SSID }} {{ .Signal }}% {{ .ReceiveRate }}Mbps{{ end }}";
+              };
+              foreground = "#222222";
+              powerline_symbol = "";
+              background = "#8822ee";
+              type = "wifi";
+              style = "powerline";
+              background_templates = [
+                "{{ if (lt .Signal 60) }}#DDDD11{{ else if (lt .Signal 90) }}#DD6611{{ else }}#11CC11{{ end }}"
+              ];
+            }
+            {
+              properties = {
+                cache_duration = "none";
+              };
+              leading_diamond = "";
+              trailing_diamond = "";
+              template = " {{ .CurrentDate | date .Format }} ";
+              foreground = "#111111";
+              background = "#2e9599";
+              type = "time";
+              style = "diamond";
+              invert_powerline = true;
+            }
           ];
         }
       ];
-    }
-    {
-      type = "rprompt";
-      segments = [
-        {
-          properties = {
-            cache_duration = "none";
-          };
-          template = "<#546E7A,transparent></> {{.Icon}}{{ if .WSL }} on {{ end }} <transparent,#546E7A></>";
-          foreground = "#26C6DA";
-          background = "#546E7A";
-          type = "os";
-          style = "plain";
-        }
-        {
-          properties = {
-            cache_duration = "none";
-            paused_icon = " ";
-            playing_icon = " ";
-          };
-          template = "  {{ .Icon }}{{ if ne .Status \"stopped\" }}{{ .Artist }} - {{ .Track }}{{ end }} ";
-          foreground = "#111111";
-          powerline_symbol = "";
-          background = "#1BD760";
-          type = "ytm";
-          style = "powerline";
-          invert_powerline = true;
-        }
-        {
-          properties = {
-            cache_duration = "none";
-            charged_icon = " ";
-            charging_icon = " ";
-            discharging_icon = " ";
-            display_error = true;
-          };
-          template = " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }} ";
-          foreground = "#ffffff";
-          powerline_symbol = "";
-          background = "#f36943";
-          type = "battery";
-          style = "powerline";
-          background_templates = [
-            "{{if eq \"Charging\" .State.String}}#40c4ff{{end}}"
-            "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}"
-            "{{if eq \"Full\" .State.String}}#4caf50{{end}}"
-          ];
-          invert_powerline = true;
-        }
-        {
-          properties = {
-            cache_duration = "none";
-            template = "{{ if .Error }}{{ .Error }}{{ else }} {{ .SSID }} {{ .Signal }}% {{ .ReceiveRate }}Mbps{{ end }}";
-          };
-          foreground = "#222222";
-          powerline_symbol = "";
-          background = "#8822ee";
-          type = "wifi";
-          style = "powerline";
-          background_templates = [
-            "{{ if (lt .Signal 60) }}#DDDD11{{ else if (lt .Signal 90) }}#DD6611{{ else }}#11CC11{{ end }}"
-          ];
-        }
-        {
-          properties = {
-            cache_duration = "none";
-          };
-          leading_diamond = "";
-          trailing_diamond = "";
-          template = " {{ .CurrentDate | date .Format }} ";
-          foreground = "#111111";
-          background = "#2e9599";
-          type = "time";
-          style = "diamond";
-          invert_powerline = true;
-        }
-      ];
-    }
-  ];
-  version = 3;
-  final_space = true;
+      version = 3;
+      final_space = true;
     };
   };
 }

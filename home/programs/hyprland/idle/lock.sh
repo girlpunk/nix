@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-~/.config/hypr/scripts/idle/inhibitors/pulse.sh || exit 1
+# If pulse says something is playing, don't lock
+./inhibitors/pulse.sh || exit 1
 
-hyprlock
+# Start lock screen
+pidof hyprlock || hyprlock

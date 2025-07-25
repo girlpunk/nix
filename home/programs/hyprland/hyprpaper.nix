@@ -1,4 +1,4 @@
-{ ... }:
+_:
 let
   wave = builtins.fetchurl {
     url = "https://github.com/xyproto/archlinux-wallpaper/blob/masterkey/img/wave.png?raw=true";
@@ -15,8 +15,14 @@ in
     settings = {
       ipc = "on";
       splash = true;
-      preload = [wave awesome];
-      wallpaper = ["eDP-1, ${wave}" "HDMI-A-1, ${awesome}"];
+      preload = [
+        wave
+        awesome
+      ];
+      wallpaper = [
+        "eDP-1, ${wave}"
+        "HDMI-A-1, ${awesome}"
+      ];
     };
   };
 }

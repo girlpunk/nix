@@ -33,21 +33,31 @@ let
         ];
     };
 
-  mkHyprlandHome = { hidpi, monitors, mut ? false }: mkHome {
-    inherit mut;
-    mods = [
-      #inputs.hypr-binds-flake.homeManagerModules.${system}.default
-      ./home/programs/hyprland
-    ] ++ [
-      { hyprland.monitors = monitors; }
-    ];
-  };
+  mkHyprlandHome =
+    {
+      hidpi,
+      monitors,
+      mut ? false,
+    }:
+    mkHome {
+      inherit mut;
+      mods = [
+        #inputs.hypr-binds-flake.homeManagerModules.${system}.default
+        ./home/programs/hyprland
+      ]
+      ++ [
+        { hyprland.monitors = monitors; }
+      ];
+    };
 in
 {
   cli = mkHome { };
   hyprland-edp = mkHyprlandHome { hidpi = false; };
   hyprland-hdmi = mkHyprlandHome { hidpi = true; };
-  hyprland-hdmi-mutable = mkHyprlandHome { hidpi = true; mut = true; };
+  hyprland-hdmi-mutable = mkHyprlandHome {
+    hidpi = true;
+    mut = true;
+  };
 
   "sam@argon" = mkHyprlandHome {
     hidpi = true;

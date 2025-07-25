@@ -26,7 +26,7 @@
       ohMyZsh.enable = true;
     };
 
-    _1password.enable = true;
+    _1password-cli.enable = true;
 
     steam = {
       enable = true;
@@ -109,7 +109,10 @@
     ];
   };
 
-  nix.settings.trusted-users = ["root" "sam"];
+  nix.settings.trusted-users = [
+    "root"
+    "sam"
+  ];
 
   #nixpkgs.overlays = import ../lib/overlays.nix ++ [
   #  (import ./vim.nix { inherit inputs; })
