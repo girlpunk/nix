@@ -1,4 +1,13 @@
-{ ... }:
+_:
+let
+  text_color = "rgba(FFFFFFFF)";
+  entry_background_color = "rgba(33333311)";
+  entry_border_color = "rgba(3B3B3B55)";
+  entry_color = "rgba(FFFFFFFF)";
+  font_family = "Rubik Light";
+  font_family_clock = "Rubik Light";
+  font_material_symbols = "Material Symbols Rounded";
+in
 {
   programs.hyprlock = {
     enable = true;
@@ -11,18 +20,7 @@
       };
 
       background = {
-        #monitor =
-        #path = /usr/share/backgrounds/archlinux/split.png
-        color = "rgba(25, 20, 20, 1.0)";
-
-        # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
-        blur_passes = 2; # 0 disables blurring
-        blur_size = 5;
-        noise = 0.0117;
-        contrast = 0.8916;
-        brightness = 0.8172;
-        vibrancy = 0.1696;
-        vibrancy_darkness = 0.0;
+        color = "rgba(000000FF)";
       };
 
       input-field = {
@@ -35,73 +33,91 @@
         dots_center = true;
         #dots_rouding = -1
 
-        rounding = 22;
-        outer_color = "rgb(ffffff)";
-        inner_color = "rgb(000000)";
-        font_color = "rgb(170, 170, 170)";
+        #rounding = 22;
+        outer_color = entry_border_color;
+        inner_color = entry_background_color;
+        font_color = entry_color;
         fade_on_empty = true;
         placeholder_text = ''<i>Password...</i>''; # Text rendered in the input box when it's empty.
 
-        position = "0, 120";
+        position = "0, 20";
         halign = "center";
-        valign = "bottom";
+        valign = "center";
       };
 
-      # Hours
       label = [
         {
+          # Clock
           #monitor =
-          text = ''cmd[update:1000] echo "<b><big> $(date +"%H") </big></b>"'';
-          #color = $color6
-          font_size = 112;
-          font_family = "Geist Mono 10";
-          shadow_passes = 3;
-          shadow_size = 4;
+          text = "$TIME";
+          shadow_passes = 1;
+          shadow_boost = 0.5;
+          color = text_color;
+          font_size = 65;
+          font_family = font_family_clock;
 
-          position = "0, 220";
+          position = "0, 300";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          # Date
+          #monitor =
+          text = ''cmd[update:18000000] echo "$(date +'%A %d %b')"'';
+          shadow_passes = 1;
+          shadow_boost = 0.5;
+          color = text_color;
+          font_size = 20;
+          inherit font_family;
+
+          position = "0, 240";
           halign = "center";
           valign = "center";
         }
 
-        # Minutes
         {
+          # lock icon
           #monitor =
-          text = ''cmd[update:1000] echo "<b><big> $(date +"%M") </big></b>"'';
-          #color = $color6
-          font_size = 112;
-          font_family = "Geist Mono 10";
-          shadow_passes = 3;
-          shadow_size = 4;
+          text = "  ";
+          shadow_passes = 1;
+          shadow_boost = 0.5;
+          color = text_color;
+          font_size = 21;
+          font_family = font_material_symbols;
 
-          position = "0, 80";
+          position = "0, 65";
           halign = "center";
-          valign = "center";
+          valign = "bottom";
         }
 
-        # Today
         {
+          # "locked" text
           #monitor =
-          text = ''cmd[update:18000000] echo "<b><big> $(date +'%A') </big></b>"'';
-          #color = $color7
-          font_size = 22;
-          font_family = "JetBrainsMono Nerd Font 10";
+          text = "locked";
+          shadow_passes = 1;
+          shadow_boost = 0.5;
+          color = text_color;
+          font_size = 14;
+          inherit font_family;
 
-          position = "0, -160";
+          position = "0, 45";
           halign = "center";
-          valign = "center";
+          valign = "bottom";
         }
 
-        # Week
         {
+          # Status
           #monitor =
-          text = ''cmd[update:18000000] echo "<b> $(date +'%d %b') </b>"'';
-          #color = $color7
-          font_size = 18;
-          font_family = "JetBrainsMono Nerd Font 10";
+          text = ''cmd[update:5000] ${./hyprlock-status.sh}'';
+          shadow_passes = 1;
+          shadow_boost = 0.5;
+          color = text_color;
+          font_size = 14;
+          inherit font_family;
 
-          position = "0, -200";
-          halign = "center";
-          valign = "center";
+          position = "30, -30";
+          halign = "left";
+          valign = "top";
         }
       ];
     };

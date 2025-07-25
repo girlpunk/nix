@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
 
-~/.config/hypr/scripts/idle/inhibitors/pulse.sh || exit 1
-#echo "$(date) dim_screen.sh running" >> /tmp/brightness.log
+# If pulseaudio says something is playing, don't dim
+./inhibitors/pulse.sh || exit 1
 
-#if swaymsg -t get_outputs -r | grep 3840; then
-#    hdmibrightness get > /tmp/prev_hdmi_brightness
-#    hdmibrightness 0
-#fi
+# Skip AC check for longer timeout periods
+if [[ $* != *--always* ]]; then
+    # If on AC power, don't dim
+    ./inhibitors/ac.sh || exit 1
+fi
 
-# inhibited by AC or pulse?
-~/.config/hypr/scripts/idle/inhibitors/ac.sh || exit 1
-
-# Save current brightness state, and set 10% as the new state
+# Save current brightness state
 brightnessctl -qs
-brightnessctl -q set 5%
-brightnessctl s -q -d 'tpacpi::kbd_backlight' 0
 
-#echo "wrote brightness 10% ($IDLE_BRIGHTNESS}. max: $MAX" >> /tmp/brightness.log
-#pkill -SIGRTMIN+20 i3blocks
+# Set 5% as new brightness
+brightnessctl -q set 5%
+
+# Turn off keyboard backlight
+brightnessctl s -q -d 'tpacpi::kbd_backlight' 0

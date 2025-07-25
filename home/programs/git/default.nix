@@ -9,32 +9,45 @@ let
     color.ui = true;
     core.askPass = ""; # needs to be empty to use terminal for ask pass
     credential.helper = "store"; # want to make this more secure
+    pager.branch = false;
+    commit.gpgsign = true;
+
+    credential = {
+      "https://dev.azure.com" = {
+        useHttpPath = true;
+      };
+    };
+
+    gpg = {
+      format = "ssh";
+    };
   };
 in
 {
-  programs.git = {
-    enable = true;
-    userName = "Foxocube";
-    userEmail = "git@foxocube.xyz";
-    #signing = {
-    #  key = "523D5DC389D273BC";
-    #  signByDefault = true;
-    #};
-    extraConfig = gitConfig;
-    lfs.enable = true;
-    #delta.enable = true;
-    #diff-highlight.enable = true;
-    #diff-so-fancy.enable = true;
-    #difftastic.enable = true;
-  };
-  programs.gh = {
-    enable = true;
-    gitCredentialHelper = {
+  programs = {
+    git = {
       enable = true;
+
+      #TODO: Work config
+      userName = "Foxocube";
+      userEmail = "git@foxocube.xyz";
+      signing = {
+        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFygf49qzrMruoAeB/Y0RcpkTFGpTVpRr+bwRhDQIZzI";
+        signByDefault = true;
+      };
+      extraConfig = gitConfig;
+      lfs.enable = true;
+      #delta.enable = true;
+      #diff-highlight.enable = true;
+      #diff-so-fancy.enable = true;
+      #difftastic.enable = true;
     };
-    settings.git_protocol = "ssh";
-  };
-  programs.ssh = {
-    matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+    gh = {
+      enable = true;
+      gitCredentialHelper = {
+        enable = true;
+      };
+      settings.git_protocol = "ssh";
+    };
   };
 }
