@@ -39,16 +39,16 @@ in
       # Autostart necessary processes (like notifications daemons, status bars, etc.)
       # Or execute your favorite apps at launch like this:
 
-      # Authentication Agent 
+      # Authentication Agent
       #exec-once = /usr/lib/polkit-kde-authentication-agent-1
 
       exec = [
-#        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-#        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-#        "dbus-update-activation-environment --systemd --all"
+        #        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        #        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        #        "dbus-update-activation-environment --systemd --all"
 
         ("" + ./random-wallpaper.sh)
-#        "xrdb -merge ~/.Xresources"
+        #        "xrdb -merge ~/.Xresources"
       ];
 
       exec-once = [
@@ -66,8 +66,8 @@ in
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
         "XCURSOR_SIZE,24"
-#        "XDG_SESSION_TYPE,wayland"
-#        "XDG_MENU_PREFIX,arch-"
+        #        "XDG_SESSION_TYPE,wayland"
+        #        "XDG_MENU_PREFIX,arch-"
         "XKB_DEFAULT_OPTIONS,caps:super"
         "XKB_DEFAULT_LAYOUT,gb"
         "_JAVA_AWT_WM_NONREPARENTING,1"
@@ -111,10 +111,10 @@ in
         inactive_opacity = 1.0;
 
         shadow = {
-            enabled = true;
-            range = 4;
-            render_power = 3;
-            color = "rgba(1a1a1aee)";
+          enabled = true;
+          range = 4;
+          render_power = 3;
+          color = "rgba(1a1a1aee)";
         };
 
         # https://wiki.hyprland.org/Configuring/Variables/#blur
@@ -169,17 +169,17 @@ in
       # https://wiki.hyprland.org/Configuring/Variables/#input
       input = {
         kb_layout = "gb";
-        kb_variant ="";
-        kb_model ="";
-        kb_options ="";
-        kb_rules ="";
+        kb_variant = "";
+        kb_model = "";
+        kb_options = "";
+        kb_rules = "";
 
         follow_mouse = 1;
 
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-            natural_scroll = true;
+          natural_scroll = true;
         };
       };
 
@@ -274,10 +274,11 @@ in
         "CTRL, Escape, exec, gnome-system-monitor"
 
         "$mainMod, T, togglegroup"
-      ] ++ (
+      ]
+      ++ (
         # Workspaces
-        builtins.concatLists (builtins.genList (workspace:
-          [
+        builtins.concatLists (
+          builtins.genList (workspace: [
             # Switch workspaces with mainMod + [0-9]
             ## Workspaces // Switch to Workspace // <Super> [0-9] ##
             "$mainMod, ${toString workspace}, workspace, ${toString workspace}"
@@ -286,9 +287,8 @@ in
             ## Navigate // Move Focused Window to Workspace // <Super> <Shift> [0-9] ##
             "$mainMod SHIFT, ${toString workspace}, movetoworkspace, ${toString workspace}"
 
-          ]
+          ]) 9
         )
-        9)
       );
 
       bindm = [
@@ -345,12 +345,7 @@ in
   };
 }
 
-
-
-
 # bind = $mainMod, 0&1&2&3&4&5&6&7&8&9, exec, echo 1 > $XDG_RUNTIME_DIR/sov.sock
 # bind = $mainMod, 1, exec, echo 1 > $XDG_RUNTIME_DIR/sov.sock
 # bindr = $mainMod, 0&1&2&3&4&5&6&7&8&9, exec, echo 0 > $XDG_RUNTIME_DIR/sov.sock
 # bindr = $mainMod, 1, exec, echo 0 > $XDG_RUNTIME_DIR/sov.sock
-
-

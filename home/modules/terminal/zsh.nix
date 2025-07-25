@@ -5,7 +5,10 @@
 
     autosuggestion = {
       enable = true;
-      strategy = ["history" "completion"];
+      strategy = [
+        "history"
+        "completion"
+      ];
     };
 
     history = {
@@ -113,22 +116,27 @@
     enableCompletion = true;
     enableVteIntegration = true;
 
-    initContent = let
-      zshConfigEarlyInit = lib.mkOrder 1000 ''
-        # Save history immidiately
-        setopt incappendhistory
-      '';
-      zshConfig = lib.mkOrder 1500 ''
-        eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
+    initContent =
+      let
+        zshConfigEarlyInit = lib.mkOrder 1000 ''
+          # Save history immidiately
+          setopt incappendhistory
+        '';
+        zshConfig = lib.mkOrder 1500 ''
+          eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 
-        if command -v -- hyfetch > /dev/null 2>&1; then
-          hyfetch
-        else
-          echo "No Hyfetch, no pretty logo :("
-          fastfetch
-        fi
-      '';
-    in lib.mkMerge [ zshConfigEarlyInit zshConfig ];
+          if command -v -- hyfetch > /dev/null 2>&1; then
+            hyfetch
+          else
+            echo "No Hyfetch, no pretty logo :("
+            fastfetch
+          fi
+        '';
+      in
+      lib.mkMerge [
+        zshConfigEarlyInit
+        zshConfig
+      ];
 
     plugins = [
       {
@@ -157,7 +165,7 @@
           owner = "romkatv";
           repo = "windows-terminal-zsh-integration";
           rev = "master";
-#          hash = "b32caefa23901e3bd2ece1ea530eb301c428b7e9";
+          #          hash = "b32caefa23901e3bd2ece1ea530eb301c428b7e9";
           sha256 = "wTGiJFnj3fN4a9Vsc5PPl5vBgvVLJbak0AN3t7RE4B8=";
         };
       }

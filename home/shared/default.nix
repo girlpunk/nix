@@ -1,4 +1,9 @@
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   username = "sam";
@@ -17,30 +22,30 @@ let
     jq
     file
     tree
-#    kubectl
+    #    kubectl
     wget
-#    ffmpeg-headless
-#    yt-dlp
+    #    ffmpeg-headless
+    #    yt-dlp
     watch
     nano
     _1password-cli
     nixfmt-rfc-style
-#    terraform
-#    comma
+    #    terraform
+    #    comma
 
     # Python
-#    python3
-#    hatch
-#    unstable.jetbrains.pycharm-professional
+    #    python3
+    #    hatch
+    #    unstable.jetbrains.pycharm-professional
 
     # Rust
-#    rustPlatform.rustcSrc
-#    rustc
-#    rustfmt
-#    cargo
-#    pkg-config
-#    gcc
-#    unstable.jetbrains.rust-rover
+    #    rustPlatform.rustcSrc
+    #    rustc
+    #    rustfmt
+    #    cargo
+    #    pkg-config
+    #    gcc
+    #    unstable.jetbrains.rust-rover
   ];
 in
 {
@@ -98,12 +103,12 @@ in
       #    ''-I"${pkgs.glib.dev}/include/glib-2.0"''
       #    ''-I${pkgs.glib.out}/lib/glib-2.0/include/''
       #  ];
-#      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+      #      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     };
 
-#    sessionPath = [
-#      "$HOME/.dotnet/tools"
-#    ];
+    #    sessionPath = [
+    #      "$HOME/.dotnet/tools"
+    #    ];
   };
 
   manual.html.enable = true;

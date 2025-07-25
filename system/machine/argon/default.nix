@@ -2,16 +2,21 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      #../../programs/rider
-      ../../programs/1password-gui.nix
-      ../../modules/gui
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    #../../programs/rider
+    ../../programs/1password-gui.nix
+    ../../modules/gui
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -20,10 +25,12 @@
   #networking.hostName = "argon"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.wireguard.enable = true;
+  networking = {
+    networkmanager.enable = true; # Easiest to use and most distros use this by default.
+    wireguard.enable = true;
 
-  networking.hostName = "argon";
+    hostName = "argon";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/London";

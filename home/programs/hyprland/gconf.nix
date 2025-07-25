@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   ## Gnome themes
   gtk = {
     theme = "Adwaita-dark";

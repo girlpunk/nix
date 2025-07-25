@@ -12,29 +12,31 @@ let
   };
 in
 {
-  programs.git = {
-    enable = true;
-    userName = "Foxocube";
-    userEmail = "git@foxocube.xyz";
-    #signing = {
-    #  key = "523D5DC389D273BC";
-    #  signByDefault = true;
-    #};
-    extraConfig = gitConfig;
-    lfs.enable = true;
-    #delta.enable = true;
-    #diff-highlight.enable = true;
-    #diff-so-fancy.enable = true;
-    #difftastic.enable = true;
-  };
-  programs.gh = {
-    enable = true;
-    gitCredentialHelper = {
+  programs = {
+    git = {
       enable = true;
+      userName = "Foxocube";
+      userEmail = "git@foxocube.xyz";
+      #signing = {
+      #  key = "523D5DC389D273BC";
+      #  signByDefault = true;
+      #};
+      extraConfig = gitConfig;
+      lfs.enable = true;
+      #delta.enable = true;
+      #diff-highlight.enable = true;
+      #diff-so-fancy.enable = true;
+      #difftastic.enable = true;
     };
-    settings.git_protocol = "ssh";
-  };
-  programs.ssh = {
-    matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+    gh = {
+      enable = true;
+      gitCredentialHelper = {
+        enable = true;
+      };
+      settings.git_protocol = "ssh";
+    };
+    ssh = {
+      matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+    };
   };
 }
