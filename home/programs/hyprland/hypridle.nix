@@ -15,6 +15,11 @@ _: {
           on-resume = "" + ./idle/brighten_screen.sh;
         }
         {
+          timeout = 120;
+          on-timeout = "${./idle/dim_screen.sh} --always";
+          on-resume = "" + ./idle/brighten_screen.sh;
+        }
+        {
           timeout = 180;
           on-timeout = "" + ./idle/lock.sh;
         }
@@ -24,8 +29,17 @@ _: {
           on-resume = "" + ./idle/outputs_on.sh;
         }
         {
+          timeout = 600;
+          on-timeout = "${./idle/outputs_off.sh} --always";
+          on-resume = "" + ./idle/outputs_on.sh;
+        }
+        {
           timeout = 420;
           on-timeout = "" + ./idle/suspend.sh;
+        }
+        {
+          timeout = 840;
+          on-timeout = "${./idle/suspend.sh} --always";
         }
       ];
     };

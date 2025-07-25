@@ -127,18 +127,18 @@
           format-alt = "{:%Y-%m-%d}";
         };
         cpu = {
-          format = "{usage}% ";
+          format = "  {usage}%";
           tooltip = false;
         };
         memory = {
-          format = "{}% ";
+          format = " {}%";
         };
         temperature = {
           # "thermal-zone = 2
           # "hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input"
           critical-threshold = 80;
           # "format-critical = "{temperatureC}°C {icon}"
-          format = "{temperatureC}°C {icon}";
+          format = "{icon} {temperatureC}°C";
           format-icons = [
             ""
             ""
@@ -147,7 +147,7 @@
         };
         backlight = {
           device = "intel_backlight";
-          format = "{percent}% {icon}";
+          format = "{icon} {percent}%";
           format-icons = [
             ""
             ""
@@ -166,7 +166,7 @@
             warning = 30;
             critical = 15;
           };
-          format = "{icon}   {capacity}% {time}";
+          format = "{icon} {capacity}% {time}";
           format-icons = {
             default = [
               "󰁺"
@@ -205,6 +205,9 @@
           # "format-full = "",
           #"format-icons = ["", "", "", "", ""]
         };
+        disk = {
+          format = "  {percentage_used}%";
+        };
         power-profiles-daemon = {
           format = "{icon}";
           tooltip-format = "Power profile: {profile}\nDriver: {driver}";
@@ -214,6 +217,7 @@
             performance = "";
             balanced = "";
             power-saver = "";
+            laptop-battery-powersave = "";
           };
         };
         network = {

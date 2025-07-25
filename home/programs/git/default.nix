@@ -9,18 +9,37 @@ let
     color.ui = true;
     core.askPass = ""; # needs to be empty to use terminal for ask pass
     credential.helper = "store"; # want to make this more secure
+    pager.branch = false;
+
+    credential = {
+      "https://dev.azure.com" = {
+        useHttpPath = true;
+      };
+    };
+
+    gpg = {
+      "" = {
+        format = "ssh";
+      };
+      "ssh" = {
+        program = "${pkgs._1password-cli}/bin/op-ssh-sign";
+      };
+    };
+    commit.gpgsign = true;
   };
 in
 {
   programs = {
     git = {
       enable = true;
+
+      #TODO: Work config
       userName = "Foxocube";
       userEmail = "git@foxocube.xyz";
-      #signing = {
-      #  key = "523D5DC389D273BC";
-      #  signByDefault = true;
-      #};
+      signing = {
+        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFygf49qzrMruoAeB/Y0RcpkTFGpTVpRr+bwRhDQIZzI";
+        signByDefault = true;
+      };
       extraConfig = gitConfig;
       lfs.enable = true;
       #delta.enable = true;

@@ -23,8 +23,13 @@ let
           enable = true;
           controlMaster = "auto";
           controlPersist = "5m";
+          addKeysToAgent = "yes";
+          forwardAgent = true;
 
           matchBlocks = {
+            "*" = {
+              identityAgent = "~/.1password/agent.sock";
+            };
             "192.168.42.24" = {
               forwardAgent = true;
             };
@@ -68,6 +73,9 @@ let
 
         nh.enable = true;
       };
+
+      services.ssh-agent.enable = true;
+
     };
 in
 [
