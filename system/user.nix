@@ -26,7 +26,7 @@
       ohMyZsh.enable = true;
     };
 
-    _1password.enable = true;
+    _1password-cli.enable = true;
 
     steam = {
       enable = true;
