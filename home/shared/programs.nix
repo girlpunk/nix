@@ -3,7 +3,7 @@ let
     { inputs, pkgs, ... }:
     {
       programs = {
-        gpg.enable = true;
+        #gpg.enable = true;
 
         jq.enable = true;
 
@@ -27,9 +27,6 @@ let
           forwardAgent = true;
 
           matchBlocks = {
-            "*" = {
-              identityAgent = "~/.1password/agent.sock";
-            };
             "192.168.42.24" = {
               forwardAgent = true;
             };
@@ -74,8 +71,7 @@ let
         nh.enable = true;
       };
 
-      services.ssh-agent.enable = true;
-
+      services.ssh-agent.enable = false;
     };
 in
 [
