@@ -9,7 +9,6 @@
 
 let
   sources = import ../../nix/sources.nix;
-x
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
   #manpager = (pkgs.writeShellScriptBin "manpager" ''cat "$1" | col -bx | bat --language man --style plain'');
