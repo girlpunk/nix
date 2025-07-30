@@ -15,6 +15,7 @@
     ./hardware-configuration.nix
     #../../programs/rider
     ../../programs/1password-gui.nix
+    ../../programs/jetbrains-gateway.nix
     ../../modules/gui
   ];
 
@@ -31,14 +32,18 @@
 
     hostName = "argon";
   };
+  services.resolved.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
 
-  environment.systemPackages = [
-    pkgs.cryptsetup
-    pkgs.kubectl
-    pkgs.terraform
+  environment.systemPackages = with pkgs; [
+    cryptsetup
+    kubectl
+    terraform
+    usbutils
+    cinny-desktop
+    #fluffychat
   ];
 
   # Configure network proxy if necessary
