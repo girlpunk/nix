@@ -32,14 +32,18 @@
 
     hostName = "argon";
   };
+  services.resolved.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
 
-  environment.systemPackages = [
-    pkgs.cryptsetup
-    pkgs.kubectl
-    pkgs.terraform
+  environment.systemPackages = with pkgs; [
+    cryptsetup
+    kubectl
+    terraform
+    usbutils
+    cinny-desktop
+    #fluffychat
   ];
 
   # Configure network proxy if necessary
