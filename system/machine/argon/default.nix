@@ -15,6 +15,7 @@
     ./hardware-configuration.nix
     #../../programs/rider
     ../../programs/1password-gui.nix
+    ../../programs/jetbrains-gateway.nix
     ../../modules/gui
   ];
 
