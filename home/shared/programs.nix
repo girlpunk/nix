@@ -27,7 +27,8 @@ let
           forwardAgent = true;
 
           matchBlocks = {
-            "192.168.42.24" = {
+            "minos" = {
+              hostname = "192.168.42.24";
               forwardAgent = true;
             };
             "10.101.15.2" = {
@@ -68,7 +69,10 @@ let
         #  ncurses6
         #];
 
-        nh.enable = true;
+        nh = {
+          enable = true;
+          # homeFlake = "~/programs/nix";
+        };
       };
 
       services.ssh-agent.enable = false;

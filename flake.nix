@@ -8,12 +8,15 @@
     # We want the newest version for some stuff, so that comes from here
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
 
+    #nixpkgs.url = "/home/sam/programs/nixpkgs";
+
     # WSL Compatability
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
+      #url = "/home/sam/programs/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -73,6 +76,8 @@
       nixosConfigurations = pkgs.builders.mkNixos { };
 
       out = { inherit pkgs overlays; };
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.nixfmt-tree;
 
       #nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
       #  pkgs = import nixpkgs { inherit system; config = { allowUnfree = true; };};
