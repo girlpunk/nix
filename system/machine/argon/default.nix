@@ -43,6 +43,7 @@
     terraform
     usbutils
     cinny-desktop
+    element-desktop
     #fluffychat
   ];
 
