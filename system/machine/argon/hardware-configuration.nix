@@ -26,6 +26,9 @@
         "cryptd"
       ];
 
+      verbose = false;
+      systemd.enable = true;
+
       luks.devices = {
         cryptroot.device = "/dev/disk/by-uuid/57e38957-ca5a-45af-ad90-755bf814b0b7";
         #storage = {
@@ -38,13 +41,19 @@
     kernelModules = [ "i2c-dev" ];
     extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
 
+    consoleLogLevel = 3;
     kernelParams = [
       "mem_sleep_default=deep"
       "pcie_aspm.policy=powersupersave"
       "i915.enable_guc=2"
       "quiet"
       "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
     ];
+
+    loader.timeout = 0;
   };
 
   fileSystems = {
