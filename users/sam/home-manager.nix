@@ -1,19 +1,18 @@
-{ isWSL, inputs, ... }:
-
 {
+  isWSL,
+  inputs,
+  ...
+}: {
   config,
   lib,
   pkgs,
   ...
-}:
-
-let
+}: let
   sources = import ../../nix/sources.nix;
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
   #manpager = (pkgs.writeShellScriptBin "manpager" ''cat "$1" | col -bx | bat --language man --style plain'');
-in
-{
+in {
   #---------------------------------------------------------------------
   # Programs
   #---------------------------------------------------------------------

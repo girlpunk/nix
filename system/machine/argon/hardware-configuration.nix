@@ -4,9 +4,7 @@
   pkgs,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -38,8 +36,8 @@
       };
     };
 
-    kernelModules = [ "i2c-dev" ];
-    extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
+    kernelModules = ["i2c-dev"];
+    extraModulePackages = [config.boot.kernelPackages.ddcci-driver];
 
     consoleLogLevel = 3;
     kernelParams = [
@@ -79,7 +77,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/main/swap"; }
+    {device = "/dev/main/swap";}
   ];
 
   hardware = {
@@ -106,7 +104,7 @@
     pkcs11.enable = true; # expose /run/current-system/sw/lib/libtpm2_pkcs11.so
     tctiEnvironment.enable = true; # TPM2TOOLS_TCTI and TPM2_PKCS11_TCTI env variables
   };
-  users.users.sam.extraGroups = [ "tss" ]; # tss group has access to TPM devices
+  users.users.sam.extraGroups = ["tss"]; # tss group has access to TPM devices
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";

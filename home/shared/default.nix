@@ -3,9 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-
-let
+}: let
   username = "sam";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
@@ -47,8 +45,7 @@ let
     #    gcc
     #    unstable.jetbrains.rust-rover
   ];
-in
-{
+in {
   programs.home-manager.enable = true;
 
   imports = lib.concatMap import [

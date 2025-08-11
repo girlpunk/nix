@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     kitty
     nerd-fonts.fira-code
@@ -21,10 +20,12 @@
 
   programs.firefox.enable = true;
 
-  boot.plymouth.enable = true;
-  boot.plymouth.font = "${pkgs.nerd-fonts.fira-code}/share/fonts/truetype/NerdFonts/FiraCode/FiraCodeNerdFont-Regular.ttf";
-  boot.plymouth.logo = "${pkgs.nixos-icons}/share/icons/hicolor/128x128/apps/nix-snowflake.png";
-#  boot.plymouth.theme = "breeze";
+  boot.plymouth = {
+    enable = true;
+    font = "${pkgs.nerd-fonts.fira-code}/share/fonts/truetype/NerdFonts/FiraCode/FiraCodeNerdFont-Regular.ttf";
+    logo = "${pkgs.nixos-icons}/share/icons/hicolor/128x128/apps/nix-snowflake.png";
+    #  boot.plymouth.theme = "breeze";
+  };
 
   services.geoclue2.enable = true;
 }

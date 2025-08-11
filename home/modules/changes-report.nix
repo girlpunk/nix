@@ -3,9 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-
-{
+}: {
   options.home.changes-report.enable = lib.mkEnableOption "changesReport";
 
   config = lib.mkIf config.home.changes-report.enable {

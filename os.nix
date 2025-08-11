@@ -4,9 +4,7 @@
   system,
   pkgs,
   ...
-}:
-
-let
+}: let
   inherit (inputs.nixpkgs.lib) nixosSystem;
   inherit (pkgs) lib;
 
@@ -21,15 +19,15 @@ let
     extraSystemConfig
     inputs.opnix.nixosModules.default
     inputs.nix-index-database.nixosModules.nix-index
-    { nix.registry.nixpkgs.flake = inputs.nixpkgs; }
+    {nix.registry.nixpkgs.flake = inputs.nixpkgs;}
   ];
 
   make = host: {
     ${host} = nixosSystem {
       inherit lib pkgs system;
-      specialArgs = { inherit inputs; };
-      modules = modules' ++ [ ./system/machine/${host} ];
+      specialArgs = {inherit inputs;};
+      modules = modules' ++ [./system/machine/${host}];
     };
   };
 in
-lib.mergeAttrsList (map make hosts)
+  lib.mergeAttrsList (map make hosts)

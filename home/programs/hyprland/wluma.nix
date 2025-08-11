@@ -30,7 +30,7 @@ _: {
           }
         ];
         ddcutil = [
-          { name = "HDMI Monitor"; }
+          {name = "HDMI Monitor";}
         ];
       };
     };

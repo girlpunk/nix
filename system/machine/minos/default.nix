@@ -1,6 +1,8 @@
-{ pkgs, config, ... }:
-
 {
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -46,8 +48,8 @@
     networks."ens18" = {
       matchConfig.Name = "ens18";
 
-      address = [ "192.168.42.24/24" ];
-      gateway = [ "192.168.42.254" ];
+      address = ["192.168.42.24/24"];
+      gateway = ["192.168.42.254"];
       dns = [
         "192.168.42.200"
         "192.168.42.201"
