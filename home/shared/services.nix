@@ -3,8 +3,7 @@ let
     services = {
     };
   };
-in
-[
+in [
   #../services/dunst
   #../services/gpg-agent
   #../services/udiskie

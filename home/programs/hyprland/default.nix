@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
-
 {
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hyprland.nix
     ./hypridle.nix
@@ -60,7 +62,7 @@
 
   programs = {
     firefox = {
-      languagePacks = [ "en-GB" ];
+      languagePacks = ["en-GB"];
       profiles.default = {
         # extensions.packages = pkgs.nur.repos.rycee.firefox-addons; [ ];
       };

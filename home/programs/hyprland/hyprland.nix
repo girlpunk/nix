@@ -1,8 +1,10 @@
-{ config, lib, ... }:
-let
-  monitors = lib.mkOption "monitors hyprland";
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  monitors = lib.mkOption "monitors hyprland";
+in {
   options = {
     hyprland = {
       monitors = lib.mkOption {
@@ -199,105 +201,106 @@ in
       ### KEYBINDINGSS ###
       ####################
 
-      bind = [
-        ## Basics // Start a Terminal // <Super> Q ##
-        "$mainMod, Q, exec, $terminal"
-        ## Basics // Kill focused window // <Super> C ##
-        "$mainMod, C, killactive,"
+      bind =
+        [
+          ## Basics // Start a Terminal // <Super> Q ##
+          "$mainMod, Q, exec, $terminal"
+          ## Basics // Kill focused window // <Super> C ##
+          "$mainMod, C, killactive,"
 
-        ## Basics // Exit Hypr // <Super> M ##
-        ("$mainMod, M, exec, " + ./confirm-before-exit.sh + " exit")
-        ## Basics // Shut Down // <Super> <Shift> M ##
-        ("$mainMod SHIFT, M, exec, " + ./confirm-before-exit.sh + " poweroff")
-        ## Basics // Reboot // <Super> <Ctrl> M ##
-        ("$mainMod CTRL, M, exec, " + ./confirm-before-exit.sh + " reboot")
+          ## Basics // Exit Hypr // <Super> M ##
+          ("$mainMod, M, exec, " + ./confirm-before-exit.sh + " exit")
+          ## Basics // Shut Down // <Super> <Shift> M ##
+          ("$mainMod SHIFT, M, exec, " + ./confirm-before-exit.sh + " poweroff")
+          ## Basics // Reboot // <Super> <Ctrl> M ##
+          ("$mainMod CTRL, M, exec, " + ./confirm-before-exit.sh + " reboot")
 
-        ## Basics // File Manager // <Super> E ##
-        "$mainMod, E, exec, $fileManager"
-        "$mainMod, V, togglefloating,"
+          ## Basics // File Manager // <Super> E ##
+          "$mainMod, E, exec, $fileManager"
+          "$mainMod, V, togglefloating,"
 
-        ## Basics // Start Launcher // <Super> R ##
-        "$mainMod, R, exec, $menu"
+          ## Basics // Start Launcher // <Super> R ##
+          "$mainMod, R, exec, $menu"
 
-        "$mainMod, P, pseudo," # dwindle
-        "$mainMod, J, togglesplit," # dwindle
+          "$mainMod, P, pseudo," # dwindle
+          "$mainMod, J, togglesplit," # dwindle
 
-        # Move focus with mainMod + arrow keys
-        ## Navigate // Change Focus // <Super> ↑ ↓ ← → ##
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
+          # Move focus with mainMod + arrow keys
+          ## Navigate // Change Focus // <Super> ↑ ↓ ← → ##
+          "$mainMod, left, movefocus, l"
+          "$mainMod, right, movefocus, r"
+          "$mainMod, up, movefocus, u"
+          "$mainMod, down, movefocus, d"
 
-        # Move windows between monitors
-        ## Navigate // Move Window to Monitor // <Super> <Ctrl> ← → ##
-        "$mainMod CTRL, right, movewindow, mon:1"
-        "$mainMod CTRL, left, movewindow, mon:0"
+          # Move windows between monitors
+          ## Navigate // Move Window to Monitor // <Super> <Ctrl> ← → ##
+          "$mainMod CTRL, right, movewindow, mon:1"
+          "$mainMod CTRL, left, movewindow, mon:0"
 
-        # Fullscreen and floating
-        ## Navigate // Move Window to Floating // <Super> <Shift> F ##
-        "$mainMod SHIFT, F, togglefloating,"
-        ## Navigate // Move Window to Fullscreen // <Super> F ##
-        "$mainMod , F, fullscreen"
+          # Fullscreen and floating
+          ## Navigate // Move Window to Floating // <Super> <Shift> F ##
+          "$mainMod SHIFT, F, togglefloating,"
+          ## Navigate // Move Window to Fullscreen // <Super> F ##
+          "$mainMod , F, fullscreen"
 
-        # Swap window tiles
-        ## Navigate // Swap the Focused Window // <Super> <Shift> ↑ ↓ ← → ##
-        "$mainMod SHIFT, left, swapwindow, l"
-        "$mainMod SHIFT, down, swapwindow, d"
-        "$mainMod SHIFT, up, swapwindow, u"
-        "$mainMod SHIFT, right, swapwindow, r"
+          # Swap window tiles
+          ## Navigate // Swap the Focused Window // <Super> <Shift> ↑ ↓ ← → ##
+          "$mainMod SHIFT, left, swapwindow, l"
+          "$mainMod SHIFT, down, swapwindow, d"
+          "$mainMod SHIFT, up, swapwindow, u"
+          "$mainMod SHIFT, right, swapwindow, r"
 
-        # Move windows
-        ## Navigate // Move the Focused Window // <Super> <Ctrl> <Shift> ↑ ↓ ← → ##
-        "$mainMod CTRL SHIFT, left, movewindow, l"
-        "$mainMod CTRL SHIFT, down, movewindow, d"
-        "$mainMod CTRL SHIFT, up, movewindow, u"
-        "$mainMod CTRL SHIFT, right, movewindow, r"
+          # Move windows
+          ## Navigate // Move the Focused Window // <Super> <Ctrl> <Shift> ↑ ↓ ← → ##
+          "$mainMod CTRL SHIFT, left, movewindow, l"
+          "$mainMod CTRL SHIFT, down, movewindow, d"
+          "$mainMod CTRL SHIFT, up, movewindow, u"
+          "$mainMod CTRL SHIFT, right, movewindow, r"
 
-        # Example special workspace (scratchpad)
-        ## Navigate // Show Scratchpad // <Super> S ##
-        "$mainMod, S, togglespecialworkspace, magic"
-        ## Navigate // Move Window to Scratchpad // <Super> <Shift> S ##
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
+          # Example special workspace (scratchpad)
+          ## Navigate // Show Scratchpad // <Super> S ##
+          "$mainMod, S, togglespecialworkspace, magic"
+          ## Navigate // Move Window to Scratchpad // <Super> <Shift> S ##
+          "$mainMod SHIFT, S, movetoworkspace, special:magic"
 
-        # Screenshot
-        #bind = SHIFT, 107, exec, ~/.config/hypr/scripts/screenshot/captureAll.sh
-        ## Navigate // Printscreen area to Clipboard // <PrtSc> ##
-        ", 107, exec, hyprshot -m region"
+          # Screenshot
+          #bind = SHIFT, 107, exec, ~/.config/hypr/scripts/screenshot/captureAll.sh
+          ## Navigate // Printscreen area to Clipboard // <PrtSc> ##
+          ", 107, exec, hyprshot -m region"
 
-        # Scroll through existing workspaces with mainMod + scroll
-        "$mainMod, mouse_down, workspace, e+1"
-        "$mainMod, mouse_up, workspace, e-1"
+          # Scroll through existing workspaces with mainMod + scroll
+          "$mainMod, mouse_down, workspace, e+1"
+          "$mainMod, mouse_up, workspace, e-1"
 
-        # Session management
-        "$mainMod, L, exec, hyprlock"
-        "CTRL, Escape, exec, gnome-system-monitor"
+          # Session management
+          "$mainMod, L, exec, hyprlock"
+          "CTRL, Escape, exec, gnome-system-monitor"
 
-        "$mainMod, T, togglegroup"
-      ]
-      ++ (
-        # Workspaces
-        builtins.concatLists (
-          builtins.genList (workspace: [
-            # Switch workspaces with mainMod + [0-9]
-            ## Workspaces // Switch to Workspace // <Super> [0-9] ##
-            "$mainMod, ${toString workspace}, workspace, ${toString workspace}"
+          "$mainMod, T, togglegroup"
+        ]
+        ++ (
+          # Workspaces
+          builtins.concatLists (
+            builtins.genList (workspace: [
+              # Switch workspaces with mainMod + [0-9]
+              ## Workspaces // Switch to Workspace // <Super> [0-9] ##
+              "$mainMod, ${toString workspace}, workspace, ${toString workspace}"
 
-            # Move active window to a workspace with mainMod + SHIFT + [0-9]
-            ## Navigate // Move Focused Window to Workspace // <Super> <Shift> [0-9] ##
-            "$mainMod SHIFT, ${toString workspace}, movetoworkspace, ${toString workspace}"
+              # Move active window to a workspace with mainMod + SHIFT + [0-9]
+              ## Navigate // Move Focused Window to Workspace // <Super> <Shift> [0-9] ##
+              "$mainMod SHIFT, ${toString workspace}, movetoworkspace, ${toString workspace}"
 
-            # Move active workspace to a monitor
-            "$mainMod CONTROL, ${toString workspace}, exec, hyprctl dispatch moveworkspacetomonitor ${toString workspace} $(hyprctl activewindow | egrep \"monitor: [[:digit:]]+\" | egrep -o \"[[:digit:]]+\") && hyprctl dispatch workspace ${toString workspace}"
-          ]) 9
-        )
-      );
+              # Move active workspace to a monitor
+              "$mainMod CONTROL, ${toString workspace}, exec, hyprctl dispatch moveworkspacetomonitor ${toString workspace} $(hyprctl activewindow | egrep \"monitor: [[:digit:]]+\" | egrep -o \"[[:digit:]]+\") && hyprctl dispatch workspace ${toString workspace}"
+            ])
+            9
+          )
+        );
 
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
-
       ];
 
       bindl = [

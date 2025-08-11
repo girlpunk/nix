@@ -1,7 +1,6 @@
 [
   (
-    { pkgs, ... }:
-    {
+    {pkgs, ...}: {
       gtk = rec {
         enable = true;
         iconTheme = {

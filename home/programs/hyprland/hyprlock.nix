@@ -1,5 +1,4 @@
-_:
-let
+_: let
   text_color = "rgba(FFFFFFFF)";
   entry_background_color = "rgba(33333311)";
   entry_border_color = "rgba(3B3B3B55)";
@@ -7,8 +6,7 @@ let
   font_family = "Rubik Light";
   font_family_clock = "Rubik Light";
   font_material_symbols = "Material Symbols Rounded";
-in
-{
+in {
   programs.hyprlock = {
     enable = true;
     settings = {

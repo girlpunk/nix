@@ -1,18 +1,19 @@
-{ inputs, system }:
-
-let
+{
+  inputs,
+  system,
+}: let
   # nixos-version needs this to work with flakes
   libVersionOverlay = import "${inputs.nixpkgs}/lib/flake-version-info.nix" inputs.nixpkgs;
 
   libOverlay = f: p: rec {
-    libx = import ./. { inherit (p) lib; };
+    libx = import ./. {inherit (p) lib;};
     lib =
       (p.lib.extend (
         _: _: {
           inherit (libx) exe removeNewline secretManager;
         }
       )).extend
-        libVersionOverlay;
+      libVersionOverlay;
   };
 
   overlays = f: p: {
@@ -21,11 +22,10 @@ let
     #inherit (inputs.nixpkgs-unstable.packages.${system}) jetbrains.resharper;
 
     builders = {
-      mkHome =
-        {
-          pkgs ? f,
-          extraHomeConfig ? { },
-        }:
+      mkHome = {
+        pkgs ? f,
+        extraHomeConfig ? {},
+      }:
         import ../home.nix {
           inherit
             extraHomeConfig
@@ -35,11 +35,10 @@ let
             ;
         };
 
-      mkNixos =
-        {
-          pkgs ? f,
-          extraSystemConfig ? { },
-        }:
+      mkNixos = {
+        pkgs ? f,
+        extraSystemConfig ? {},
+      }:
         import ../os.nix {
           inherit
             extraSystemConfig
@@ -57,8 +56,7 @@ let
       config.allowUnfree = true;
     };
 
-    treesitterGrammars =
-      ts:
+    treesitterGrammars = ts:
       ts.withPlugins (p: [
         p.tree-sitter-scala
         p.tree-sitter-c
@@ -90,10 +88,8 @@ let
     package = inputs.hyprland.packages.${inputs.pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
       inputs.hyprland.packages.${inputs.pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-
   };
-in
-[
+in [
   libOverlay
   overlays
   #inputs.nix-index.overlays.${system}.default

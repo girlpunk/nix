@@ -5,9 +5,7 @@
   currentSystem,
   currentSystemName,
   ...
-}:
-
-{
+}: {
   imports = [
     ./language.nix
     ./user.nix
@@ -48,7 +46,7 @@
           "big-parallel"
           "kvm"
         ];
-        mandatoryFeatures = [ ];
+        mandatoryFeatures = [];
       }
     ];
     distributedBuilds = true;

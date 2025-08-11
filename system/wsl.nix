@@ -1,6 +1,9 @@
-{ pkgs, currentSystemUser, ... }:
 {
-  imports = [ ];
+  pkgs,
+  currentSystemUser,
+  ...
+}: {
+  imports = [];
 
   wsl = {
     enable = true;

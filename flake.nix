@@ -54,38 +54,35 @@
     opnix.url = "github:brizzbuzz/opnix";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }@inputs:
-    let
-      system = "x86_64-linux";
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
 
-      overlays = import ./lib/overlays.nix { inherit inputs system; };
+    overlays = import ./lib/overlays.nix {inherit inputs system;};
 
-      pkgs = import nixpkgs {
-        inherit overlays system;
-        config.allowUnfree = true;
-      };
-    in
-    {
-      homeConfigurations = pkgs.builders.mkHome { };
-      nixosConfigurations = pkgs.builders.mkNixos { };
-
-      out = { inherit pkgs overlays; };
-
-      formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.nixfmt-tree;
-
-      #nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
-      #  pkgs = import nixpkgs { inherit system; config = { allowUnfree = true; };};
-      #  system = "x86_64-linux";
-      #  modules = [
-      #    ./configuration.nix
-      #    ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
-      #  ];
-      #};
+    pkgs = import nixpkgs {
+      inherit overlays system;
+      config.allowUnfree = true;
     };
+  in {
+    homeConfigurations = pkgs.builders.mkHome {};
+    nixosConfigurations = pkgs.builders.mkNixos {};
+
+    out = {inherit pkgs overlays;};
+
+    formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.nixfmt-tree;
+
+    #nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+    #  pkgs = import nixpkgs { inherit system; config = { allowUnfree = true; };};
+    #  system = "x86_64-linux";
+    #  modules = [
+    #    ./configuration.nix
+    #    ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
+    #  ];
+    #};
+  };
 }

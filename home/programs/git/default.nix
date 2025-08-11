@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   gitConfig = {
     init.defaultBranch = "main";
     pull.rebase = false;
@@ -22,8 +20,7 @@ let
       format = "ssh";
     };
   };
-in
-{
+in {
   programs = {
     git = {
       enable = true;

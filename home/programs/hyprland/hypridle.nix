@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   pulse = pkgs.writeShellScript "inhibitor-pulse.sh" ''
     pactl list | grep RUNNING && exit 1 || exit 0
   '';
@@ -10,8 +9,7 @@ let
     # Start lock screen
     pidof hyprlock || hyprlock
   '';
-in
- {
+in {
   services.hypridle = {
     enable = true;
     settings = {

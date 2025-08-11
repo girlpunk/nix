@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   programs.zsh = {
     enable = true;
 
@@ -66,7 +69,7 @@
       zstyle :compinstall filename '$HOME/.zshrc'
 
       # Enable completion
-      autoload -Uz compinit bashcompinit  
+      autoload -Uz compinit bashcompinit
       compinit
       bashcompinit
 
@@ -116,23 +119,22 @@
     enableCompletion = true;
     enableVteIntegration = true;
 
-    initContent =
-      let
-        zshConfigEarlyInit = lib.mkOrder 1000 ''
-          # Save history immidiately
-          setopt incappendhistory
-        '';
-        zshConfig = lib.mkOrder 1500 ''
-          eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
+    initContent = let
+      zshConfigEarlyInit = lib.mkOrder 1000 ''
+        # Save history immidiately
+        setopt incappendhistory
+      '';
+      zshConfig = lib.mkOrder 1500 ''
+        eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 
-          if command -v -- hyfetch > /dev/null 2>&1; then
-            hyfetch
-          else
-            echo "No Hyfetch, no pretty logo :("
-            fastfetch
-          fi
-        '';
-      in
+        if command -v -- hyfetch > /dev/null 2>&1; then
+          hyfetch
+        else
+          echo "No Hyfetch, no pretty logo :("
+          fastfetch
+        fi
+      '';
+    in
       lib.mkMerge [
         zshConfigEarlyInit
         zshConfig
