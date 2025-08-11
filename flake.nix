@@ -74,7 +74,7 @@
 
     out = {inherit pkgs overlays;};
 
-    formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.nixfmt-tree;
+    formatter.${system} = pkgs.alejandra;
 
     #nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
     #  pkgs = import nixpkgs { inherit system; config = { allowUnfree = true; };};
