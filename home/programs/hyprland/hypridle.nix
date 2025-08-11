@@ -1,9 +1,22 @@
-_: {
+{ pkgs, ... }:
+let
+  pulse = pkgs.writeShellScript "inhibitor-pulse.sh" ''
+    pactl list | grep RUNNING && exit 1 || exit 0
+  '';
+  lock = pkgs.writeShellScript "lock.sh" ''
+    # If pulse says something is playing, don't lock
+    ${pulse} || exit 1
+
+    # Start lock screen
+    pidof hyprlock || hyprlock
+  '';
+in
+ {
   services.hypridle = {
     enable = true;
     settings = {
       general = {
-        lock_cmd = "" + ./idle/lock.sh;
+        lock_cmd = lock + "";
         ignore_dbus_inhibit = false; # whether to ignore dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
         ignore_systemd_inhibit = false; # whether to ignore systemd-inhibit --what=idle inhibitors
       };
@@ -21,7 +34,7 @@ _: {
         }
         {
           timeout = 180;
-          on-timeout = "" + ./idle/lock.sh;
+          on-timeout = "" + lock;
         }
         {
           timeout = 300;
