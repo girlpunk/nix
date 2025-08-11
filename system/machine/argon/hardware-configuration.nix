@@ -22,6 +22,7 @@
       kernelModules = [
         "dm-snapshot"
         "cryptd"
+        "coretemp"
       ];
 
       verbose = false;
