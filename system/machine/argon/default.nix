@@ -39,6 +39,7 @@
     proxmox-backup-client
     devenv
     #fluffychat
+    (pkgs.callPackage ../../programs/amazing-marvin {})
   ];
 
   # Configure network proxy if necessary
