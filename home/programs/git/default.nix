@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+_: let
   gitConfig = {
     init.defaultBranch = "main";
     pull.rebase = false;

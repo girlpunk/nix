@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  currentSystem,
-  currentSystemName,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./language.nix
     ./user.nix
@@ -84,7 +77,7 @@
 
   environment = {
     sessionVariables = {
-      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+      LD_LIBRARY_PATH = ["${pkgs.stdenv.cc.cc.lib}/lib"];
     };
   };
 
