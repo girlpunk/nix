@@ -10,10 +10,12 @@
     };
     isSystemUser = true;
     homeMode = "555";
+    shell = pkgs.bash;
   };
 
   users.groups.nixremote = {};
 
   nix.settings.trusted-users = [
+    "nixremote"
   ];
 }
