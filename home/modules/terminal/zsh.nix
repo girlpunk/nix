@@ -125,6 +125,8 @@
         setopt incappendhistory
       '';
       zshConfig = lib.mkOrder 1500 ''
+        eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
+
         eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 
         if command -v -- hyfetch > /dev/null 2>&1; then

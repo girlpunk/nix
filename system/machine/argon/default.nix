@@ -38,7 +38,8 @@
     element-desktop
     proxmox-backup-client
     devenv
-    #fluffychat
+    direnv
+
     (pkgs.callPackage ../../programs/amazing-marvin {})
   ];
 
