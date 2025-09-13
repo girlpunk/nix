@@ -9,6 +9,7 @@
       "wheel"
       "docker"
       "i2c"
+      "wireshark"
     ];
     openssh = {
       authorizedKeys.keys = [

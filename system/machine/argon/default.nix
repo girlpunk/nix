@@ -32,15 +32,21 @@
   environment.systemPackages = with pkgs; [
     cryptsetup
     kubectl
+    kubectl-cnpg
     terraform
     usbutils
     cinny-desktop
-    element-desktop
-    proxmox-backup-client
+    wireshark
+    wine
+
     devenv
     direnv
 
     (pkgs.callPackage ../../programs/amazing-marvin {})
+    (with dotnetCorePackages;
+      combinePackages [
+        dotnet_9.sdk
+      ])
   ];
 
   # Configure network proxy if necessary
@@ -73,6 +79,11 @@
     resolved.enable = true;
 
     avahi.enable = true;
+  };
+
+  programs.wireshark = {
+    enable = true;
+    usbmon.enable = true;
   };
 
   # Make apps using sound get higher priority automatically
