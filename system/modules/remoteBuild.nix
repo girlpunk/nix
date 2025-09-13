@@ -1,18 +1,24 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  sshConfig = pkgs.writeTextFile {
+    name = "config";
+    text = ''
+      Host minos
+              HostName 192.168.42.24
+              # Prevent using ssh-agent or another keyfile, useful for testing
+              IdentitiesOnly yes
+              IdentityFile /root/.ssh/nixremote
+              # The weakly privileged user on the remote builder – if not set, 'root' is used – which will hopefully fail
+              User nixremote
+    '';
+  };
+in
 {
-  users.users.root.packages = [  
-    (pkgs.writeTextFile {  
-      name = "/root/.ssh/config";
-      text = ''
-        Host minos
-                # Prevent using ssh-agent or another keyfile, useful for testing
-                IdentitiesOnly yes
-                IdentityFile /root/.ssh/nixremote
-                # The weakly privileged user on the remote builder – if not set, 'root' is used – which will hopefully fail
-                User nixremote
-      '';
-    })
-  ];
+  system.activationScripts.rootSshConfig = {
+    text = ''
+      ln -fs ${sshConfig} /root/.ssh/config
+    '';
+  };
 
   nix = {
     buildMachines = [{
@@ -30,7 +36,7 @@
       mandatoryFeatures = [];
     }];
     distributedBuilds = true;
-    nix.settings = {
+    settings = {
       builders-use-substitutes = true;
     };
   };
