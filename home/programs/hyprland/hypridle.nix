@@ -9,6 +9,25 @@
     # Start lock screen
     pidof hyprlock || hyprlock
   '';
+  dim_screen = pkgs.writeShellScript "dim_screen.sh" ''
+    # If pulseaudio says something is playing, don't dim
+    ./inhibitors/pulse.sh || exit 1
+
+    # Skip AC check for longer timeout periods
+    if [[ $* != *--always* ]]; then
+        # If on AC power, don't dim
+        ./inhibitors/ac.sh || exit 1
+    fi
+
+    # Save current brightness state
+    brightnessctl -qs
+
+    # Set 5% as new brightness
+    brightnessctl -q set 5%
+
+    # Turn off keyboard backlight
+    brightnessctl s -q -d 'tpacpi::kbd_backlight' 0
+  '';
 in {
   services.hypridle = {
     enable = true;
@@ -22,12 +41,12 @@ in {
       listener = [
         {
           timeout = 60;
-          on-timeout = "" + ./idle/dim_screen.sh;
+          on-timeout = "" + dim_screen;
           on-resume = "" + ./idle/brighten_screen.sh;
         }
         {
           timeout = 120;
-          on-timeout = "${./idle/dim_screen.sh} --always";
+          on-timeout = "${dim_screen} --always";
           on-resume = "" + ./idle/brighten_screen.sh;
         }
         {
