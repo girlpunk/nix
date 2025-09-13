@@ -10,6 +10,7 @@
     ../../programs/bambu-studio.nix
     ../../programs/jetbrains-gateway.nix
     ../../modules/gui
+    ../../modules/remoteBuild.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
