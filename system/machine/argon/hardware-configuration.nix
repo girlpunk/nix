@@ -10,6 +10,7 @@
   ];
 
   boot = {
+    resumeDevice = "/dev/dm-3";
     initrd = {
       availableKernelModules = [
         "xhci_pci"
@@ -54,6 +55,10 @@
 
     loader.timeout = 0;
   };
+
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=1h
+  '';
 
   fileSystems = {
     "/" = {
@@ -110,6 +115,29 @@
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
   }; # Force intel-media-driver
+
+  powerManagement.enable = true;
+
+  services = {
+    thermald.enable = true;
+    tlp.enable = true;
+
+    logind = {
+      lidSwitch = "hibernate";
+      lidSwitchExternalPower = "hybrid-sleep";
+      lidSwitchDocked = "hybrid-sleep";
+    };
+
+    upower = {
+      enable = true;
+    };
+
+    blueman.enable = true;
+
+    udev.extraRules = ''
+      KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+    '';
+  };
 
   # VP9 decoding not supported when using intel-media-driver
   # https://github.com/intel/media-driver/issues/1024
