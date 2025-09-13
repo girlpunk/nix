@@ -13,8 +13,9 @@
     ./wluma.nix
   ];
 
-  home.packages = [
-    pkgs.rofi
+  home.packages = with pkgs; [
+    rofi
+    networkmanagerapplet
   ];
 
   xdg = {
