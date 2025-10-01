@@ -142,23 +142,21 @@
 
     plugins = [
       {
-        # will source zsh-autosuggestions.plugin.zsh
         name = "zsh-autosuggestions";
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-autosuggestions";
           rev = "v0.7.1";
-          sha256 = "wTGiJFnj3fN4a9Vsc5PPl5vBgvVLJbak0AN3t7RE4B8=";
+          hash = "sha256-vpTyYq9ZgfgdDsWzjxVAE7FZH4MALMNZIFyEOBLm5Qo=";
         };
       }
       {
-        # will source zsh-autosuggestions.plugin.zsh
-        name = " zsh-syntax-highlighting";
+        name = "zsh-syntax-highlighting";
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
-          repo = " zsh-syntax-highlighting";
-          rev = "v0.8.0";
-          sha256 = "wTGiJFnj3fN4a9Vsc5PPl5vBgvVLJbak0AN3t7RE4B8=";
+          repo = "zsh-syntax-highlighting";
+          rev = "0.8.0";
+          hash = "sha256-iJdWopZwHpSyYl5/FQXEW7gl/SrKaYDEtTH9cGP7iPo=";
         };
       }
       {
@@ -167,8 +165,7 @@
           owner = "romkatv";
           repo = "windows-terminal-zsh-integration";
           rev = "master";
-          #          hash = "b32caefa23901e3bd2ece1ea530eb301c428b7e9";
-          sha256 = "wTGiJFnj3fN4a9Vsc5PPl5vBgvVLJbak0AN3t7RE4B8=";
+          hash = "sha256-wTGiJFnj3fN4a9Vsc5PPl5vBgvVLJbak0AN3t7RE4B8=";
         };
       }
     ];
