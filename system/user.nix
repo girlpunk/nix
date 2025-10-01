@@ -30,12 +30,6 @@
 
     _1password.enable = true;
 
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      localNetworkGameTransfers.openFirewall = true;
-    };
-
     git = {
       enable = true;
     };

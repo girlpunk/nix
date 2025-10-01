@@ -3,14 +3,11 @@
   lib,
   ...
 }: {
+  imports = [
+    ../dotnet.nix
+  ];
+
   environment.systemPackages = with pkgs; [
-    # Dotnet
-    (
-      with dotnetCorePackages;
-        combinePackages [
-          dotnet_9.sdk
-        ]
-    )
     unstable.jetbrains.rider
   ];
 }
