@@ -11,6 +11,7 @@
   hosts = [
     "argon"
     "minos"
+    "work"
   ];
 
   modules' = [

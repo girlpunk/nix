@@ -80,11 +80,12 @@ let
     services.ssh-agent.enable = false;
   };
 in [
+  more
+  #nix-index-database.hmModules.nix-index
   #../programs/dconf
-  ../programs/git
-#  ../programs/statix
   #../programs/firefox
   #../programs/fish
+  ../programs/git
   #../programs/khal
   #../programs/md-toc
   #../programs/mimeo
@@ -93,8 +94,7 @@ in [
   #../programs/neovim-ide
   #../programs/ngrok
   #../programs/signal
+  ../programs/statix
   #../programs/yubikey
   #../programs/zathura
-  #nix-index-database.hmModules.nix-index
-  more
 ]
