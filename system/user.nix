@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   # Add ~/.local/bin to PATH
   environment.localBinInPath = true;
 
@@ -13,6 +9,7 @@
       "wheel"
       "docker"
       "i2c"
+      "wireshark"
     ];
     openssh = {
       authorizedKeys.keys = [

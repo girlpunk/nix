@@ -1,9 +1,5 @@
 let
-  more = {
-    inputs,
-    pkgs,
-    ...
-  }: {
+  more = {pkgs, ...}: {
     programs = {
       #gpg.enable = true;
 

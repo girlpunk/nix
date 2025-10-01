@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   monitors = lib.mkOption "monitors hyprland";
@@ -56,6 +57,7 @@ in {
       exec-once = [
         # Lock immidiately on start, as we don't have a greeter
         ("" + ./idle/lock.sh)
+        "${pkgs._1password-gui}/bin/1password --silent"
       ];
 
       #############################
@@ -355,8 +357,8 @@ in {
     };
   };
 }
-
 # bind = $mainMod, 0&1&2&3&4&5&6&7&8&9, exec, echo 1 > $XDG_RUNTIME_DIR/sov.sock
 # bind = $mainMod, 1, exec, echo 1 > $XDG_RUNTIME_DIR/sov.sock
 # bindr = $mainMod, 0&1&2&3&4&5&6&7&8&9, exec, echo 0 > $XDG_RUNTIME_DIR/sov.sock
 # bindr = $mainMod, 1, exec, echo 0 > $XDG_RUNTIME_DIR/sov.sock
+

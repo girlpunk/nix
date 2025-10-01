@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hyprland.nix
     ./hypridle.nix
@@ -17,8 +13,9 @@
     ./wluma.nix
   ];
 
-  home.packages = [
-    pkgs.rofi
+  home.packages = with pkgs; [
+    rofi
+    networkmanagerapplet
   ];
 
   xdg = {
