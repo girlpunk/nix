@@ -67,4 +67,5 @@ in {
 
   "sam@minos" = mkHome {};
   "sam@home-assistant" = mkHome {};
+  "sam@work" = mkHome {};
 }
