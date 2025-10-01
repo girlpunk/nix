@@ -82,7 +82,7 @@ let
 in [
   #../programs/dconf
   ../programs/git
-  ../programs/statix
+#  ../programs/statix
   #../programs/firefox
   #../programs/fish
   #../programs/khal
@@ -95,7 +95,6 @@ in [
   #../programs/signal
   #../programs/yubikey
   #../programs/zathura
-  ../programs/statix
   #nix-index-database.hmModules.nix-index
   more
 ]
