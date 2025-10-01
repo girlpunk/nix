@@ -13,6 +13,9 @@
     #../../programs/rider
     ../../programs/1password-gui.nix
     ../../programs/jetbrains-gateway.nix
+    ../../programs/sshd.nix
+    ../../programs/steam.nix
+    ../../programs/terraform
     ../../modules/gui
   ];
 
@@ -36,7 +39,6 @@
   environment.systemPackages = with pkgs; [
     cryptsetup
     kubectl
-    terraform
     usbutils
     cinny-desktop
     element-desktop

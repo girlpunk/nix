@@ -7,7 +7,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../programs/sunshine.nix
+    ../../programs/steam.nix
+    ../../programs/sshd.nix
     #../../wm/hyprland.nix
+    ../../programs/rider
   ];
 
   # Bootloader.

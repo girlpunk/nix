@@ -28,7 +28,6 @@
     nano
     _1password-cli
     nixfmt-rfc-style
-    #    terraform
     #    comma
 
     # Python
