@@ -45,15 +45,11 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     _1password-shell-plugins.url = "github:1Password/shell-plugins";
+
     opnix.url = "github:brizzbuzz/opnix";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
+  outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
 
     overlays = import ./lib/overlays.nix {inherit inputs system;};

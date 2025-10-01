@@ -10,6 +10,7 @@
   ];
 
   boot = {
+    resumeDevice = "/dev/dm-3";
     initrd = {
       availableKernelModules = [
         "xhci_pci"
@@ -55,6 +56,10 @@
     loader.timeout = 0;
   };
 
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=1h
+  '';
+
   fileSystems = {
     "/" = {
       device = "/dev/main/root";
@@ -82,7 +87,27 @@
   ];
 
   hardware = {
-    bluetooth.enable = lib.mkDefault true;
+    bluetooth = {
+      enable = lib.mkDefault true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          # Shows battery charge of connected devices on supported
+          # Bluetooth adapters. Defaults to 'false'.
+          Experimental = true;
+          # When enabled other devices can connect faster to us, however
+          # the tradeoff is increased power consumption. Defaults to
+          # 'false'.
+          FastConnectable = true;
+        };
+        Policy = {
+          # Enable all controllers when they are found. This includes
+          # adapters present on start as well as adapters that are plugged
+          # in later on. Defaults to 'true'.
+          AutoEnable = true;
+        };
+      };
+    };
     sensor.iio.enable = true;
     cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
@@ -110,6 +135,29 @@
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
   }; # Force intel-media-driver
+
+  powerManagement.enable = true;
+
+  services = {
+    thermald.enable = true;
+    tlp.enable = true;
+
+    logind = {
+      lidSwitch = "hibernate";
+      lidSwitchExternalPower = "hybrid-sleep";
+      lidSwitchDocked = "hybrid-sleep";
+    };
+
+    upower = {
+      enable = true;
+    };
+
+    blueman.enable = true;
+
+    udev.extraRules = ''
+      KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+    '';
+  };
 
   # VP9 decoding not supported when using intel-media-driver
   # https://github.com/intel/media-driver/issues/1024

@@ -10,15 +10,22 @@
     greetd.tuigreet
   ];
 
-  programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  services.greetd = {
-    enable = true;
-    settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-  };
+  #services.greetd = {
+  #  enable = true;
+  #  settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+  #};
 
-  programs.firefox.enable = true;
+  programs = {
+    hyprland.enable = true;
+
+    regreet = {
+      enable = true;
+    };
+
+    firefox.enable = true;
+  };
 
   boot.plymouth = {
     enable = true;

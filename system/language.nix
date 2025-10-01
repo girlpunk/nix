@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  currentSystem,
-  currentSystemName,
-  ...
-}: {
+_: {
   # Set your time zone.
   time.timeZone = "Europe/London";
 

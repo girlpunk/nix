@@ -1,22 +1,19 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     #../../programs/rider
     ../../programs/1password-gui.nix
+    ../../programs/bambu-studio.nix
     ../../programs/jetbrains-gateway.nix
     ../../programs/sshd.nix
     ../../programs/steam.nix
     ../../programs/terraform
     ../../modules/gui
+    ../../modules/remoteBuild.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -39,12 +36,20 @@
   environment.systemPackages = with pkgs; [
     cryptsetup
     kubectl
+    kubectl-cnpg
     usbutils
     cinny-desktop
-    element-desktop
-    proxmox-backup-client
+    wireshark
+    wine
+
     devenv
-    #fluffychat
+    direnv
+
+    (pkgs.callPackage ../../programs/amazing-marvin {})
+    (with dotnetCorePackages;
+      combinePackages [
+        dotnet_9.sdk
+      ])
   ];
 
   # Configure network proxy if necessary
@@ -77,6 +82,11 @@
     resolved.enable = true;
 
     avahi.enable = true;
+  };
+
+  programs.wireshark = {
+    enable = true;
+    usbmon.enable = true;
   };
 
   # Make apps using sound get higher priority automatically
