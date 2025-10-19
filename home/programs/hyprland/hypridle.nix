@@ -1,32 +1,66 @@
 {pkgs, ...}: let
   pulse = pkgs.writeShellScript "inhibitor-pulse.sh" ''
-    pactl list | grep RUNNING && exit 1 || exit 0
+    ${pkgs.wireplumber}/bin/wpctl status | grep active && exit 1 || exit 0
   '';
+
   lock = pkgs.writeShellScript "lock.sh" ''
     # If pulse says something is playing, don't lock
     ${pulse} || exit 1
 
     # Start lock screen
-    pidof hyprlock || hyprlock
+    pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock
   '';
+
+  ac = pkgs.writeShellScript "inhibitor-ac.sh" ''
+    grep 1 /sys/class/power_supply/AC/online && exit 1 || exit 0
+  '';
+
   dim_screen = pkgs.writeShellScript "dim_screen.sh" ''
     # If pulseaudio says something is playing, don't dim
-    ./inhibitors/pulse.sh || exit 1
+    ${pulse} || exit 1
 
     # Skip AC check for longer timeout periods
     if [[ $* != *--always* ]]; then
         # If on AC power, don't dim
-        ./inhibitors/ac.sh || exit 1
+        ${ac} || exit 1
     fi
 
     # Save current brightness state
-    brightnessctl -qs
+    ${pkgs.brightnessctl}/bin/brightnessctl -qs
 
     # Set 5% as new brightness
-    brightnessctl -q set 5%
+    ${pkgs.brightnessctl}/bin/brightnessctl -q set 5%
 
     # Turn off keyboard backlight
-    brightnessctl s -q -d 'tpacpi::kbd_backlight' 0
+    ${pkgs.brightnessctl}/bin/brightnessctl s -q -d 'tpacpi::kbd_backlight' 0
+  '';
+
+  outputs_off = pkgs.writeShellScript "outputs_off.sh" ''
+    # Skip AC check for longer timeout periods
+    if [[ $* != *--always* ]]; then
+        # If on AC power, don't turn off monitor
+        ${ac} || exit 1
+    fi
+
+    # If pulse says something is playing, don't turn off monitor
+    ${pulse} || exit 1
+
+    # Turn off monitor
+    ${pkgs.hyprland}/bin/hyprctl dispatch dpms off
+  '';
+
+  suspend = pkgs.writeShellScript "suspend.sh" ''
+    # Skip AC check for longer timeout periods
+    if [[ $* != *--always* ]]; then
+        # If on AC power, don't suspend
+        ${ac} || exit 1
+    fi
+
+    # If pulse says something is playing, don't suspend
+    ${pulse} || exit 1
+
+    # Suspend
+    ${pkgs.systemd}/bin/systemctl suspend-then-hibernate
   '';
 in {
   services.hypridle = {
@@ -55,21 +89,21 @@ in {
         }
         {
           timeout = 300;
-          on-timeout = "" + ./idle/outputs_off.sh;
+          on-timeout = "" + outputs_off;
           on-resume = "" + ./idle/outputs_on.sh;
         }
         {
           timeout = 600;
-          on-timeout = "${./idle/outputs_off.sh} --always";
+          on-timeout = "${outputs_off} --always";
           on-resume = "" + ./idle/outputs_on.sh;
         }
         {
           timeout = 420;
-          on-timeout = "" + ./idle/suspend.sh;
+          on-timeout = "" + suspend;
         }
         {
           timeout = 840;
-          on-timeout = "${./idle/suspend.sh} --always";
+          on-timeout = "${suspend} --always";
         }
       ];
     };
