@@ -24,6 +24,7 @@
         "dm-snapshot"
         "cryptd"
         "coretemp"
+        "i915"
       ];
 
       verbose = false;
@@ -45,7 +46,8 @@
     kernelParams = [
       "mem_sleep_default=deep"
       "pcie_aspm.policy=powersupersave"
-      "i915.enable_guc=2"
+      "i915.enable_guc=3"
+      # "i915.enable_psr=0"  # Does this fix the crashes?
       "quiet"
       "splash"
       "boot.shell_on_fail"
@@ -98,7 +100,7 @@
           # When enabled other devices can connect faster to us, however
           # the tradeoff is increased power consumption. Defaults to
           # 'false'.
-          FastConnectable = true;
+          FastConnectable = false;
         };
         Policy = {
           # Enable all controllers when they are found. This includes
@@ -115,14 +117,20 @@
 
   hardware.graphics = {
     enable = true;
+    #    package = pkgs.unstable.mesa;
     extraPackages = with pkgs; [
       # your Open GL, Vulkan and VAAPI drivers
-      #vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable
+      vpl-gpu-rt # for newer GPUs on NixOS >24.05 or unstable
       # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
-      intel-media-sdk # for older GPUs
+      #intel-media-sdk # for older GPUs
       intel-media-driver
+      # vaapiIntel try this next?
       libvdpau-va-gl
+      intel-compute-runtime-legacy1
     ];
+
+    #    enable32Bit = true;
+    #    package32 = pkgs.unstable.pkgsi686Linux.mesa;
   };
 
   security.tpm2 = {
@@ -133,7 +141,8 @@
   users.users.sam.extraGroups = ["tss"]; # tss group has access to TPM devices
 
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
+    LIBVA_DRIVER_NAME = "i915"; # iHD
+    #MESA_LOADER_DRIVER_OVERRIDE="iHD";
   }; # Force intel-media-driver
 
   powerManagement.enable = true;
@@ -163,9 +172,9 @@
   # https://github.com/intel/media-driver/issues/1024
   # NixOS Wiki recommends using the legacy intel-vaapi-driver with the hybrid codec over that one for Skylake.
   # https://wiki.nixos.org/wiki/Accelerated_Video_Playback
-  #  hardware.intelgpu = {
-  #    vaapiDriver = "intel-vaapi-driver";
-  #    enableHybridCodec = true;
+  #hardware.intelgpu = {
+  #  vaapiDriver = "intel-vaapi-driver";
+  #  enableHybridCodec = true;
   #
   #    driver = "i915";
   #  };
