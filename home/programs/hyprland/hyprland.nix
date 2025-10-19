@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   monitors = lib.mkOption "monitors hyprland";
@@ -187,9 +188,12 @@ in {
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#gestures
-      gestures = {
-        workspace_swipe = true;
-      };
+      gesture = [
+        "3, horizontal, workspace"
+      ];
+      # gestures = {
+      #   workspace_swipe = true;
+      # };
 
       # Example per-device config
       # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
@@ -267,7 +271,8 @@ in {
           # Screenshot
           #bind = SHIFT, 107, exec, ~/.config/hypr/scripts/screenshot/captureAll.sh
           ## Navigate // Printscreen area to Clipboard // <PrtSc> ##
-          ", 107, exec, hyprshot -m region"
+          #", 107, exec, hyprshot -m region"
+          ", 107, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" -t png - | tee \"$HOME/Pictures/Screenshots/Screenshots_$(date +%Y%m%d_%H%M%S).png\" | ${pkgs.wl-clipboard}/bin/wl-copy"
 
           # Scroll through existing workspaces with mainMod + scroll
           "$mainMod, mouse_down, workspace, e+1"
@@ -308,8 +313,8 @@ in {
         # Session management
         ",switch:Lid Switch, exec, hyprlock"
 
-        ",XF86AudioMute,         exec, pactl set-sink-mute   @DEFAULT_SINK@ toggle && pacat /home/jacob/.local/share/Steam/steamui/sounds/deck_ui_volume.wav"
-        ",XF86AudioMicMute,      exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+        ",XF86AudioMute,         exec, wpctl set-mute @DEFAULT_SINK@ toggle && pacat /home/jacob/.local/share/Steam/steamui/sounds/deck_ui_volume.wav"
+        ",XF86AudioMicMute,      exec, wpctl set-mute @DEFAULT_SOURCE@ toggle"
       ];
 
       bindel = [
