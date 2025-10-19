@@ -55,7 +55,7 @@ in {
 
       exec-once = [
         # Lock immidiately on start, as we don't have a greeter
-        ("" + ./idle/lock.sh)
+        #("" + ./idle/lock.sh)
         "${pkgs._1password-gui}/bin/1password --silent"
       ];
 
