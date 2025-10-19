@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   programs.rofi = {
     enable = true;
     font = "'Fira Code Nerd Font Mono' 12";
