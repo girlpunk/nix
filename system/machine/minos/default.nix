@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./build-user.nix
     ../../programs/sunshine.nix
+    ../../programs/rider
     #../../wm/hyprland.nix
   ];
 
