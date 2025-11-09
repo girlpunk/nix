@@ -150,7 +150,7 @@
           owner = "zsh-users";
           repo = "zsh-autosuggestions";
           rev = "v0.7.1";
-          sha256 = "wTGiJFnj3fN4a9Vsc5PPl5vBgvVLJbak0AN3t7RE4B8=";
+          hash = "sha256-vpTyYq9ZgfgdDsWzjxVAE7FZH4MALMNZIFyEOBLm5Qo=";
         };
       }
       {
@@ -159,7 +159,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = " zsh-syntax-highlighting";
-          rev = "v0.8.0";
+          rev = "0.8.0";
           sha256 = "wTGiJFnj3fN4a9Vsc5PPl5vBgvVLJbak0AN3t7RE4B8=";
         };
       }
