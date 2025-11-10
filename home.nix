@@ -22,6 +22,7 @@
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       #extraSpecialArgs = pkgs.xargs;
+      extraSpecialArgs = {inherit inputs;};
       modules =
         modules'
         ++ mods

@@ -17,14 +17,14 @@
         "https://nix-community.cachix.org"
         "https://channable-public.cachix.org"
         "https://cache.nixos.org/"
+        "https://hyprland.cachix.org"
       ];
+      trusted-substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = [
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "minos:wcHt079XZRopdL7wy1aeBjkgE82Vmz1K9n8WpsOgZsY="
       ];
-#      trusted-substituters = [
-#        "ssh-nh://minos"
-#      ];
     };
   };
 
@@ -58,11 +58,11 @@
     comma
   ];
 
-  environment = {
-    sessionVariables = {
-      LD_LIBRARY_PATH = ["${pkgs.stdenv.cc.cc.lib}/lib"];
-    };
-  };
+  #environment = {
+  #  sessionVariables = {
+  #    LD_LIBRARY_PATH = ["${pkgs.stdenv.cc.cc.lib}/lib"];
+  #  };
+  #};
 
   # Enable the OpenSSH daemon.
   services.openssh = {

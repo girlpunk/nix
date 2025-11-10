@@ -34,7 +34,7 @@
         gst_all_1.gst-plugins-base
         gst_all_1.gst-plugins-good
         webkitgtk_4_1
-        pkgs.linuxPackages.nvidia_x11
+        #        pkgs.linuxPackages.nvidia_x11
         libglvnd
         fontconfig
         dejavu_fonts

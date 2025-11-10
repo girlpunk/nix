@@ -106,6 +106,11 @@
     "sam"
   ];
 
+  services.onepassword-secrets = {
+    enable = true;
+    tokenFile = "/etc/opnix-token";
+  };
+
   #nixpkgs.overlays = import ../lib/overlays.nix ++ [
   #  (import ./vim.nix { inherit inputs; })
   #];

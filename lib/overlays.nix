@@ -18,8 +18,10 @@
 
   overlays = f: p: {
     #inherit (inputs.nix-index-database.packages.${system}) nix-index-database nix-index-small-database;
-
     #inherit (inputs.nixpkgs-unstable.packages.${system}) jetbrains.resharper;
+
+    inherit (inputs.hyprland.packages.${system}) hyprland;
+    inherit (inputs.hyprland.packages.${system}) xdg-desktop-portal-hyprland;
 
     builders = {
       mkHome = {
@@ -84,10 +86,6 @@
       inherit (inputs) gh-md-toc penguin-fox;
       addons = f.nur.repos.rycee.firefox-addons;
     };
-
-    package = inputs.hyprland.packages.${inputs.pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage =
-      inputs.hyprland.packages.${inputs.pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 in [
   libOverlay

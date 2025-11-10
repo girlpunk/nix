@@ -95,9 +95,9 @@
       fi
 
       # If Terraform is installed, setup completion
-      #if command -v -- terraform > /dev/null 2>&1; then
-      #    complete -o nospace -C terraform terraform
-      #fi
+      if command -v -- terraform > /dev/null 2>&1; then
+          complete -o nospace -C terraform terraform
+      fi
 
       # Add dotnet tools to path
       if [[ -d "$HOME/.dotnet/tools" ]]; then

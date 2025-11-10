@@ -5,7 +5,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    #../../programs/rider
+    ../../modules/gui
     ../../programs/1password-gui.nix
     ../../programs/bambu-studio.nix
     ../../programs/jetbrains-gateway.nix
