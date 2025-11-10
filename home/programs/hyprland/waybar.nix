@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -33,7 +33,8 @@ _: {
           "disk"
           "cpu"
           "memory"
-          "pulseaudio"
+          #"pulseaudio"
+          "wireplumber"
           "clock"
           "tray"
         ];
@@ -117,6 +118,7 @@ _: {
         };
         clock = {
           # "timezone = "America/New_York"
+          format = "{:%d %H:%M}";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           format-alt = "{:%Y-%m-%d}";
         };
@@ -161,6 +163,7 @@ _: {
             critical = 15;
           };
           format = "{icon} {capacity}% {time}";
+          format-time = "{H}:{M}";
           format-icons = {
             default = [
               "󰁺"
@@ -246,6 +249,12 @@ _: {
             ];
           };
           on-click = "pavucontrol";
+        };
+        wireplumber = {
+          format = "{volume}% {icon} {format_source}";
+          format-muted = "󰝟 {format_source}";
+          format-icons = ["" "" ""];
+          on-click = "${pkgs.helvum}/bin/helvum";
         };
         "custom/media" = {
           format = "{icon} {}";

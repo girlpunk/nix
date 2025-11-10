@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   sshConfig = pkgs.writeTextFile {
     name = "config";
     text = ''
@@ -12,8 +11,7 @@ let
               User nixremote
     '';
   };
-in
-{
+in {
   system.activationScripts.rootSshConfig = {
     text = ''
       ln -fs ${sshConfig} /root/.ssh/config
@@ -21,23 +19,28 @@ in
   };
 
   nix = {
-    buildMachines = [{
-      hostName = "minos";
-      system = "x86_64-linux";
-      protocol = "ssh-ng";
-      maxJobs = 4;
-      speedFactor = 2;
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
-      mandatoryFeatures = [];
-    }];
+    buildMachines = [
+      {
+        hostName = "minos";
+        system = "x86_64-linux";
+        protocol = "ssh-ng";
+        maxJobs = 4;
+        speedFactor = 2;
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        mandatoryFeatures = [];
+      }
+    ];
     distributedBuilds = true;
     settings = {
       builders-use-substitutes = true;
+      substituters = [
+        "ssh-ng://minos"
+      ];
     };
   };
 }
