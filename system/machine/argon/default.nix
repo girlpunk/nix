@@ -49,9 +49,6 @@
     wireshark
     wine
 
-    devenv
-    direnv
-
     (pkgs.callPackage ../../programs/amazing-marvin {})
     (with dotnetCorePackages;
       combinePackages [
