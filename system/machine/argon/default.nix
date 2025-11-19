@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
     ../../modules/gui
     ../../programs/1password-gui.nix
-    ../../programs/bambu-studio.nix
+    #../../programs/bambu-studio.nix
     ../../programs/jetbrains-gateway.nix
     ../../modules/gui
     ../../modules/remoteBuild.nix
@@ -54,6 +54,8 @@
       combinePackages [
         dotnet_9.sdk
       ])
+
+    unstable.bambu-studio
   ];
 
   # Configure network proxy if necessary
