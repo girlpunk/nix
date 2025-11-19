@@ -47,7 +47,6 @@
       "mem_sleep_default=deep"
       "pcie_aspm.policy=powersupersave"
       "i915.enable_guc=3"
-      # "i915.enable_psr=0"  # Does this fix the crashes?
       "quiet"
       "splash"
       "boot.shell_on_fail"
@@ -117,20 +116,12 @@
 
   hardware.graphics = {
     enable = true;
-    #    package = pkgs.unstable.mesa;
     extraPackages = with pkgs; [
-      # your Open GL, Vulkan and VAAPI drivers
-      vpl-gpu-rt # for newer GPUs on NixOS >24.05 or unstable
-      # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
-      #intel-media-sdk # for older GPUs
+      vpl-gpu-rt
       intel-media-driver
-      # vaapiIntel try this next?
       libvdpau-va-gl
-      intel-compute-runtime-legacy1
+      #intel-compute-runtime-legacy1
     ];
-
-    #    enable32Bit = true;
-    #    package32 = pkgs.unstable.pkgsi686Linux.mesa;
   };
 
   security.tpm2 = {
@@ -141,9 +132,8 @@
   users.users.sam.extraGroups = ["tss"]; # tss group has access to TPM devices
 
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "i915"; # iHD
-    #MESA_LOADER_DRIVER_OVERRIDE="iHD";
-  }; # Force intel-media-driver
+    LIBVA_DRIVER_NAME = "i915";
+  };
 
   powerManagement.enable = true;
 
@@ -167,17 +157,6 @@
       KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
     '';
   };
-
-  # VP9 decoding not supported when using intel-media-driver
-  # https://github.com/intel/media-driver/issues/1024
-  # NixOS Wiki recommends using the legacy intel-vaapi-driver with the hybrid codec over that one for Skylake.
-  # https://wiki.nixos.org/wiki/Accelerated_Video_Playback
-  #hardware.intelgpu = {
-  #  vaapiDriver = "intel-vaapi-driver";
-  #  enableHybridCodec = true;
-  #
-  #    driver = "i915";
-  #  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

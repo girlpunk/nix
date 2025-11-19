@@ -1,9 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/gui
     ../../programs/1password-gui.nix
@@ -11,6 +14,12 @@
     ../../programs/jetbrains-gateway.nix
     ../../modules/gui
     ../../modules/remoteBuild.nix
+    ../../programs/proxmox-backup.nix
+
+    inputs.nixos-hardware.nixosModules.common-pc-laptop
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
+    inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.common-gpu-intel
   ];
 
   # Use the systemd-boot EFI boot loader.

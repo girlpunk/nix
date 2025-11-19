@@ -9,7 +9,9 @@
     ./build-user.nix
     ../../programs/sunshine.nix
     ../../programs/rider
-    #../../wm/hyprland.nix
+
+    flake-inputs.nixos-hardware.nixosModules.common-pc-ssd
+    flake-inputs.nixos-hardware.nixosModules.common-cpu-intel
   ];
 
   # Bootloader.
