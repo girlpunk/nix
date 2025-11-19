@@ -239,8 +239,10 @@ in {
 
           # Move windows between monitors
           ## Navigate // Move Window to Monitor // <Super> <Ctrl> ← → ##
-          "$mainMod CTRL, right, movewindow, mon:1"
-          "$mainMod CTRL, left, movewindow, mon:0"
+          "$mainMod CTRL, left, movecurrentworkspacetomonitor, l"
+          "$mainMod CTRL, right, movecurrentworkspacetomonitor, r"
+          "$mainMod CTRL, up, movecurrentworkspacetomonitor, u"
+          "$mainMod CTRL, down, movecurrentworkspacetomonitor, d"
 
           # Fullscreen and floating
           ## Navigate // Move Window to Floating // <Super> <Shift> F ##
