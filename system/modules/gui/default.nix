@@ -7,7 +7,7 @@
     ddcutil
     corefonts
     discord
-    greetd.tuigreet
+    #greetd.tuigreet
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
