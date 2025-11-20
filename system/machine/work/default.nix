@@ -1,5 +1,9 @@
-{ pkgs, inputs, lib, ...}:
 {
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.nixos-wsl.nixosModules.default
     ../../programs/terraform
@@ -14,10 +18,10 @@
   };
 
   programs = {
-#    nh = {
-#      osFlake = lib.mkForce "/mnt/d/nix#nixosConfigurations.work";
-#      homeFlake = lib.mkForce "/mnt/d/nix#homeConfigurations.sam@work.activationPackage";
-#    };
+    # nh = {
+    #   osFlake = lib.mkForce "/mnt/d/nix#nixosConfigurations.work";
+    #   homeFlake = lib.mkForce "/mnt/d/nix#homeConfigurations.sam@work.activationPackage";
+    # };
   };
 
   environment.systemPackages = with pkgs; [
