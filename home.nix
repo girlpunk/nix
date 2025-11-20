@@ -17,6 +17,7 @@
 
   mkHome = {
     mut ? false,
+    work ? false,
     mods ? [],
   }:
     inputs.home-manager.lib.homeManagerConfiguration {
@@ -27,7 +28,10 @@
         modules'
         ++ mods
         ++ [
-          {dotfiles.mutable = mut;}
+          {
+            dotfiles.mutable = mut;
+            defaultGit.work = work;
+          }
         ];
     };
 
@@ -68,5 +72,7 @@ in {
 
   "sam@minos" = mkHome {};
   "sam@home-assistant" = mkHome {};
-  "sam@work" = mkHome {};
+  "sam@work" = mkHome {
+    work = true;
+  };
 }
