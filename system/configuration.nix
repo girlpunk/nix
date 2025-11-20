@@ -82,6 +82,11 @@
       flake = "/home/sam/programs/nix";
     };
 
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     nix-ld.enable = true;
     nix-ld.libraries = with pkgs; [
       # Add any missing dynamic libraries for unpackaged programs

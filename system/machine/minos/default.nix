@@ -8,11 +8,12 @@
     ./hardware-configuration.nix
     ./build-user.nix
     ../../programs/rider
-    ../../programs/rider
     ../../programs/sshd.nix
     ../../programs/steam.nix
     ../../programs/sunshine.nix
-    #../../wm/hyprland.nix
+
+    flake-inputs.nixos-hardware.nixosModules.common-pc-ssd
+    flake-inputs.nixos-hardware.nixosModules.common-cpu-intel
   ];
 
   # Bootloader.
