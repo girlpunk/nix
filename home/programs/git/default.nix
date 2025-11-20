@@ -62,11 +62,9 @@ in {
     };
   };
 
+  imports = lib.optional (builtins.pathExists ./work.nix) ./work.nix;
+
   config = {
-    imports =
-      if config.defaultGit.work
-      then [./work.nix]
-      else [];
     programs = {
       git = gitConfig;
       gh = {
