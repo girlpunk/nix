@@ -325,10 +325,10 @@ in {
         ("SHIFT,XF86AudioRaiseVolume, exec, " + ./volume.sh + " 1%+")
         ("SHIFT,XF86AudioLowerVolume, exec, " + ./volume.sh + " 1%-")
 
-        "     ,XF86MonBrightnessUp,   exec, brightnessctl s 5%+ -m | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "     ,XF86MonBrightnessDown, exec, brightnessctl s 5%- -m | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "SHIFT,XF86MonBrightnessUp,   exec, brightnessctl s 1%+ -m | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "SHIFT,XF86MonBrightnessDown, exec, brightnessctl s 1%- -m | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "     ,XF86MonBrightnessUp,   exec, brightnessctl s 5%+ -em | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "     ,XF86MonBrightnessDown, exec, brightnessctl s 5%- -em | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "SHIFT,XF86MonBrightnessUp,   exec, brightnessctl s 1%+ -em | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "SHIFT,XF86MonBrightnessDown, exec, brightnessctl s 1%- -em | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
       ];
 
       ##############################
