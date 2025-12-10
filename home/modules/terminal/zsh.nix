@@ -40,6 +40,7 @@
         "1password"
         "colored-man-pages"
         "command-not-found"
+        "direnv"
         "docker"
         "docker-compose"
         "dotnet"
