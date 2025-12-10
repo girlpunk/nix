@@ -11,7 +11,7 @@
     dig # dns command-line tool
     docker-compose # docker manager
     duf # disk usage/free utility
-    du-dust
+    dust
     eza # a better `ls`
     killall # kill processes by name
     ncdu # disk space info (a better du)
@@ -26,7 +26,8 @@
     watch
     nano
     _1password-cli
-    nixfmt-rfc-style
+    alejandra
+    treefmt
     #    comma
 
     # Python

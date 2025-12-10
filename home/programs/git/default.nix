@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  gitExtraConfig = let
+  gitSettings = let
     mergiraf-attributes =
       pkgs.runCommandLocal "gitattributes" {nativeBuildInputs = [pkgs.mergiraf];}
       ''
@@ -71,16 +71,11 @@
       # Shared config
       enable = true;
       package = pkgs.gitFull;
-      extraConfig = gitExtraConfig;
+      settings = gitSettings;
 
       attributes = [
         "* merge=mergiraf"
       ];
-
-      difftastic = {
-        enable = true;
-        enableAsDifftool = true;
-      };
 
       lfs.enable = true;
 
@@ -116,6 +111,7 @@ in {
   config = {
     programs = {
       git = gitConfig;
+
       gh = {
         enable = true;
         gitCredentialHelper = {
@@ -123,7 +119,14 @@ in {
         };
         settings.git_protocol = "ssh";
       };
+
       mergiraf.enable = true;
+
+      difftastic = {
+        enable = true;
+        git.enable = true;
+        git.diffToolMode = true;
+      };
     };
   };
 }

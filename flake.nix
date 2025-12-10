@@ -3,7 +3,7 @@
 
   inputs = {
     # Main repo for most packages
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-25.11";
 
     # We want the newest version for some stuff, so that comes from here
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
@@ -15,7 +15,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       #url = "/home/sam/programs/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
