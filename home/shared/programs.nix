@@ -13,18 +13,26 @@ let
       #  database = pkgs.nix-index-database;
       #};
 
-      # command-not-found only works with channels
-      command-not-found.enable = false;
       nix-index.enable = true;
 
       ssh = {
         enable = true;
-        controlMaster = "auto";
-        controlPersist = "5m";
-        addKeysToAgent = "yes";
-        forwardAgent = true;
+        enableDefaultConfig = false;
 
         matchBlocks = {
+          "*" = {
+            controlPersist = "5m";
+            controlMaster = "auto";
+            addKeysToAgent = "yes";
+            forwardAgent = true;
+
+            compression = false;
+            serverAliveInterval = 0;
+            serverAliveCountMax = 3;
+            hashKnownHosts = false;
+            userKnownHostsFile = "~/.ssh/known_hosts";
+            controlPath = "~/.ssh/master-%r@%n:%p";
+          };
           "minos" = {
             hostname = "192.168.42.24";
             forwardAgent = true;
