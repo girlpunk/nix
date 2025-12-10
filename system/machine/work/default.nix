@@ -24,6 +24,10 @@
     # };
   };
 
+  services.openssh = {
+    enable = lib.mkForce false;
+  };
+
   environment.systemPackages = with pkgs; [
     git-filter-repo
     awscli2
