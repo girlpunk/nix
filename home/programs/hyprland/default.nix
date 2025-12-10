@@ -24,6 +24,9 @@
 
     mime.enable = true;
     mimeApps.enable = true;
+    mimeApps.defaultApplications = {
+      "x-scheme-handler/jetbrains-gateway" = "jetbrains-gateway.desktop";
+    };
   };
 
   services = {
