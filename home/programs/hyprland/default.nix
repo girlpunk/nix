@@ -160,6 +160,6 @@
       };
     };
     ssh.matchBlocks."*".identityAgent = "~/.1password/agent.sock";
-    git.extraConfig.gpg.ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
+    git.settings.gpg.ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
   };
 }
