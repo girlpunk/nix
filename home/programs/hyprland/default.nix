@@ -70,6 +70,10 @@
       enable = true;
       #config.systemd.user.sockets.wob.Socket.ListenFIFO = "${config.xdg.dataHome}/wob.sock";
     };
+
+    hyprsunset = {
+      enable = true;
+    };
   };
 
   #config.systemd.user.sockets.wob.Socket.ListenFIFO = "${config.xdg.dataHome}/wob.sock";
