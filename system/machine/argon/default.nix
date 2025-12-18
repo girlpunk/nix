@@ -47,8 +47,8 @@
     kubectl
     kubectl-cnpg
     usbutils
-    cinny-desktop
-    wireshark
+    cinny
+    #wireshark
     wine
 
     (pkgs.callPackage ../../programs/amazing-marvin {})
@@ -93,7 +93,7 @@
   };
 
   programs.wireshark = {
-    enable = true;
+    enable = false;
     usbmon.enable = true;
   };
 

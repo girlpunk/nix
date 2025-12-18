@@ -4,7 +4,6 @@
   ...
 }: let
   version = "2.3.1";
-  appimageName = "Bambu_Studio_ubuntu-24.04_PR-7292.AppImage";
   Url = "https://github.com/bambulab/BambuStudio/releases/download/v02.03.01.51/Bambu_Studio_ubuntu-24.04_PR-8583.AppImage";
   Sha256 = "sha256:280ecff1535139f49045e4df13bbab1caccbb4bfb6e5e0f573dd1e55c58922fd";
   srcZipped = pkgs.fetchzip {

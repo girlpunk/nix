@@ -142,9 +142,13 @@
     tlp.enable = true;
 
     logind = {
-      lidSwitch = "hibernate";
-      lidSwitchExternalPower = "hybrid-sleep";
-      lidSwitchDocked = "hybrid-sleep";
+      settings = {
+        Login = {
+          HandleLidSwitch = "hibernate";
+          HandleLidSwitchExternalPower = "hybrid-sleep";
+          HandleLidSwitchDocked = "hybrid-sleep";
+        };
+      };
     };
 
     upower = {

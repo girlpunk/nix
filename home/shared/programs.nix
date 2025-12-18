@@ -1,5 +1,5 @@
 let
-  more = {pkgs, ...}: {
+  more = _: {
     programs = {
       #gpg.enable = true;
 
