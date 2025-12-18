@@ -8,7 +8,7 @@
     ${pulse} || exit 1
 
     # Start lock screen
-    pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock
+    pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock --grace 10
   '';
 
   ac = pkgs.writeShellScript "inhibitor-ac.sh" ''

@@ -11,10 +11,11 @@ in {
     enable = true;
     settings = {
       general = {
-        disable_loading_bar = false;
-        grace = 10;
         hide_cursor = true;
-        no_fade_in = false;
+      };
+
+      animations = {
+        enabled = true;
       };
 
       background = {
