@@ -53,6 +53,17 @@
     hyprpolkitagent.enable = true;
     network-manager-applet.enable = true;
     poweralertd.enable = true;
+    mako.enable = true;
+    mako.settings = {
+      font = "Fira Code Nerd Font 10";
+      border-size = 2;
+      icon-location = "top";
+      margin = "25,10,10";
+
+      "app-name=.cinny-wrapped" = {
+        default-timeout = 15000;
+      };
+    };
     ssh-agent.enable = false;
 
     wob = {
