@@ -4,13 +4,7 @@
   lib,
   ...
 }: let
-  gitSettings = let
-    mergiraf-attributes =
-      pkgs.runCommandLocal "gitattributes" {nativeBuildInputs = [pkgs.mergiraf];}
-      ''
-        mergiraf languages --gitattributes >> $out
-      '';
-  in
+  gitSettings =
     {
       branch.autoSetupRebase = "always";
       checkout.defaultRemote = "origin";
@@ -87,8 +81,10 @@
       if !config.defaultGit.work
       then {
         # Home config
-        userName = "Foxocube";
-        userEmail = "git@foxocube.xyz";
+        settings.user = {
+          name = "Foxocube";
+          email = "git@foxocube.xyz";
+        };
 
         signing = {
           key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFygf49qzrMruoAeB/Y0RcpkTFGpTVpRr+bwRhDQIZzI";
