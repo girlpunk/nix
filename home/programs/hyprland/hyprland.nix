@@ -2,11 +2,8 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
-}: let
-  monitors = lib.mkOption "monitors hyprland";
-in {
+}: {
   options = {
     hyprland = {
       monitors = lib.mkOption {
@@ -325,10 +322,10 @@ in {
         ("SHIFT,XF86AudioRaiseVolume, exec, " + ./volume.sh + " 1%+")
         ("SHIFT,XF86AudioLowerVolume, exec, " + ./volume.sh + " 1%-")
 
-        "     ,XF86MonBrightnessUp,   exec, brightnessctl s 5%+ -em | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "     ,XF86MonBrightnessDown, exec, brightnessctl s 5%- -em | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "SHIFT,XF86MonBrightnessUp,   exec, brightnessctl s 1%+ -em | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "SHIFT,XF86MonBrightnessDown, exec, brightnessctl s 1%- -em | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "     ,XF86MonBrightnessUp,   exec, brightnessctl -e -m s 5%+ | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "     ,XF86MonBrightnessDown, exec, brightnessctl -e -m s 5%- | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "SHIFT,XF86MonBrightnessUp,   exec, brightnessctl -e -m s 1%+ | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "SHIFT,XF86MonBrightnessDown, exec, brightnessctl -e -m s 1%- | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
       ];
 
       ##############################
@@ -351,7 +348,7 @@ in {
         #"dimaround,     class:^jetbrains-.*$,floating:1"
         #"minsize 300 400,class:^jetbrains-.*$"
 
-        "workspace 5,title:^(Cinny)(.*)$"
+        "workspace 5,class:cinny$"
         "workspace 5,title:^(.*)(Discord)$"
         "workspace 5,title:^Discord Updater$"
         "workspace 5,title:^(Element)(.*)$"
