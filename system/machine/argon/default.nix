@@ -50,6 +50,7 @@
     cinny
     #wireshark
     wine
+    sbctl
 
     (pkgs.callPackage ../../programs/amazing-marvin {})
     (with dotnetCorePackages;

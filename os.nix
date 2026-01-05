@@ -21,6 +21,7 @@
     #inputs.opnix.nixosModules.default
     inputs.sops-nix.nixosModules.sops
     inputs.nix-index-database.nixosModules.nix-index
+    inputs.lanzaboote.nixosModules.lanzaboote
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}
   ];
 

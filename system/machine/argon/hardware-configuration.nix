@@ -55,6 +55,13 @@
     ];
 
     loader.timeout = 0;
+
+    loader.systemd-boot.enable = lib.mkForce false;
+
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+    };
   };
 
   systemd.sleep.extraConfig = ''
