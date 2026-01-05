@@ -335,23 +335,23 @@
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
-      windowrulev2 = [
-        "suppressevent maximize, class:.*" # You'll probably like this.
+      windowrule = [
+        "match:class .*, suppress_event maximize" # You'll probably like this.
 
-        "workspace 1,class:kitty"
+        "match:class kitty workspace 1"
 
-        "workspace 2, class:firefox"
+        "match:class firefox, workspace 2"
 
-        "workspace 3,title:^(.*)(VSCodium)$"
-        "workspace 3,   class:^jetbrains-.*$"
-        "noinitialfocus,class:^jetbrains-.*$,floating:1" # ,title:^win\d*$
+        "match:title ^(.*)(VSCodium)$, workspace 3"
+        "match:class ^jetbrains-.*$, workspace 3"
+        "match:class ^jetbrains-.*$, match:float yes, no_initial_focus on" # ,title:^win\d*$
         #"dimaround,     class:^jetbrains-.*$,floating:1"
         #"minsize 300 400,class:^jetbrains-.*$"
 
-        "workspace 5,class:cinny$"
-        "workspace 5,title:^(.*)(Discord)$"
-        "workspace 5,title:^Discord Updater$"
-        "workspace 5,title:^(Element)(.*)$"
+        "workspace 5, match:class cinny$"
+        "workspace 5, match:title ^(.*)(Discord)$"
+        "workspace 5, match:title ^Discord Updater$"
+        "workspace 5, match:title ^(Element)(.*)$"
       ];
 
       debug = {
