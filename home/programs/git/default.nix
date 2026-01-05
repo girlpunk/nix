@@ -52,10 +52,6 @@
       then {
         # Home-specific config
         commit.gpgsign = true;
-
-        gpg = {
-          format = "ssh";
-        };
       }
       else {}
     );
@@ -87,6 +83,7 @@
         };
 
         signing = {
+          format = "ssh";
           key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFygf49qzrMruoAeB/Y0RcpkTFGpTVpRr+bwRhDQIZzI";
           signByDefault = true;
         };
