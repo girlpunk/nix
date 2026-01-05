@@ -18,7 +18,7 @@
     ./system/configuration.nix
     #./system/virtualisation.nix
     extraSystemConfig
-    inputs.opnix.nixosModules.default
+    #inputs.opnix.nixosModules.default
     inputs.sops-nix.nixosModules.sops
     inputs.nix-index-database.nixosModules.nix-index
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}

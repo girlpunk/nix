@@ -8,7 +8,7 @@
   modules' = [
     ./home/shared
     inputs.nix-index.homeManagerModules.${system}.default
-    inputs.opnix.homeManagerModules.default
+    #inputs.opnix.homeManagerModules.default
     inputs._1password-shell-plugins.hmModules.default
     inputs.nix-index-database.homeModules.nix-index
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}

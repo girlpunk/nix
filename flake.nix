@@ -47,7 +47,6 @@
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      #  inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     _1password-shell-plugins = {
@@ -55,10 +54,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    opnix = {
-      url = "github:brizzbuzz/opnix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #opnix = {
+    #  url = "github:brizzbuzz/opnix";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -81,7 +80,7 @@
     };
 
     treefmt = inputs.treefmt-nix.lib.evalModule pkgs (
-      {pkgs, ...}: {
+      _: {
         # Used to find the project root
         projectRootFile = "flake.nix";
 
