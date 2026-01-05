@@ -9,15 +9,14 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/gui
+    ../../modules/remoteBuild.nix
     ../../programs/1password-gui.nix
     #../../programs/bambu-studio.nix
     ../../programs/jetbrains-gateway.nix
-    ../../programs/sshd.nix
-    ../../programs/steam.nix
-    ../../programs/terraform
-    ../../modules/gui
-    ../../modules/remoteBuild.nix
     ../../programs/proxmox-backup.nix
+    ../../programs/sshd.nix
+    #../../programs/steam.nix
+    ../../programs/terraform
 
     inputs.nixos-hardware.nixosModules.common-pc-laptop
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
@@ -74,7 +73,7 @@
   # };
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   services = {
     lvm.enable = true;
