@@ -63,6 +63,9 @@
       "app-name=.cinny-wrapped" = {
         default-timeout = 15000;
       };
+      "app-name=discord" = {
+        default-timeout = 15000;
+      };
     };
     ssh-agent.enable = false;
 
