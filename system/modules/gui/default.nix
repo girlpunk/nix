@@ -1,13 +1,14 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    brightnessctl
+    corefonts
+    ddcutil
+    discord
+    geoclue2
+    #greetd.tuigreet
     kitty
     nerd-fonts.fira-code
-    geoclue2
-    brightnessctl
-    ddcutil
-    corefonts
-    discord
-    #greetd.tuigreet
+    vlc
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -25,6 +26,14 @@
     };
 
     firefox.enable = true;
+
+    vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [
+        jnoortheen.nix-ide
+        kamadorueda.alejandra
+      ];
+    };
   };
 
   boot.plymouth = {
