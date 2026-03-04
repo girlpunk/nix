@@ -1,0 +1,10 @@
+keys:
+  - &admin_foxocube "age1zntyzw63mf2r6c6gnducgnlx6avfk0te4lcrxq88aj425pmvxyqqnws28m"
+  - &server_argon "age1aye90t9yg8r8cysgh3hzmtepa6qlnkx7qyjln5tt7c5wc539jf8qfthpxv"
+
+creation_rules:
+  - path_regex: secrets/argon\.yaml$
+    key_groups:
+      - age:
+          - *admin_foxocube
+          - *server_argon
