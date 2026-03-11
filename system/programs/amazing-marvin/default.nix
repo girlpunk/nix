@@ -3,12 +3,12 @@
   appimageTools,
   fetchurl,
 }: let
-  version = "1.68.0";
+  version = "1.69.1";
   pname = "marvin";
 
   src = fetchurl {
     url = "https://amazingmarvin.s3.amazonaws.com/Marvin-${version}.AppImage";
-    hash = "sha256-c6ql3loog0nU7dcCHe5ba7PEhcyQ+MwTTIAKKT5aOB4=";
+    hash = "sha256-b2qFmEO7mzuySq2aFsbRj+hj1b7SdjwEm6vNtKgtFnU=";
   };
 
   appimageContents = appimageTools.extractType2 {

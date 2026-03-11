@@ -1,4 +1,22 @@
-{pkgs, ...}: {
+{pkgs, ...}:
+let
+  marvin-info = pkgs.writeShellScript "marvin-info.sh" ''
+    TOKEN=$(cat /run/secrets/MARVIN)
+
+    echo -n "󰚩 "
+    ${pkgs.curl}/bin/curl \
+        -H "X-API-Token: $TOKEN" \
+        http://localhost:12082/api/todayItems \
+      | jq ".[0].title" -r
+  '';
+
+  marvin-open = pkgs.writeShellScript "marvin-open.sh" ''
+    TOKEN=$(cat /run/secrets/MARVIN)
+
+    xdg-open $(curl -H "X-API-Token: $TOKEN" http://localhost:12082/api/todayItems | jq "\"https://app.amazingmarvin.com/#t=\"+.[0]._id" -r)
+  '';
+in
+{
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -15,6 +33,7 @@
           "hyprland/mode"
           "hyprland/scratchpad"
           "custom/media"
+          "custom/marvin"
         ];
         modules-center = [
           "hyprland/window"
@@ -268,6 +287,11 @@
           exec = "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"; # Script in resources folder
           # "exec = "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" # Filter player based on name
         };
+        "custom/marvin" = {
+          exec = "${marvin-info}";
+          interval = 60;
+          on-click = "${marvin-open}";
+        };
       };
     };
 
@@ -456,6 +480,12 @@
       }
 
       #backlight {
+        background-color: #90b1b1;
+      }
+
+      #custom-marvin {
+        padding: 0 5px;
+        color: #000000;
         background-color: #90b1b1;
       }
 

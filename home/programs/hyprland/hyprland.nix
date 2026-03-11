@@ -337,12 +337,14 @@
 
       windowrule = [
         "match:class .*, suppress_event maximize" # You'll probably like this.
+        "match:title Amazing Marvin - Top of Mind, float on, size 300 100, pin on, no_initial_focus on"
 
         "match:class kitty workspace 1"
 
         "match:class firefox, workspace 2"
 
         "match:title ^(.*)(VSCodium)$, workspace 3"
+        "match:class code, workspace 3"
         "match:class ^jetbrains-.*$, workspace 3"
         "match:class ^jetbrains-.*$, match:float yes, no_initial_focus on" # ,title:^win\d*$
         #"dimaround,     class:^jetbrains-.*$,floating:1"
