@@ -53,6 +53,8 @@
     #wireshark
     wine
     sbctl
+    yazi
+    freecad
 
     (pkgs.callPackage ../../programs/amazing-marvin {})
   ];
