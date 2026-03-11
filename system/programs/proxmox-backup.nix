@@ -1,6 +1,5 @@
-{pkgs, config, ...}: {
+{pkgs, ...}: {
   systemd = {
-
     timers.proxmox-backup = {
       wantedBy = ["timers.target"];
 
@@ -35,7 +34,7 @@
           --include-dev=/home \
           --include-dev=/boot \
           --exclude=/media/juggernaut
-     '';
+      '';
 
       serviceConfig = {
         ExecStopPost = pkgs.writeShellScript "proxmox-notify.sh" ''

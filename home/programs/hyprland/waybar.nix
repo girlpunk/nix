@@ -1,5 +1,4 @@
-{pkgs, ...}:
-let
+{pkgs, ...}: let
   marvin-info = pkgs.writeShellScript "marvin-info.sh" ''
     TOKEN=$(cat /run/secrets/MARVIN)
 
@@ -15,8 +14,7 @@ let
 
     xdg-open $(curl -H "X-API-Token: $TOKEN" http://localhost:12082/api/todayItems | jq "\"https://app.amazingmarvin.com/#t=\"+.[0]._id" -r)
   '';
-in
-{
+in {
   programs.waybar = {
     enable = true;
     systemd.enable = true;

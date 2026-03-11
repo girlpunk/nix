@@ -99,7 +99,7 @@
 
   sops.defaultSopsFile = ../../../secrets/argon.yaml;
   # This will automatically import SSH keys as age keys
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
   # This is the actual specification of the secrets.
   sops.secrets.PBS_REPOSITORY = {};
   sops.secrets.PBS_PASSWORD = {};
