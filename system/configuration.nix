@@ -49,13 +49,14 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    cifs-utils
+    comma
+    home-manager
+    killall
+    lm_sensors
     nano
     pciutils
     wget
-    cifs-utils
-    killall
-    home-manager
-    comma
   ];
 
   #environment = {

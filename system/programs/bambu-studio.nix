@@ -25,20 +25,19 @@
     extraPkgs = pkgs:
       with pkgs; [
         cacert
-        curl
+        #curl
         glib
         glib-networking
         gst_all_1.gst-plugins-bad
         gst_all_1.gst-plugins-base
         gst_all_1.gst-plugins-good
         webkitgtk_4_1
-        #        pkgs.linuxPackages.nvidia_x11
-        libglvnd
-        fontconfig
-        dejavu_fonts
-        liberation_ttf
-        libxkbcommon
-        hack-font
+        #libglvnd
+        #fontconfig
+        #dejavu_fonts
+        #liberation_ttf
+        #libxkbcommon
+        #hack-font
       ];
     desktopItems = [
       (makeDesktopItem {
