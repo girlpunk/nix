@@ -3,21 +3,21 @@
   makeDesktopItem,
   ...
 }: let
-  version = "2.3.1";
-  Url = "https://github.com/bambulab/BambuStudio/releases/download/v02.03.01.51/Bambu_Studio_ubuntu-24.04_PR-8583.AppImage";
-  Sha256 = "sha256:280ecff1535139f49045e4df13bbab1caccbb4bfb6e5e0f573dd1e55c58922fd";
-  srcZipped = pkgs.fetchzip {
-    url = zipUrl;
-    sha256 = zipSha256;
-  };
+  version = "02.04.00.70";
   bambu-studio = pkgs.appimageTools.wrapType2 {
     name = "BambuStudio";
-    pname = "bambustudio";
+    pname = "bambu-studio";
     inherit version;
-    appimageContents = pkgs.appimageTools.extract {
-      src = appimagePath;
+
+    #appimageContents = pkgs.appimageTools.extract {
+    #  src = appimagePath;
+    #};
+    #src = appimagePath;
+    src = pkgs.fetchurl {
+      url = "https://github.com/bambulab/BambuStudio/releases/download/v${version}/Bambu_Studio_ubuntu-24.04_PR-8834.AppImage";
+      sha256 = "sha256:26bc07dccb04df2e462b1e03a3766509201c46e27312a15844f6f5d7fdf1debd";
     };
-    src = appimagePath;
+
     profile = ''
       export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
       export GIO_MODULE_DIR="${pkgs.glib-networking}/lib/gio/modules/"
