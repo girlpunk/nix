@@ -104,6 +104,7 @@
   sops.secrets.PBS_REPOSITORY = {};
   sops.secrets.PBS_PASSWORD = {};
   sops.secrets.PBS_FINGERPRINT = {};
+  sops.secrets.PBS_KEY = {};
   sops.secrets.MARVIN = {
     mode = "0600";
     owner = config.users.users.sam.name;
