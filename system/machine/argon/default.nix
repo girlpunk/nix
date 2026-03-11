@@ -104,7 +104,10 @@
   sops.secrets.PBS_REPOSITORY = {};
   sops.secrets.PBS_PASSWORD = {};
   sops.secrets.PBS_FINGERPRINT = {};
-
+  sops.secrets.MARVIN = {
+    mode = "0600";
+    owner = config.users.users.sam.name;
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
