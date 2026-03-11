@@ -225,7 +225,7 @@
           "$mainMod, R, exec, $menu"
 
           "$mainMod, P, pseudo," # dwindle
-          "$mainMod, J, togglesplit," # dwindle
+          #"$mainMod, J, togglesplit," # dwindle
 
           # Move focus with mainMod + arrow keys
           ## Navigate // Change Focus // <Super> ↑ ↓ ← → ##
