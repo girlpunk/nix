@@ -15,7 +15,6 @@
 
   home.packages = with pkgs; [
     rofi
-    networkmanagerapplet
   ];
 
   xdg = {
@@ -30,28 +29,36 @@
   };
 
   services = {
-    arrpc.enable = true;
-    activitywatch.enable = true;
+    #arrpc.enable = true;
+    activitywatch = {
+      enable = true;
+
+      watchers = {
+        awatcher = {
+          package = pkgs.awatcher;
+        };
+      };
+    };
     blueman-applet.enable = true;
     clipman.enable = true;
 
-    darkman.enable = true;
-    darkman.settings = {
-      lat = 51.48;
-      lng = -0.22;
-      usegeoclue = true;
-    };
+    #darkman.enable = true;
+    #darkman.settings = {
+    #  lat = 51.48;
+    #  lng = -0.22;
+    #  usegeoclue = true;
+    #};
 
-    gammastep = {
-      enable = true;
-      latitude = 51.48;
-      longitude = -0.22;
-      provider = "geoclue2";
-      tray = true;
-    };
+    #gammastep = {
+    #  enable = true;
+    #  latitude = 51.48;
+    #  longitude = -0.22;
+    #  provider = "geoclue2";
+    #  tray = true;
+    #};
 
     hyprpolkitagent.enable = true;
-    network-manager-applet.enable = true;
+    #network-manager-applet.enable = true;
     poweralertd.enable = true;
     mako.enable = true;
     mako.settings = {

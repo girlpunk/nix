@@ -5,7 +5,7 @@
   # nixos-version needs this to work with flakes
   libVersionOverlay = import "${inputs.nixpkgs}/lib/flake-version-info.nix" inputs.nixpkgs;
 
-  libOverlay = f: p: rec {
+  libOverlay = _f: p: rec {
     libx = import ./. {inherit (p) lib;};
     lib =
       (p.lib.extend (
@@ -16,7 +16,7 @@
       libVersionOverlay;
   };
 
-  overlays = f: p: {
+  overlays = f: _p: {
     #inherit (inputs.nix-index-database.packages.${system}) nix-index-database nix-index-small-database;
     #inherit (inputs.nixpkgs-unstable.packages.${system}) jetbrains.resharper;
 
