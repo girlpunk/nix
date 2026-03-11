@@ -49,13 +49,13 @@
     #  usegeoclue = true;
     #};
 
-    #gammastep = {
-    #  enable = true;
-    #  latitude = 51.48;
-    #  longitude = -0.22;
-    #  provider = "geoclue2";
-    #  tray = true;
-    #};
+    gammastep = {
+      enable = true;
+      latitude = 51.48;
+      longitude = -0.22;
+      provider = "geoclue2";
+      tray = false;
+    };
 
     hyprpolkitagent.enable = true;
     #network-manager-applet.enable = true;
