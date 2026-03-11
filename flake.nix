@@ -35,14 +35,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Fast nix search client
-    nix-search = {
-      url = "github:diamondburned/nix-search";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ## Fast nix search client
+    #nix-search = {
+    #  url = "github:diamondburned/nix-search";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     # Nix linter
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils.url = "github:numtide/flake-utils";
 
     hyprland = {
@@ -53,11 +56,6 @@
       url = "github:1Password/shell-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #opnix = {
-    #  url = "github:brizzbuzz/opnix";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -94,6 +92,7 @@
         # Enable the Nix formatter
         programs.alejandra.enable = true;
         programs.statix.enable = true;
+        programs.deadnix.enable = true;
       }
     );
   in
@@ -107,6 +106,7 @@
       formatter = treefmt.config.build.wrapper;
       checks = {
         formatting = treefmt.config.build.check self;
+        # deadnix = pkgs.deadnix pkgs;
       };
     });
 

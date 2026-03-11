@@ -2,6 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -11,7 +12,8 @@
     ../../modules/gui
     ../../modules/remoteBuild.nix
     ../../programs/1password-gui.nix
-    #../../programs/bambu-studio.nix
+    ../../programs/bambu-studio.nix
+    ../../programs/dotnet.nix
     ../../programs/jetbrains-gateway.nix
     ../../programs/proxmox-backup.nix
     ../../programs/sshd.nix
@@ -46,18 +48,13 @@
     kubectl
     kubectl-cnpg
     usbutils
-    cinny
+    #cinny-desktop
+    element-desktop
     #wireshark
     wine
     sbctl
 
     (pkgs.callPackage ../../programs/amazing-marvin {})
-    (with dotnetCorePackages;
-      combinePackages [
-        dotnet_9.sdk
-      ])
-
-    unstable.bambu-studio
   ];
 
   # Configure network proxy if necessary

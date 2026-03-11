@@ -4,14 +4,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # Dotnet
-    (
-      with dotnetCorePackages;
-        combinePackages [
-          dotnet_9.sdk
-          pkgs.unstable.dotnetCorePackages.dotnet_10.sdk
-        ]
-    )
     unstable.jetbrains.rider
   ];
 
