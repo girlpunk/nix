@@ -68,10 +68,13 @@
       margin = "25,10,10";
 
       "app-name=.cinny-wrapped" = {
-        default-timeout = 15000;
+        default-timeout = 5000;
       };
       "app-name=discord" = {
-        default-timeout = 15000;
+        default-timeout = 5000;
+      };
+      "app-name=Element" = {
+        default-timeout = 5000;
       };
     };
     ssh-agent.enable = false;
