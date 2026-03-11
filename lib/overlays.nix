@@ -51,7 +51,7 @@
         };
     };
 
-    nix-search = inputs.nix-search.packages.${system}.default;
+    #nix-search = inputs.nix-search.packages.${system}.default;
 
     unstable = import inputs.nixpkgs-unstable {
       inherit system;

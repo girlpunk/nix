@@ -6,6 +6,6 @@
 in {
   home.packages = [
     nix-linter
-    pkgs.statix
+    #pkgs.statix
   ];
 }
