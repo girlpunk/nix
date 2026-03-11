@@ -66,8 +66,6 @@ in {
   home = {
     inherit username homeDirectory packages;
 
-    changes-report.enable = true;
-
     language.base = "en_GB";
 
     sessionVariables = {
