@@ -42,7 +42,7 @@ in
           # "mpd",
           "idle_inhibitor"
           "network"
-          "power-profiles-daemon"
+          #"power-profiles-daemon"
           "temperature"
           "backlight"
           #"keyboard-state"
@@ -62,7 +62,7 @@ in
           disable-scroll = true;
           all-outputs = true;
           warp-on-scroll = false;
-          format = "{name}: {icon}";
+          format = "{name} {icon}";
           format-icons = {
             "1" = "";
             "2" = "";
@@ -239,9 +239,9 @@ in
         network = {
           format = "{icon}";
           #"interface = "*", # (Optional) To force the use of this interface
-          format-wifi = "{ipaddr}/{cidr} {essid} {frequency}Ghz ({signalStrength}%)";
+          format-wifi = "{essid} {frequency}Ghz ({signalStrength}%)"; # {ipaddr}/{cidr}
           format-ethernet = "{ipaddr}/{cidr} 󰈁";
-          tooltip-format = "{ifname} via {gwaddr} ";
+          tooltip-format = "{ifname} via {gwaddr}";
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "Disconnected ⚠";
           format-alt = "{ifname}: {ipaddr}/{cidr}";
@@ -367,6 +367,7 @@ in
       }
 
       #workspaces button.urgent {
+        color: #000000;
         background-color: #eb4d4b;
       }
 
@@ -392,13 +393,13 @@ in
       #scratchpad,
       #power-profiles-daemon,
       #mpd {
-        padding: 0 10px;
+        padding: 0 5px;
         color: #ffffff;
       }
 
       #window,
       #workspaces {
-        margin: 0 4px;
+        margin: 0 5px;
       }
 
       /* If workspaces is the leftmost module, omit left margin */
@@ -421,7 +422,7 @@ in
       }
 
       #battery.charging, #battery.plugged {
-        color: #ffffff;
+        color: #000000;
         background-color: #26A65B;
       }
 
