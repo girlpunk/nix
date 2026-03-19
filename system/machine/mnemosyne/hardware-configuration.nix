@@ -27,23 +27,7 @@
     extraModulePackages = [];
   };
 
-  #fileSystems."/" = {
-  #  device = "/dev/disk/by-uuid/b0d32d20-807f-462e-b41f-84610bea7dd3";
-  #  fsType = "ext4";
-  #};
-
-  #fileSystems."/boot" = {
-  #  device = "/dev/disk/by-uuid/422D-774E";
-  #  fsType = "vfat";
-  #  options = [
-  #    "fmask=0077"
-  #    "dmask=0077"
-  #  ];
-  #};
-
-  #swapDevices = [
-  #  {device = "/dev/disk/by-uuid/f50c935b-5602-485d-b9a4-7ca7b50e8666";}
-  #];
+  hardware.facter.reportPath = ./facter.json;
 
   disko.devices = {
     disk.disk1 = {
