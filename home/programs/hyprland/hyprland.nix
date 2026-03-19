@@ -37,7 +37,7 @@
       #################
 
       # Autostart necessary processes (like notifications daemons, status bars, etc.)
-      # Or execute your favorite apps at launch like this:
+      # Or execute your favourite apps at launch like this:
 
       # Authentication Agent
       #exec-once = /usr/lib/polkit-kde-authentication-agent-1
@@ -52,7 +52,7 @@
       ];
 
       exec-once = [
-        # Lock immidiately on start, as we don't have a greeter
+        # Lock immediately on start, as we don't have a greeter
         #("" + ./idle/lock.sh)
         "${pkgs._1password-gui}/bin/1password --silent"
       ];
@@ -90,7 +90,7 @@
 
         border_size = 2;
 
-        # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
+        # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colours
         "col.active_border" = "rgba(ff30c7ee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(5959b4aa)";
 

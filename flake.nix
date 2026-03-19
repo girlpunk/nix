@@ -8,7 +8,7 @@
     # We want the newest version for some stuff, so that comes from here
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
 
-    # WSL Compatability
+    # WSL Compatibility
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -85,12 +85,31 @@
     };
 
     treefmt = inputs.treefmt-nix.lib.evalModule pkgs (
-      _: {
+      _: let
+        typos_config = (pkgs.formats.toml {}).generate "typos.toml" {
+          files = {
+            extend-exclude = ["secrets/*.yaml"];
+          };
+
+          default.extend-identifiers = {
+            als = "als";
+            authorizedKeys = "authorizedKeys";
+            LS_COLORS = "LS_COLORS";
+          };
+
+          default.extend-words = {
+            center = "center";
+            color = "color";
+            colored = "colored";
+            colors = "colors";
+            maximize = "maximize";
+          };
+        };
+      in {
         # Used to find the project root
         projectRootFile = "flake.nix";
 
         programs = {
-
           # Github Actions
           actionlint.enable = true;
           pinact.enable = true;
@@ -108,7 +127,11 @@
           jsonfmt.enable = true;
 
           keep-sorted.enable = true;
-          typos.enable = true;
+          typos = {
+            enable = true;
+            locale = "en-gb";
+            configFile = "${typos_config}";
+          };
 
           # Enable the Nix formatter
           alejandra.enable = true;
@@ -120,7 +143,21 @@
 
           # YAML
           yamlfmt.enable = true;
-          yamllint.enable = true;
+          yamllint = {
+            enable = true;
+            settings = {
+              extends = "default";
+              ignore = [
+                "secrets/*.yaml"
+              ];
+
+              rules = {
+                line-length = {
+                  max = 180;
+                };
+              };
+            };
+          };
         };
       }
     );

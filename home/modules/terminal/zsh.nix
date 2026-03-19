@@ -122,7 +122,7 @@
 
     initContent = let
       zshConfigEarlyInit = lib.mkOrder 1000 ''
-        # Save history immidiately
+        # Save history immediately
         setopt incappendhistory
       '';
       zshConfig = lib.mkOrder 1500 ''

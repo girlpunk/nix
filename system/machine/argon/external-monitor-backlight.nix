@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   hardware.i2c.enable = true;
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ddcci-driver];

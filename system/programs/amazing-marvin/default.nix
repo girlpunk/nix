@@ -30,7 +30,7 @@ in
     '';
 
     meta = {
-      description = "Personal productivity app that incorporates principles from behavioral psychology to help you beat procrastination, feel in control and finish your to-do list";
+      description = "Personal productivity app that incorporates principles from behavioural psychology to help you beat procrastination, feel in control and finish your to-do list";
       homepage = "https://amazingmarvin.com/";
       #    license = lib.licenses.mkLicense {
       #      free = false;
