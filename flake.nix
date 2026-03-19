@@ -35,12 +35,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ## Fast nix search client
-    #nix-search = {
-    #  url = "github:diamondburned/nix-search";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
-
     # Nix linter
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -65,8 +59,16 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
 
-      # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-facter-modules = {
+      url = "github:numtide/nixos-facter-modules";
     };
   };
 
@@ -102,6 +104,7 @@
             color = "color";
             colored = "colored";
             colors = "colors";
+            facter = "facter";
             maximize = "maximize";
           };
         };

@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   marvin-info = pkgs.writeShellScript "marvin-info.sh" ''
     TOKEN=$(cat /run/secrets/MARVIN)
 
@@ -278,7 +282,7 @@ in {
           format = "{volume}% {icon} {format_source}";
           format-muted = "󰝟 {format_source}";
           format-icons = ["" "" ""];
-          on-click = (lib.getExe' pkgs.helvum "helvum");
+          on-click = lib.getExe' pkgs.helvum "helvum";
         };
         "custom/media" = {
           format = "{icon} {}";

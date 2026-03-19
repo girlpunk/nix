@@ -140,7 +140,7 @@
     enable = true;
     pkcs11.enable = true; # expose /run/current-system/sw/lib/libtpm2_pkcs11.so
     tctiEnvironment.enable = true; # TPM2TOOLS_TCTI and TPM2_PKCS11_TCTI env variables
-    fapi.systemPcrs = [ 0 4 7 11 ];
+    fapi.systemPcrs = [0 4 7 11];
   };
   users.users.sam.extraGroups = ["tss"]; # tss group has access to TPM devices
 

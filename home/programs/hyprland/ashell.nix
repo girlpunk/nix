@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   marvin-info = pkgs.writeShellScript "marvin-info.sh" ''
     TOKEN=$(cat /run/secrets/MARVIN)
 
@@ -27,14 +31,14 @@ in {
 
     settings = {
       modules = {
-        left = [ "Workspaces" "Marvin" ]; # "Marvin"
-        center = [ "WindowTitle" ];
-        right = [ "SystemInfo" [ "Clock" "Privacy" "Settings" ] "Tray" ]; # "Tray"
+        left = ["Workspaces" "Marvin"]; # "Marvin"
+        center = ["WindowTitle"];
+        right = ["SystemInfo" ["Clock" "Privacy" "Settings"] "Tray"]; # "Tray"
       };
 
       workspaces = {
         enable_workspace_filling = true;
-        workspace_names = ["" "" "" "" "" ];
+        workspace_names = ["" "" "" "" ""];
       };
 
       system_info = {
@@ -44,10 +48,10 @@ in {
           "UploadSpeed"
           "Temperature"
           #backlight
- 
+
           #battery
-          { Disk = "/home"; }
-          { Disk = "/nix"; }
+          {Disk = "/home";}
+          {Disk = "/nix";}
           "Cpu"
           "Memory"
           "MemorySwap"

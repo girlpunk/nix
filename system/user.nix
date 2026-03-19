@@ -17,7 +17,7 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFygf49qzrMruoAeB/Y0RcpkTFGpTVpRr+bwRhDQIZzI sam@argon"
         ];
       };
-     shell = pkgs.zsh;
+      shell = pkgs.zsh;
     };
 
     groups.i2c = {};

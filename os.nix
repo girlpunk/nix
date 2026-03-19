@@ -11,6 +11,7 @@
   hosts = [
     "argon"
     "minos"
+    "mnemosyne"
     "work"
   ];
 
@@ -21,6 +22,8 @@
     inputs.sops-nix.nixosModules.sops
     inputs.nix-index-database.nixosModules.nix-index
     inputs.lanzaboote.nixosModules.lanzaboote
+    inputs.disko.nixosModules.disko
+    inputs.nixos-facter-modules.nixosModules.facter
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}
   ];
 
