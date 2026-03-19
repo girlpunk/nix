@@ -28,7 +28,10 @@
       ];
 
       verbose = false;
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+        tpm2.enable = true;
+      };
 
       luks.devices = {
         cryptroot.device = "/dev/disk/by-uuid/57e38957-ca5a-45af-ad90-755bf814b0b7";
@@ -87,6 +90,7 @@
     "/boot" = {
       device = "/dev/disk/by-uuid/572C-8AA3";
       fsType = "vfat";
+      options = ["umask=0077"];
     };
   };
 
@@ -117,6 +121,7 @@
       };
     };
     sensor.iio.enable = true;
+    #sensor.hddtemp.enable = true;
     cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
   };
@@ -135,6 +140,7 @@
     enable = true;
     pkcs11.enable = true; # expose /run/current-system/sw/lib/libtpm2_pkcs11.so
     tctiEnvironment.enable = true; # TPM2TOOLS_TCTI and TPM2_PKCS11_TCTI env variables
+    fapi.systemPcrs = [ 0 4 7 11 ];
   };
   users.users.sam.extraGroups = ["tss"]; # tss group has access to TPM devices
 

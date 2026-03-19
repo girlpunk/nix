@@ -1,18 +1,24 @@
-{pkgs, ...}: let
+{pkgs, lib, ...}: let
   marvin-info = pkgs.writeShellScript "marvin-info.sh" ''
     TOKEN=$(cat /run/secrets/MARVIN)
 
     echo -n "󰚩 "
-    ${pkgs.curl}/bin/curl \
+    ${lib.getExe' pkgs.curl "curl"} \
         -H "X-API-Token: $TOKEN" \
         http://localhost:12082/api/todayItems \
-      | jq ".[0].title" -r
+      | ${lib.getExe' pkgs.jq "jq"} ".[0].title" -r
   '';
 
   marvin-open = pkgs.writeShellScript "marvin-open.sh" ''
     TOKEN=$(cat /run/secrets/MARVIN)
 
-    xdg-open $(curl -H "X-API-Token: $TOKEN" http://localhost:12082/api/todayItems | jq "\"https://app.amazingmarvin.com/#t=\"+.[0]._id" -r)
+    ${lib.getExe' pkgs.xdg-utils "xdg-open"} \
+      $(
+        ${lib.getExe' pkgs.curl "curl"} \
+          -H "X-API-Token: $TOKEN" \
+          http://localhost:12082/api/todayItems | \
+        ${lib.getExe' pkgs.jq "jq"} "\"https://app.amazingmarvin.com/#t=\"+.[0]._id" -r
+      )
   '';
 in {
   programs.waybar = {
@@ -271,7 +277,7 @@ in {
           format = "{volume}% {icon} {format_source}";
           format-muted = "󰝟 {format_source}";
           format-icons = ["" "" ""];
-          on-click = "${pkgs.helvum}/bin/helvum";
+          on-click = (lib.getExe' pkgs.helvum "helvum");
         };
         "custom/media" = {
           format = "{icon} {}";

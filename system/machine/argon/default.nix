@@ -94,7 +94,7 @@
 
     resolved.enable = true;
 
-    avahi.enable = true;
+    #avahi.enable = true;
   };
 
   programs.wireshark = {

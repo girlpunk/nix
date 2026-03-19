@@ -3,10 +3,10 @@
 
   inputs = {
     # Main repo for most packages
-    nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     # We want the newest version for some stuff, so that comes from here
-    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # WSL Compatibility
     nixos-wsl = {
