@@ -4,7 +4,7 @@ monitors=$(hyprctl monitors | grep Monitor | awk '{print $2}') # get monitors
 
 for monitor in $monitors; do
     wallpaper=$(find /usr/share/wallpapers/*/contents  -type f | shuf -n 1)
-    hyprctl hyprpaper preload $wallpaper
+    hyprctl hyprpaper preload "$wallpaper"
     hyprctl hyprpaper wallpaper "$monitor,$wallpaper"
 done
 

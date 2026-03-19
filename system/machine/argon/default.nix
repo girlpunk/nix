@@ -10,14 +10,19 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/gui
+    ../../modules/gui
+    ../../modules/remoteBuild.nix
     ../../modules/remoteBuild.nix
     ../../programs/1password-gui.nix
-    ../../programs/bambu-studio.nix
+    #../../programs/bambu-studio.nix
     ../../programs/dotnet.nix
     ../../programs/jetbrains-gateway.nix
     ../../programs/proxmox-backup.nix
     ../../programs/sshd.nix
+    ../../programs/sshd.nix
     #../../programs/steam.nix
+    ../../programs/steam.nix
+    ../../programs/terraform
     ../../programs/terraform
 
     inputs.nixos-hardware.nixosModules.common-pc-laptop
@@ -57,6 +62,7 @@
     freecad
 
     (pkgs.callPackage ../../programs/amazing-marvin {})
+    unstable.bambu-studio
   ];
 
   # Configure network proxy if necessary

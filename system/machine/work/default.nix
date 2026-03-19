@@ -8,6 +8,7 @@
     inputs.nixos-wsl.nixosModules.default
     ../../programs/terraform
     ../../programs/dotnet.nix
+    ../../programs/svglint.nix
   ];
 
   system.stateVersion = "25.05";

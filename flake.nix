@@ -89,10 +89,39 @@
         # Used to find the project root
         projectRootFile = "flake.nix";
 
-        # Enable the Nix formatter
-        programs.alejandra.enable = true;
-        programs.statix.enable = true;
-        programs.deadnix.enable = true;
+        programs = {
+
+          # Github Actions
+          actionlint.enable = true;
+          pinact.enable = true;
+          zizmor.enable = true;
+
+          # Bash/shell scripts
+          beautysh.enable = true;
+          #shellcheck.enable = true;
+          shfmt.enable = true;
+
+          biome.enable = true;
+
+          deno.enable = true;
+
+          jsonfmt.enable = true;
+
+          keep-sorted.enable = true;
+          typos.enable = true;
+
+          # Enable the Nix formatter
+          alejandra.enable = true;
+          deadnix.enable = true;
+          #nixf-diagnose.enable = true;
+          #nixfmt.enable = true;
+          #nixpkgs-fmt.enable = true;
+          statix.enable = true;
+
+          # YAML
+          yamlfmt.enable = true;
+          yamllint.enable = true;
+        };
       }
     );
   in
