@@ -20,7 +20,7 @@
     work ? false,
     mods ? [],
   }:
-    inputs.home-manager.lib.homeManagerConfiguration {
+    (inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       #extraSpecialArgs = pkgs.xargs;
       extraSpecialArgs = {inherit inputs;};
@@ -33,7 +33,7 @@
             defaultGit.work = work;
           }
         ];
-    };
+    }).activationPackage;
 
   mkHyprlandHome = {
     hidpi,

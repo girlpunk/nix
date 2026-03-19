@@ -172,19 +172,6 @@
       formatter = treefmt.config.build.wrapper;
       checks = {
         formatting = treefmt.config.build.check self;
-        # deadnix = pkgs.deadnix pkgs;
       };
     });
-
-  #{
-
-  #nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
-  #  pkgs = import nixpkgs { inherit system; config = { allowUnfree = true; };};
-  #  system = "x86_64-linux";
-  #  modules = [
-  #    ./configuration.nix
-  #    ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
-  #  ];
-  #};
-  #  };
 }
