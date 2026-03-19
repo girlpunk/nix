@@ -1,15 +1,17 @@
 {pkgs, ...}: {
   imports = [
-    ./hyprland.nix
-    ./hypridle.nix
-    ./hyprpaper.nix
-    ./hyprlock.nix
-    ./waybar.nix
-    ./kitty.nix
-    ./gconf.nix
-    ./fonts.nix
+    ./ashell.nix
     ./cursor.nix
+    ./eww.nix
+    ./fonts.nix
+    ./gconf.nix
+    ./hypridle.nix
+    ./hyprland.nix
+    ./hyprlock.nix
+    ./hyprpaper.nix
+    ./kitty.nix
     ./rofi.nix
+    ./waybar.nix
     ./wluma.nix
   ];
 
@@ -58,7 +60,7 @@
     };
 
     hyprpolkitagent.enable = true;
-    #network-manager-applet.enable = true;
+    network-manager-applet.enable = true;
     poweralertd.enable = true;
     mako.enable = true;
     mako.settings = {

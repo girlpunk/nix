@@ -22,8 +22,9 @@
   '';
 in {
   programs.waybar = {
-    enable = true;
-    systemd.enable = true;
+    #enable = true;
+    #systemd.enable = true;
+
     settings = {
       mainBar = {
         # "layer = "top", # Waybar at top layer
