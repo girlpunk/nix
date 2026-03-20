@@ -71,6 +71,7 @@ in {
   };
 
   "sam@minos" = mkHome {};
+  "sam@mnemosyne" = mkHome {};
   "sam@home-assistant" = mkHome {};
   "sam@work" = mkHome {
     work = true;

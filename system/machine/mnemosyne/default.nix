@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   inputs,
@@ -46,7 +47,7 @@
 
   systemd.network = {
     enable = true;
-    networks."ens18" = {
+    networks."40-ens18" = {
       matchConfig.Name = "ens18";
 
       address = ["10.0.5.201/24"];
@@ -57,7 +58,7 @@
 
       networkConfig = {
         IPv6AcceptRA = true;
-        DHCP = "no";
+        DHCP = lib.mkForce "no";
       };
 
       linkConfig.RequiredForOnline = "routable";
