@@ -18,4 +18,8 @@
   nix.settings.trusted-users = [
     "nixremote"
   ];
+
+  nix.extraOptions = ''
+    secret-key-files = "/etc/nix/cache-priv-key.pem"
+  '';
 }
