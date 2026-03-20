@@ -1,7 +1,7 @@
 {
+  inputs,
   pkgs,
   config,
-  inputs,
   ...
 }: {
   imports = [
@@ -45,8 +45,7 @@
   services.resolved = {
     enable = true;
     fallbackDns = [
-      "192.168.42.200"
-      "192.168.42.201"
+      "192.168.42.254"
     ];
   };
 
@@ -58,8 +57,7 @@
       address = ["192.168.42.24/24"];
       gateway = ["192.168.42.254"];
       dns = [
-        "192.168.42.200"
-        "192.168.42.201"
+        "192.168.42.254"
       ];
 
       networkConfig = {
