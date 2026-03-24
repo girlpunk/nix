@@ -5,16 +5,17 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
     ./build-user.nix
+    ./hardware-configuration.nix
+
+    inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
+
+    ../../modules/mounts.nix
     ../../programs/rider
     ../../programs/sshd.nix
     ../../programs/steam.nix
     ../../programs/sunshine.nix
-
-    inputs.nixos-hardware.nixosModules.common-pc-ssd
-    inputs.nixos-hardware.nixosModules.common-cpu-intel
   ];
 
   # Bootloader.

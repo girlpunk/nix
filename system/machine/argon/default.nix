@@ -9,9 +9,14 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+
+    inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.common-gpu-intel
+    inputs.nixos-hardware.nixosModules.common-pc-laptop
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
+
     ../../modules/gui
-    ../../modules/gui
-    ../../modules/remoteBuild.nix
+    ../../modules/mounts.nix
     ../../modules/remoteBuild.nix
     ../../programs/1password-gui.nix
     #../../programs/bambu-studio.nix
@@ -19,16 +24,8 @@
     ../../programs/jetbrains-gateway.nix
     ../../programs/proxmox-backup.nix
     ../../programs/sshd.nix
-    ../../programs/sshd.nix
     #../../programs/steam.nix
-    ../../programs/steam.nix
     ../../programs/terraform
-    ../../programs/terraform
-
-    inputs.nixos-hardware.nixosModules.common-pc-laptop
-    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-    inputs.nixos-hardware.nixosModules.common-cpu-intel
-    inputs.nixos-hardware.nixosModules.common-gpu-intel
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -49,33 +46,21 @@
   time.timeZone = "Europe/London";
 
   environment.systemPackages = with pkgs; [
+    #cinny-desktop
     cryptsetup
+    element-desktop
+    freecad
     kubectl
     kubectl-cnpg
-    usbutils
-    #cinny-desktop
-    element-desktop
-    #wireshark
-    wine
     sbctl
+    usbutils
+    wine
+    #wireshark
     yazi
-    freecad
 
     (pkgs.callPackage ../../programs/amazing-marvin {})
     unstable.bambu-studio
   ];
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

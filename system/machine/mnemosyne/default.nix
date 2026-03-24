@@ -6,12 +6,12 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../programs/sshd.nix
 
-    inputs.nixos-hardware.nixosModules.common-pc-ssd
     inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
+
+    ../../programs/sshd.nix
   ];
 
   # Bootloader.

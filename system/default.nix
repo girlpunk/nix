@@ -1,29 +1,29 @@
 {pkgs, ...}: {
   imports = [
-    ./language.nix
-    ./user.nix
+    ./modules/language.nix
+    ./modules/user.nix
   ];
 
   nix = {
     package = pkgs.nixVersions.latest;
     extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
       builders-use-substitutes = true
+      experimental-features = nix-command flakes
+      keep-derivations = true
+      keep-outputs = true
     '';
     settings = {
       substituters = [
-        "https://nix-community.cachix.org"
-        "https://channable-public.cachix.org"
         "https://cache.nixos.org/"
+        "https://channable-public.cachix.org"
         "https://hyprland.cachix.org"
+        "https://nix-community.cachix.org"
       ];
       trusted-substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "minos:wcHt079XZRopdL7wy1aeBjkgE82Vmz1K9n8WpsOgZsY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };
   };
@@ -34,15 +34,12 @@
     autoPrune.enable = true;
   };
 
-  # Manage fonts. We pull these from a secret directory since most of these
-  # fonts require a purchase.
   fonts = {
     fontDir.enable = true;
 
     packages = with pkgs; [
       fira-code
       nerd-fonts.fira-code
-      #pkgs.jetbrains-mono
     ];
   };
 
@@ -59,18 +56,12 @@
     wget
   ];
 
-  #environment = {
-  #  sessionVariables = {
-  #    LD_LIBRARY_PATH = ["${pkgs.stdenv.cc.cc.lib}/lib"];
-  #  };
-  #};
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings = {
-      PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
       PermitRootLogin = "no";
     };
   };
@@ -78,8 +69,10 @@
   programs = {
     nh = {
       enable = true;
+
       clean.enable = true;
       clean.extraArgs = "--keep-since 4d --keep 3";
+
       flake = "/home/sam/programs/nix";
     };
 
@@ -96,13 +89,4 @@
       ncurses6
     ];
   };
-
-  #system.autoUpgrade = {
-  #  enable = true;
-  #};
-
-  #nix.gc = {
-  #  automatic = true;
-  #  options = "--delete-older-than 14d";
-  #};
 }

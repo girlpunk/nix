@@ -16,15 +16,14 @@
   ];
 
   modules' = [
-    ./system/configuration.nix
-    #./system/virtualisation.nix
     extraSystemConfig
-    inputs.sops-nix.nixosModules.sops
-    inputs.nix-index-database.nixosModules.nix-index
-    inputs.lanzaboote.nixosModules.lanzaboote
     inputs.disko.nixosModules.disko
+    inputs.lanzaboote.nixosModules.lanzaboote
+    inputs.nix-index-database.nixosModules.nix-index
     inputs.nixos-facter-modules.nixosModules.facter
+    inputs.sops-nix.nixosModules.sops
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}
+    ./system
   ];
 
   make = host: {

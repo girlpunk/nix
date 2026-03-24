@@ -6,16 +6,19 @@
 }: {
   imports = [
     inputs.nixos-wsl.nixosModules.default
-    ../../programs/terraform
+
     ../../programs/dotnet.nix
     ../../programs/svglint.nix
+    ../../programs/terraform
   ];
 
   system.stateVersion = "25.05";
   wsl = {
     enable = true;
+    wslConf.automount.root = "/mnt";
     defaultUser = "sam";
     docker-desktop.enable = true;
+    startMenuLaunchers = true;
   };
 
   programs = {
