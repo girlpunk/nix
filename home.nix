@@ -19,6 +19,7 @@
     mut ? false,
     work ? false,
     mods ? [],
+    host ? "",
   }:
     (inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -32,8 +33,8 @@
             dotfiles.mutable = mut;
             defaultGit.work = work;
           }
-        ];
-    }).activationPackage;
+        ] ++ (pkgs.lib.optional (builtins.pathExists ./home/machines/${host}) ./home/machines/${host});
+    });
 
   mkHyprlandHome = {
     hidpi,
@@ -61,6 +62,7 @@ in {
   };
 
   "sam@argon" = mkHyprlandHome {
+    host = "argon";
     hidpi = true;
 
     monitors = [
@@ -70,10 +72,11 @@ in {
     ];
   };
 
-  "sam@minos" = mkHome {};
-  "sam@mnemosyne" = mkHome {};
-  "sam@home-assistant" = mkHome {};
+  "sam@minos" = mkHome {host = "minos";};
+  "sam@mnemosyne" = mkHome {host = "mnemosyne";};
+  "sam@home-assistant" = mkHome {host = "home-assistant";};
   "sam@work" = mkHome {
     work = true;
+    host = "work";
   };
 }
