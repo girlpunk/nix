@@ -31,6 +31,7 @@
       extensions = with pkgs.vscode-extensions; [
         jnoortheen.nix-ide
         kamadorueda.alejandra
+        ms-vscode-remote.remote-ssh
         (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "aw-watcher-vscode";

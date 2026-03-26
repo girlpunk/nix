@@ -70,6 +70,13 @@
     nixos-facter-modules = {
       url = "github:numtide/nixos-facter-modules";
     };
+
+    mediafeeder = {
+      url = "path:/home/sam/programs/MediaFeeder";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+    };
   };
 
   outputs = {
