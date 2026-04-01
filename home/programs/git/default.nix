@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  gitSettings =
+  gitSettings = lib.mkMerge [
     {
       branch.autoSetupRebase = "always";
       checkout.defaultRemote = "origin";
@@ -47,16 +47,16 @@
 
       submodule.recurse = "true";
     }
-    // (
-      if !config.defaultGit.work
-      then {
+    (
+      lib.mkIf (!config.defaultGit.work)
+      {
         # Home-specific config
         commit.gpgsign = true;
       }
-      else {}
-    );
+    )
+  ];
 
-  gitConfig =
+  gitConfig = lib.mkMerge [
     {
       # Shared config
       enable = true;
@@ -73,9 +73,9 @@
         enable = true;
       };
     }
-    // (
-      if !config.defaultGit.work
-      then {
+    (
+      lib.mkIf (!config.defaultGit.work)
+      {
         # Home config
         settings.user = {
           name = "Foxocube";
@@ -90,8 +90,8 @@
 
         maintenance.repositories = ["~/programs/*"];
       }
-      else {}
-    );
+    )
+  ];
 in {
   options = {
     defaultGit = {
