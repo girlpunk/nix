@@ -11,6 +11,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
+    ../../modules/remoteBuild.nix
     ../../programs/sshd.nix
   ];
 
