@@ -11,12 +11,14 @@
     # WSL Compatibility
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
+
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
     };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
-      #url = "/home/sam/programs/home-manager";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -26,33 +28,49 @@
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index = {
       url = "github:gvolpe/nix-index";
+
       inputs.nix-index-database.follows = "nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
     };
 
     # Nix linter
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+
+      inputs.systems.follows = "nix-systems";
+    };
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "nix-systems";
+      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
     _1password-shell-plugins = {
       url = "github:1Password/shell-plugins";
+
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "nix-systems";
     };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -60,15 +78,13 @@
       url = "github:nix-community/lanzaboote/v1.0.0";
 
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit.follows = "pre-commit-hooks";
     };
 
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
-    nixos-facter-modules = {
-      url = "github:numtide/nixos-facter-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     mediafeeder = {
@@ -76,6 +92,18 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.treefmt-nix.follows = "treefmt-nix";
+      inputs.git-hooks-nix.follows = "pre-commit-hooks";
+      inputs.flake-compat.follows = "flake-compat";
+    };
+
+    # Common dependencies
+    nix-systems.url = "github:nix-systems/default";
+    flake-compat.url = "github:NixOS/flake-compat";
+
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+
+      inputs.flake-compat.follows = "flake-compat";
     };
   };
 
@@ -111,7 +139,6 @@
             color = "color";
             colored = "colored";
             colors = "colors";
-            facter = "facter";
             maximize = "maximize";
           };
         };

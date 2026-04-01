@@ -20,7 +20,6 @@
     inputs.disko.nixosModules.disko
     inputs.lanzaboote.nixosModules.lanzaboote
     inputs.nix-index-database.nixosModules.nix-index
-    inputs.nixos-facter-modules.nixosModules.facter
     inputs.sops-nix.nixosModules.sops
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}
     ./system
