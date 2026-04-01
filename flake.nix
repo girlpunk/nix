@@ -139,6 +139,7 @@
             color = "color";
             colored = "colored";
             colors = "colors";
+            facter = "facter";
             maximize = "maximize";
           };
         };

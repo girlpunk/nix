@@ -61,7 +61,7 @@
     (pkgs.callPackage ../../programs/amazing-marvin {})
     unstable.bambu-studio
 
-    (inputs.mediafeeder.packages.x86_64-linux.mediafeeder-bridges)
+    inputs.mediafeeder.packages.x86_64-linux.mediafeeder-bridges
   ];
 
   # Enable CUPS to print documents.
