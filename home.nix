@@ -17,7 +17,7 @@
 
   mkHome = {
     mods ? [],
-    host ? "",
+    host,
   }: (inputs.home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
     #extraSpecialArgs = pkgs.xargs;
@@ -25,14 +25,18 @@
     modules =
       modules'
       ++ mods
-      ++ (pkgs.lib.optional (builtins.pathExists ./home/machine/${host}) ./home/machine/${host});
+      ++ [./home/machine/${host}];
   });
 
-  mkHyprlandHome = _:
+  mkHyprlandHome = {
+    mods ? [],
+    host,
+  }:
     mkHome {
-      mods = [
-        ./home/programs/hyprland
-      ];
+      inherit host;
+      mods =
+        mods
+        ++ [./home/programs/hyprland];
     };
 in {
   cli = mkHome {};

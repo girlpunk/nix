@@ -16,7 +16,7 @@
   marvin-open = pkgs.writeShellScript "marvin-open.sh" ''
     TOKEN=$(cat /run/secrets/MARVIN)
 
-    ${lib.getExe pkgs.xdg-utils "xdg-open"} \
+    ${lib.getExe' pkgs.xdg-utils "xdg-open"} \
       $(
         ${lib.getExe pkgs.curl} -s \
           -H "X-API-Token: $TOKEN" \

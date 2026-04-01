@@ -88,7 +88,7 @@
           signByDefault = true;
         };
 
-        maintenance.repositories = ["~/programs/*"];
+        #maintenance.repositories = ["~/programs/*"];
       }
     )
   ];

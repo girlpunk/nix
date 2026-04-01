@@ -1,8 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./ashell.nix
     ./cursor.nix
-    ./eww.nix
     ./fonts.nix
     ./gconf.nix
     ./hypridle.nix
@@ -190,6 +193,6 @@
       };
     };
     ssh.matchBlocks."*".identityAgent = "~/.1password/agent.sock";
-    git.settings.gpg.ssh.program = lib.getExe pkgs._1password-gui "op-ssh-sign";
+    git.settings.gpg.ssh.program = lib.getExe' pkgs._1password-gui "op-ssh-sign";
   };
 }

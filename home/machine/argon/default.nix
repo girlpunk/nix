@@ -1,4 +1,4 @@
-{}: {
+_: {
   imports = [
     ../../modules/remoteBuild.nix
     ../../programs/discord.nix

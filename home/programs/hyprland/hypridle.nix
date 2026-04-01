@@ -1,6 +1,10 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   pulse = pkgs.writeShellScript "inhibitor-pulse.sh" ''
-    ${lib.getExe pkgs.wireplumber "wpctl"} status | grep active && exit 1 || exit 0
+    ${lib.getExe' pkgs.wireplumber "wpctl"} status | grep active && exit 1 || exit 0
   '';
 
   lock = pkgs.writeShellScript "lock.sh" ''
@@ -46,7 +50,7 @@
     ${pulse} || exit 1
 
     # Turn off monitor
-    ${lib.getExe pkgs.hyprland "hyprctl"} dispatch dpms off
+    ${lib.getExe' pkgs.hyprland "hyprctl"} dispatch dpms off
   '';
 
   suspend = pkgs.writeShellScript "suspend.sh" ''
@@ -60,7 +64,7 @@
     ${pulse} || exit 1
 
     # Suspend
-    ${lib.getExe pkgs.systemd "systemctl"} suspend-then-hibernate
+    ${lib.getExe' pkgs.systemd "systemctl"} suspend-then-hibernate
   '';
 in {
   services.hypridle = {
