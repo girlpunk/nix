@@ -170,7 +170,7 @@
       nixosConfigurations = pkgs.builders.mkNixos {};
     }
     // inputs.flake-utils.lib.eachDefaultSystem (_: {
-      out = {inherit pkgs overlays;};
+      #out = {inherit pkgs overlays;};
 
       formatter = treefmt.config.build.wrapper;
       checks = {

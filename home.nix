@@ -1,5 +1,5 @@
 {
-  extraHomeConfig,
+  extraHomeConfig ? {},
   inputs,
   system,
   pkgs,
