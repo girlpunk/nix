@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   systemd = {
     timers.proxmox-backup = {
       wantedBy = ["timers.target"];
@@ -20,7 +24,7 @@
         export PBS_PASSWORD=$(cat /run/secrets/PBS_PASSWORD)
         export PBS_FINGERPRINT=$(cat /run/secrets/PBS_FINGERPRINT)
 
-        ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client \
+        ${lib.getExe pkgs.proxmox-backup-client} \
           backup argon.pxar:/ \
           --change-detection-mode=metadata \
           --keyfile=/run/secrets/PBS_KEY \
@@ -55,7 +59,7 @@
             time="20000"
           fi
 
-          ${pkgs.sudo}/bin/sudo -u sam env DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus ${pkgs.notify-desktop}/bin/notify-desktop -t "$time" "$msg"
+          ${lib.getExe pkgs.sudo} -u sam env DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus ${lib.getExe pkgs.notify-desktop} -t "$time" "$msg"
         '';
 
         Nice = 19;

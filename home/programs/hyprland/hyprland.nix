@@ -54,7 +54,7 @@
       exec-once = [
         # Lock immediately on start, as we don't have a greeter
         #("" + ./idle/lock.sh)
-        "${pkgs._1password-gui}/bin/1password --silent"
+        "${lib.getExe pkgs._1password-gui "1password"} --silent"
       ];
 
       #############################
@@ -271,7 +271,7 @@
           #bind = SHIFT, 107, exec, ~/.config/hypr/scripts/screenshot/captureAll.sh
           ## Navigate // Printscreen area to Clipboard // <PrtSc> ##
           #", 107, exec, hyprshot -m region"
-          ", 107, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" -t png - | tee \"$HOME/Pictures/Screenshots/Screenshots_$(date +%Y%m%d_%H%M%S).png\" | ${pkgs.wl-clipboard}/bin/wl-copy"
+          ", 107, exec, ${lib.getExe pkgs.grim} -g \"$(${lib.getExe pkgs.slurp})\" -t png - | tee \"$HOME/Pictures/Screenshots/Screenshots_$(date +%Y%m%d_%H%M%S).png\" | ${lib.getExe pkgs.wl-clipboard "wl-copy"}"
 
           # Scroll through existing workspaces with mainMod + scroll
           "$mainMod, mouse_down, workspace, e+1"

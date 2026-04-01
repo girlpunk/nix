@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   pulse = pkgs.writeShellScript "inhibitor-pulse.sh" ''
-    ${pkgs.wireplumber}/bin/wpctl status | grep active && exit 1 || exit 0
+    ${lib.getExe pkgs.wireplumber "wpctl"} status | grep active && exit 1 || exit 0
   '';
 
   lock = pkgs.writeShellScript "lock.sh" ''
@@ -8,7 +8,7 @@
     ${pulse} || exit 1
 
     # Start lock screen
-    pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock --grace 10
+    pidof hyprlock || ${lib.getExe pkgs.hyprlock} --grace 10
   '';
 
   ac = pkgs.writeShellScript "inhibitor-ac.sh" ''
@@ -26,13 +26,13 @@
     fi
 
     # Save current brightness state
-    ${pkgs.brightnessctl}/bin/brightnessctl -qs
+    ${lib.getExe pkgs.brightnessctl} -qs
 
     # Set 5% as new brightness
-    ${pkgs.brightnessctl}/bin/brightnessctl -q set 5%
+    ${lib.getExe pkgs.brightnessctl} -q set 5%
 
     # Turn off keyboard backlight
-    ${pkgs.brightnessctl}/bin/brightnessctl s -q -d 'tpacpi::kbd_backlight' 0
+    ${lib.getExe pkgs.brightnessctl} s -q -d 'tpacpi::kbd_backlight' 0
   '';
 
   outputs_off = pkgs.writeShellScript "outputs_off.sh" ''
@@ -46,7 +46,7 @@
     ${pulse} || exit 1
 
     # Turn off monitor
-    ${pkgs.hyprland}/bin/hyprctl dispatch dpms off
+    ${lib.getExe pkgs.hyprland "hyprctl"} dispatch dpms off
   '';
 
   suspend = pkgs.writeShellScript "suspend.sh" ''
@@ -60,7 +60,7 @@
     ${pulse} || exit 1
 
     # Suspend
-    ${pkgs.systemd}/bin/systemctl suspend-then-hibernate
+    ${lib.getExe pkgs.systemd "systemctl"} suspend-then-hibernate
   '';
 in {
   services.hypridle = {
