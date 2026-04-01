@@ -3,7 +3,6 @@
     brightnessctl
     corefonts
     ddcutil
-    discord
     geoclue2
     #greetd.tuigreet
     kitty
