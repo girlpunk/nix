@@ -7,4 +7,11 @@ _: {
     #italic_font      auto
     #bold_italic_font auto
   };
+
+  xdg.terminal-exec = {
+    enable = true;
+    settings.default = [
+      "kitty.desktop"
+    ];
+  };
 }
