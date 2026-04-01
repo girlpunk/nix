@@ -16,67 +16,34 @@
   ];
 
   mkHome = {
-    mut ? false,
-    work ? false,
     mods ? [],
     host ? "",
-  }:
-    (inputs.home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      #extraSpecialArgs = pkgs.xargs;
-      extraSpecialArgs = {inherit inputs;};
-      modules =
-        modules'
-        ++ mods
-        ++ [
-          {
-            dotfiles.mutable = mut;
-            defaultGit.work = work;
-          }
-        ] ++ (pkgs.lib.optional (builtins.pathExists ./home/machines/${host}) ./home/machines/${host});
-    });
+  }: (inputs.home-manager.lib.homeManagerConfiguration {
+    inherit pkgs;
+    #extraSpecialArgs = pkgs.xargs;
+    extraSpecialArgs = {inherit inputs;};
+    modules =
+      modules'
+      ++ mods
+      ++ (pkgs.lib.optional (builtins.pathExists ./home/machine/${host}) ./home/machine/${host});
+  });
 
-  mkHyprlandHome = {
-    hidpi,
-    monitors,
-    mut ? false,
-  }:
+  mkHyprlandHome = _:
     mkHome {
-      inherit mut;
-      mods =
-        [
-          #inputs.hypr-binds-flake.homeManagerModules.${system}.default
-          ./home/programs/hyprland
-        ]
-        ++ [
-          {hyprland.monitors = monitors;}
-        ];
+      mods = [
+        ./home/programs/hyprland
+      ];
     };
 in {
   cli = mkHome {};
-  hyprland-edp = mkHyprlandHome {hidpi = false;};
-  hyprland-hdmi = mkHyprlandHome {hidpi = true;};
-  hyprland-hdmi-mutable = mkHyprlandHome {
-    hidpi = true;
-    mut = true;
-  };
+  hyprland = mkHyprlandHome {};
 
   "sam@argon" = mkHyprlandHome {
     host = "argon";
-    hidpi = true;
-
-    monitors = [
-      # See https://wiki.hyprland.org/Configuring/Monitors/
-      "eDP-1,preferred,auto,1"
-      "HDMI-A-2,preferred,auto-left,1"
-    ];
   };
 
   "sam@minos" = mkHome {host = "minos";};
   "sam@mnemosyne" = mkHome {host = "mnemosyne";};
   "sam@home-assistant" = mkHome {host = "home-assistant";};
-  "sam@work" = mkHome {
-    work = true;
-    host = "work";
-  };
+  "sam@work" = mkHome {host = "work";};
 }

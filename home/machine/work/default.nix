@@ -1,0 +1,3 @@
+_: {
+  defaultGit.work = true;
+}
