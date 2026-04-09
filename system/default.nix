@@ -25,6 +25,7 @@
         "minos:wcHt079XZRopdL7wy1aeBjkgE82Vmz1K9n8WpsOgZsY="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
+      auto-optimise-store = true;
     };
   };
 

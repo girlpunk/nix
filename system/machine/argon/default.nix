@@ -105,6 +105,9 @@
     owner = config.users.users.sam.name;
   };
 
+  # Don't try and build lots of things at once, you'll run out of disk space
+  nix.settings.max-jobs = 1;
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
