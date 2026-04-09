@@ -46,15 +46,15 @@
   time.timeZone = "Europe/London";
 
   environment.systemPackages = with pkgs; [
-    #cinny-desktop
+    cinny-desktop
     cryptsetup
-    element-desktop
+    #element-desktop
     freecad
     kubectl
     kubectl-cnpg
     sbctl
     usbutils
-    wine
+    #wine
     #wireshark
     yazi
 

@@ -24,7 +24,13 @@
       enable = true;
     };
 
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      wrapperConfig = {
+        speechSynthesisSupport = false;
+        #pipewireSupport = true;
+      };
+    };
 
     vscode = {
       enable = true;

@@ -7,7 +7,7 @@
     cursorTheme.size = 16;
     #iconTheme.name = "Breeze";
     iconTheme = {
-      package = pkgs.hicolor-icon-theme;
+      #package = pkgs.hicolor-icon-theme;
       name = "hicolor";
     };
   };

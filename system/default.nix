@@ -56,14 +56,18 @@
     wget
   ];
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      KbdInteractiveAuthentication = false;
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
+  services = {
+    # Enable the OpenSSH daemon.
+    openssh = {
+      enable = true;
+      settings = {
+        KbdInteractiveAuthentication = false;
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+      };
     };
+
+    speechd.enable = false;
   };
 
   programs = {
