@@ -14,6 +14,7 @@
     ./hyprpaper.nix
     ./kitty.nix
     ./rofi.nix
+    ./tomat.nix
     ./waybar.nix
     ./wluma.nix
   ];
