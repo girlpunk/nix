@@ -57,6 +57,8 @@
         })
       ];
     };
+
+    iio-hyprland.enable = true;
   };
 
   boot.plymouth = {

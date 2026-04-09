@@ -8,9 +8,9 @@ _: {
           thresholds = {
             "0" = "night";
             "20" = "dark";
+            "80" = "dim";
             "250" = "normal";
             "500" = "bright";
-            "80" = "dim";
             "800" = "outdoors";
           };
         };
