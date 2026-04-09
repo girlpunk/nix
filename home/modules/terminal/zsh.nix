@@ -93,6 +93,7 @@
       # If kubectl is installed, setup completion
       if command -v -- kubectl > /dev/null 2>&1; then
         source <(kubectl completion zsh)
+        source <(kubectl cnpg completion zsh)
       fi
 
       # If Terraform is installed, setup completion
