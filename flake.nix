@@ -143,6 +143,8 @@
             colors = "colors";
             facter = "facter";
             maximize = "maximize";
+            MAXIMIZED = "MAXIMIZED";
+            MINIMIZED = "MINIMIZED";
           };
         };
       in {
@@ -212,6 +214,12 @@
       formatter = treefmt.config.build.wrapper;
       checks = {
         formatting = treefmt.config.build.check self;
+        pre-commit-check = inputs.git-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            nixfmt.enable = true;
+          };
+        };
       };
     });
 }
