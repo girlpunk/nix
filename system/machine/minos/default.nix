@@ -73,6 +73,8 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [5107];
+
   nix = {
     extraOptions = ''
       secret-key-files = /etc/nix/cache-priv-key.pem
