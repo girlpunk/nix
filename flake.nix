@@ -58,7 +58,7 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "nix-systems";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+      inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
     _1password-shell-plugins = {
@@ -78,7 +78,7 @@
       url = "github:nix-community/lanzaboote/v1.0.0";
 
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit.follows = "pre-commit-hooks";
+      inputs.pre-commit.follows = "git-hooks";
     };
 
     disko = {
@@ -87,24 +87,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.gitignore.inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     mediafeeder = {
       url = "path:/home/sam/programs/MediaFeeder";
 
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.treefmt-nix.follows = "treefmt-nix";
-      inputs.git-hooks-nix.follows = "pre-commit-hooks";
+      inputs.git-hooks-nix.follows = "git-hooks";
       inputs.flake-compat.follows = "flake-compat";
     };
 
     # Common dependencies
     nix-systems.url = "github:nix-systems/default";
     flake-compat.url = "github:NixOS/flake-compat";
-
-    pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
-
-      inputs.flake-compat.follows = "flake-compat";
-    };
   };
 
   outputs = {
