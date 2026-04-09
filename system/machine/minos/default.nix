@@ -12,6 +12,7 @@
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
     ../../modules/mounts.nix
+    ../../programs/kubernetes-client.nix
     ../../programs/rider
     ../../programs/sshd.nix
     ../../programs/steam.nix

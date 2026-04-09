@@ -22,6 +22,7 @@
     #../../programs/bambu-studio.nix
     ../../programs/dotnet.nix
     ../../programs/jetbrains-gateway.nix
+    ../../programs/kubernetes-client.nix
     ../../programs/proxmox-backup.nix
     ../../programs/sshd.nix
     #../../programs/steam.nix
@@ -50,8 +51,6 @@
     cryptsetup
     #element-desktop
     freecad
-    kubectl
-    kubectl-cnpg
     sbctl
     usbutils
     #wine
