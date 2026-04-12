@@ -7,11 +7,11 @@ _: {
           path = "/sys/bus/iio/devices";
           thresholds = {
             "0" = "night";
-            "20" = "dark";
-            "80" = "dim";
-            "250" = "normal";
-            "500" = "bright";
-            "800" = "outdoors";
+            "10" = "dark";
+            "50" = "dim";
+            "100" = "normal";
+            "250" = "bright";
+            "500" = "outdoors";
           };
         };
       };

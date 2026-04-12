@@ -152,7 +152,47 @@
 
   services = {
     thermald.enable = true;
-    tlp.enable = true;
+    tlp = {
+      enable = true;
+
+      # After next upgrade
+      # pd.enable = true;
+
+      settings = {
+        TLP_PROFILE_DEFAULT = "BAL";
+        TLP_PROFILE_AC = "BAL";
+
+        START_CHARGE_THRESH_BAT0 = 80;
+        STOP_CHARGE_THRESH_BAT0 = 85;
+
+        DISK_DEVICES = "sda";
+        DISK_IOSCHED = "mq-deadline";
+
+        INTEL_GPU_POWER_PROFILE_ON_AC = "base";
+        INTEL_GPU_POWER_PROFILE_ON_BAT = "power_saving";
+
+        MEM_SLEEP_ON_AC = "deep";
+        MEM_SLEEP_ON_BAT = "deep";
+
+        CPU_MIN_PERF_ON_AC = 0;
+        CPU_MAX_PERF_ON_AC = 100;
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_BAT = 80;
+        CPU_MIN_PERF_ON_SAVE = 0;
+        CPU_MAX_PERF_ON_SAVE = 60;
+
+        CPU_BOOST_ON_AC = 1;
+        CPU_BOOST_ON_BAT = 1;
+        CPU_BOOST_ON_SAVE = 0;
+
+        CPU_HWP_DYN_BOOST_ON_AC = 1;
+        CPU_HWP_DYN_BOOST_ON_BAT = 1;
+        CPU_HWP_DYN_BOOST_ON_SAVE = 0;
+
+        DEVICES_TO_DISABLE_ON_STARTUP = "wwan";
+        DEVICES_TO_DISABLE_ON_WIFI_CONNECT = "wwan";
+      };
+    };
 
     logind = {
       settings = {

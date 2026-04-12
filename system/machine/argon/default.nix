@@ -47,26 +47,28 @@
   time.timeZone = "Europe/London";
 
   environment.systemPackages = with pkgs; [
+    inputs.mediafeeder.packages.x86_64-linux.mediafeeder-bridges
+    (pkgs.callPackage ../../programs/amazing-marvin {})
+
     cinny-desktop
     cryptsetup
     #element-desktop
     freecad
+    kubectl
+    kubectl-cnpg
+    onlyoffice-desktopeditors
     sbctl
+    unstable.bambu-studio
     usbutils
     #wine
     #wireshark
     yazi
-
-    (pkgs.callPackage ../../programs/amazing-marvin {})
-    unstable.bambu-studio
-
-    inputs.mediafeeder.packages.x86_64-linux.mediafeeder-bridges
   ];
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   services = {
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
     lvm.enable = true;
 
     # Enable sound.
