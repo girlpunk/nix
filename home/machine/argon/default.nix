@@ -2,6 +2,7 @@ _: {
   imports = [
     ../../modules/remoteBuild.nix
     ../../programs/discord.nix
+    ../../programs/vscode
   ];
 
   hyprland.monitors = [

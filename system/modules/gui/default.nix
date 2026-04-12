@@ -32,32 +32,6 @@
       };
     };
 
-    vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        jnoortheen.nix-ide
-        kamadorueda.alejandra
-        ms-vscode-remote.remote-ssh
-        (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-          mktplcRef = {
-            name = "aw-watcher-vscode";
-            publisher = "activitywatch";
-            version = "0.5.0";
-            hash = "sha256-OrdIhgNXpEbLXYVJAx/jpt2c6Qa5jf8FNxqrbu5FfFs=";
-          };
-
-          meta = {
-            description = "This extension allows ActivityWatch, the free and open-source time tracker, to keep track of the projects and programming languages you use in VS Code.";
-            homepage = "https://github.com/ActivityWatch/aw-watcher-vscode";
-            downloadPage = "https://marketplace.visualstudio.com/items?itemName=activitywatch.aw-watcher-vscode";
-            #license = lib.licenses.unfree;
-            #sourceProvenance = with lib.sourceTypes; [ binaryBytecode ];
-            #maintainers = with lib.maintainers; [ xiaoxiangmoe ];
-          };
-        })
-      ];
-    };
-
     iio-hyprland.enable = true;
   };
 
