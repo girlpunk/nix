@@ -15,7 +15,7 @@ in {
   services = {
     tomat = {
       enable = true;
-      package = package;
+      inherit package;
       settings = {
         # Timer durations and behaviour
         timer = {

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   ## Gnome themes
   gtk = {
     enable = true;

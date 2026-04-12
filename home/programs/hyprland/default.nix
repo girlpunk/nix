@@ -99,96 +99,123 @@
 
   programs = {
     firefox = {
+      enable = true;
+      package = pkgs.firefox-bin;
+
       languagePacks = ["en-GB"];
       profiles.default = {
         # extensions.packages = pkgs.nur.repos.rycee.firefox-addons; [ ];
       };
+
       policies = {
+        # Updates
+        AppAutoUpdate = false;
+        BackgroundAppUpdate = false;
+
+        # Bloat Features
+        DisableFirefoxStudies = true;
+        DisableMasterPasswordCreation = true;
+        DisableProfileImport = true;
+        DisableProfileRefresh = true;
+        DisableSetDesktopBackground = true;
+        DisablePocket = true;
+        DisableTelemetry = true;
+        DontCheckDefaultBrowser = true;
+        GenerativeAI.Enabled = false;
+        GenerativeAI.Locked = true;
+        UserMessaging = {
+          ExtensionRecommendations = false;
+          FeatureRecommendations = false;
+          UrlbarInterventions = false;
+          SkipOnboarding = false;
+          MoreFromMozilla = false;
+        };
+
         FirefoxHome = {
           SponsoredTopSites = false;
           SponsoredPocket = false;
           Highlights = false;
         };
-        ExtensionSettings = {
-          # 1Password – Password Manager
-          "{d634138d-c276-4fc8-924b-40a0ea21d284}" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/1password-x-password-manager/latest.xpi";
+
+        # We have 1Password for this
+        OfferToSaveLogins = false;
+        DisableFormHistory = true;
+        AutofillAddressEnabled = false;
+        AutofillCreditCardEnabled = false;
+
+        ExtensionSettings = let
+          moz = short: {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
+            installation_mode = "force_installed";
           };
-          # Augmented Steam
-          "{1be309c5-3e4f-4b99-927d-bb500eb4fa88}" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/augmented-steam/latest.xpi";
-          };
-          # Auto Tab Discard
-          "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/auto-tab-discard/latest.xpi";
-          };
-          # Facebook Container
-          "@contain-facebook" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/facebook-container/latest.xpi";
-          };
-          # Panorama Tab Groups
-          "panorama-tab-groups@example.com" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/panorama-tab-groups/latest.xpi";
-          };
-          # Reddit Enhancement Suite
-          "jid1-xUfzOsOFlzSOXg@jetpack" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/reddit-enhancement-suite/latest.xpi";
-          };
-          # ShareX
-          "firefox@getsharex.com" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/sharex/latest.xpi";
-          };
-          # SponsorBlock for YouTube - Skip Sponsorships
-          "sponsorBlocker@ajay.app" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
-          };
-          # SteamDB
-          "firefox-extension@steamdb.info" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/steam-database/latest.xpi";
-          };
-          # Tab Counter
-          "tab-counter@daawesomep.addons.mozilla.org" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/tab-counter-webext/latest.xpi";
-          };
-          # Tampermonkey
-          "firefox@tampermonkey.net" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/tampermonkey/latest.xpi";
-          };
-          # The Camelizer
-          "izer@camelcamelcamel.com" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/the-camelizer-price-history-ch/latest.xpi";
-          };
-          # uBlacklist
-          "@ublacklist" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublacklist/latest.xpi";
-          };
-          # uBlock Origin
-          "uBlock0@raymondhill.net" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          };
-          # Wappalyzer - Technology profiler
-          "wappalyzer@crunchlabz.com" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/wappalyzer/latest.xpi";
-          };
-          # New Tab Override
-          "newtaboverride@agenedia.com" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/new-tab-override/latest.xpi";
+        in {
+          "{d634138d-c276-4fc8-924b-40a0ea21d284}" = moz "1password-x-password-manager";
+          "{1be309c5-3e4f-4b99-927d-bb500eb4fa88}" = moz "augmented-steam";
+          "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}" = moz "auto-tab-discard";
+          "@contain-facebook" = moz "facebook-container";
+          "panorama-tab-groups@example.com" = moz "panorama-tab-groups";
+          "jid1-xUfzOsOFlzSOXg@jetpack" = moz "reddit-enhancement-suite";
+          "firefox@getsharex.com" = moz "sharex";
+          "sponsorBlocker@ajay.app" = moz "sponsorblock";
+          "firefox-extension@steamdb.info" = moz "steam-database";
+          "tab-counter@daawesomep.addons.mozilla.org" = moz "tab-counter-webext";
+          "izer@camelcamelcamel.com" = moz "the-camelizer-price-history-ch";
+          "uBlock0@raymondhill.net" = moz "ublock-origin";
+          "wappalyzer@crunchlabz.com" = moz "wappalyzer";
+        };
+      };
+      profiles.default = {
+        search = {
+          default = "kagi";
+
+          engines = {
+            kagi = {
+              name = "Kagi";
+              urls = [
+                {
+                  template = "https://kagi.com/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              iconMapObj."32" = "https://kagi.com/favicon-32x32.png";
+              definedAliases = ["@k"];
+            };
+            nix-packages = {
+              name = "Nix Packages";
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@np"];
+            };
+
+            nixos-wiki = {
+              name = "NixOS Wiki";
+              urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
+              iconMapObj."16" = "https://wiki.nixos.org/favicon.ico";
+              definedAliases = ["@nw"];
+            };
+
+            bing.metaData.hidden = true;
+            google.metaData.hidden = true;
           };
         };
       };
