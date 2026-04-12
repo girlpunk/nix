@@ -37,13 +37,14 @@
 in {
   programs.ashell = {
     enable = true;
+    package = pkgs.unstable.ashell;
     systemd.enable = true;
 
     settings = {
       modules = {
-        left = ["Workspaces" "Marvin"]; # "Marvin"
+        left = ["Workspaces" "Marvin"];
         center = ["WindowTitle"];
-        right = ["SystemInfo" "Backlight" ["Clock" "Privacy" "Settings"] "Tray"]; # "Tray"
+        right = ["SystemInfo" "Backlight" "Clock" "Privacy" "Settings" "Tempo" "Tray"];
       };
 
       workspaces = {
@@ -67,10 +68,32 @@ in {
 
           #wireplumber
         ];
+
+        interval = 10;
       };
 
       clock = {
         format = "%e %H:%M";
+      };
+
+      settings = {
+        battery_format = "IconAndPercentage";
+        network_indicator_format = "IconAndPercentage";
+        bluetooth_indicator_format = "IconAndValue";
+        brightness_indicator_format = "IconAndPercentage";
+
+        indicators = [
+          "IdleInhibitor"
+          "PowerProfile"
+          "Audio"
+          # "Microphone"
+          "Bluetooth"
+          "Network"
+          "Vpn"
+          "Battery"
+          "PeripheralBattery"
+          #"Brightness"
+        ];
       };
 
       CustomModule = [
