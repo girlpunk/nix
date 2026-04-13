@@ -6,7 +6,7 @@
   ...
 }: let
   modules' = [
-    ./home/shared
+    ./home
     inputs.nix-index.homeManagerModules.${system}.default
     #inputs.opnix.homeManagerModules.default
     inputs._1password-shell-plugins.hmModules.default

@@ -24,38 +24,21 @@
     #    ffmpeg-headless
     #    yt-dlp
     watch
-    nano
     _1password-cli
     alejandra
     treefmt
     #    comma
-
-    # Python
-    #    python3
-    #    hatch
-    #    unstable.jetbrains.pycharm-professional
-
-    # Rust
-    #    rustPlatform.rustcSrc
-    #    rustc
-    #    rustfmt
-    #    cargo
-    #    pkg-config
-    #    gcc
-    #    unstable.jetbrains.rust-rover
   ];
 in {
-  programs.home-manager = {
-    enable = true;
-    useGlobalPkgs = true;
-  };
-
-  imports = lib.concatMap import [
-    ../modules
-    #../scripts
-    #../themes
-    ./programs.nix
-    ./services.nix
+  imports = [
+    ./modules/changes-report.nix
+    ./modules/hidpi.nix
+    ./modules/terminal
+    ./programs/git
+    ./programs/nano
+    ./programs/neofetch
+    ./programs/ssh
+    ./programs/statix
   ];
 
   xdg = {
@@ -106,37 +89,25 @@ in {
     #    sessionPath = [
     #      "$HOME/.dotnet/tools"
     #    ];
-
-    file.nanorc = {
-      text = ''
-        ## Interpret digits given on the command line after a colon after a filename
-        ## as the line number to go to in that file.
-        set colonparsing
-
-        ## Remember the used search/replace strings for the next session.
-        set historylog
-
-        ## Enable vim-style lock-files.  This is just to let a vim user know you
-        ## are editing a file [s]he is trying to edit and vice versa.  There are
-        ## no plans to implement vim-style undo state in these files.
-        set locking
-
-        ## Use the end of the title bar for some state flags: I = auto-indenting,
-        ## M = mark, L = hard-wrapping long lines, R = recording, S = soft-wrapping.
-        set stateflags
-      '';
-    };
   };
 
-  programs.nh = {
-    enable = true;
-    flake = "/home/sam/programs/nix";
+  programs = {
+    home-manager = {
+      enable = true;
+      useGlobalPkgs = true;
+    };
+
+    nh = {
+      enable = true;
+      flake = "/home/sam/programs/nix";
+    };
+
+    jq.enable = true;
+
+    nix-index.enable = true;
   };
 
   manual.html.enable = true;
-
-  # restart services on change
-  #systemd.user.startServices = "sd-switch";
 
   # notifications about home-manager news
   news.display = "show";
