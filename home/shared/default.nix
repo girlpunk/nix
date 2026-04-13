@@ -45,7 +45,10 @@
     #    unstable.jetbrains.rust-rover
   ];
 in {
-  programs.home-manager.enable = true;
+  programs.home-manager = {
+    enable = true;
+    useGlobalPkgs = true;
+  };
 
   imports = lib.concatMap import [
     ../modules
