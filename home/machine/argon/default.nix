@@ -1,7 +1,7 @@
 _: {
   imports = [
     ../../modules/remoteBuild.nix
-    ../../programs/discord.nix
+    ../../programs/discord
     ../../programs/vscode
   ];
 
