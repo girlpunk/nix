@@ -3,6 +3,7 @@ _: {
     ../../modules/remoteBuild.nix
     ../../programs/discord
     ../../programs/vscode
+    ../../programs/activitywatch
   ];
 
   hyprland.monitors = [

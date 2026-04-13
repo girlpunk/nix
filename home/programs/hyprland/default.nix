@@ -36,15 +36,14 @@
 
   services = {
     #arrpc.enable = true;
-    activitywatch = {
-      enable = true;
-
+    activitywatch = mkIf services.activitywatch.enable {
       watchers = {
         awatcher = {
           package = pkgs.awatcher;
         };
       };
     };
+
     blueman-applet.enable = true;
     clipman.enable = true;
 
