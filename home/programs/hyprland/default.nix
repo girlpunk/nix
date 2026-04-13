@@ -15,7 +15,7 @@
     ./kitty.nix
     ./rofi.nix
     ./tomat.nix
-    ./waybar.nix
+    #./waybar.nix
     ./wluma.nix
   ];
 
@@ -35,7 +35,6 @@
   };
 
   services = {
-    #arrpc.enable = true;
     activitywatch = mkIf services.activitywatch.enable {
       watchers = {
         awatcher = {
@@ -46,13 +45,6 @@
 
     blueman-applet.enable = true;
     clipman.enable = true;
-
-    #darkman.enable = true;
-    #darkman.settings = {
-    #  lat = 51.48;
-    #  lng = -0.22;
-    #  usegeoclue = true;
-    #};
 
     gammastep = {
       enable = true;
@@ -65,28 +57,31 @@
     hyprpolkitagent.enable = true;
     network-manager-applet.enable = true;
     poweralertd.enable = true;
-    mako.enable = true;
-    mako.settings = {
-      font = "Fira Code Nerd Font 10";
-      border-size = 2;
-      icon-location = "top";
-      margin = "25,10,10";
 
-      "app-name=.cinny-wrapped" = {
-        default-timeout = 5000;
-      };
-      "app-name=discord" = {
-        default-timeout = 5000;
-      };
-      "app-name=Element" = {
-        default-timeout = 5000;
+    mako = {
+      enable = true;
+      settings = {
+        font = "Fira Code Nerd Font 10";
+        border-size = 2;
+        icon-location = "top";
+        margin = "25,10,10";
+
+        "app-name=.cinny-wrapped" = {
+          default-timeout = 5000;
+        };
+        "app-name=discord" = {
+          default-timeout = 5000;
+        };
+        "app-name=Element" = {
+          default-timeout = 5000;
+        };
       };
     };
+
     ssh-agent.enable = false;
 
     wob = {
       enable = true;
-      #config.systemd.user.sockets.wob.Socket.ListenFIFO = "${config.xdg.dataHome}/wob.sock";
     };
 
     hyprsunset = {
