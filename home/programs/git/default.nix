@@ -99,7 +99,7 @@ in {
     };
   };
 
-  imports = lib.optional (builtins.pathExists ./work.nix) ./work.nix;
+  # work.nix is imported from home/machines/work/default.nix
 
   config = {
     programs = {
