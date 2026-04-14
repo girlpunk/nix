@@ -96,7 +96,7 @@
     };
 
     mediafeeder = {
-      url = "path:/home/sam/programs/MediaFeeder";
+      url = "github:girlpunk/MediaFeeder";
 
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.treefmt-nix.follows = "treefmt-nix";

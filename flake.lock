@@ -599,14 +599,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1776094426,
-        "narHash": "sha256-DoM0ZzBzvygi4RrWTwDCpY45Qata92bqC4EjWRAXKD0=",
-        "path": "/home/sam/programs/MediaFeeder",
-        "type": "path"
+        "lastModified": 1775833283,
+        "narHash": "sha256-d9GnaMKhD/ULLQotMUA6p7kgbhkWYxIaxhKxAQVhqmQ=",
+        "owner": "girlpunk",
+        "repo": "MediaFeeder",
+        "rev": "5791e5610e879d63c394b62c782e6175abdf48a1",
+        "type": "github"
       },
       "original": {
-        "path": "/home/sam/programs/MediaFeeder",
-        "type": "path"
+        "owner": "girlpunk",
+        "repo": "MediaFeeder",
+        "type": "github"
       }
     },
     "nix-index": {
