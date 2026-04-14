@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   imports = [
@@ -36,7 +37,7 @@
   };
 
   services = {
-    activitywatch = mkIf services.activitywatch.enable {
+    activitywatch = lib.mkIf config.services.activitywatch.enable {
       watchers = {
         awatcher = {
           package = pkgs.awatcher;

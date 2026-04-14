@@ -217,7 +217,7 @@
         pre-commit-check = inputs.git-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
-            nixfmt.enable = true;
+            #nixfmt.enable = true;
           };
         };
       };

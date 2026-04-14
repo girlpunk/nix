@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+{pkgs, ...}: let
   username = "sam";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
@@ -94,7 +90,7 @@ in {
   programs = {
     home-manager = {
       enable = true;
-      useGlobalPkgs = true;
+      #useGlobalPkgs = true;
     };
 
     nh = {

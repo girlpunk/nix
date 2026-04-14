@@ -1,11 +1,8 @@
-{pkgs, ...}:
-{
+_: {
   services.activitywatch = {
-    activitywatch = {
-      enable = true;
+    enable = true;
 
-      watchers = {
-      };
+    watchers = {
     };
   };
 }
