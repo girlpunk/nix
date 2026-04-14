@@ -35,6 +35,8 @@
     done
   '';
 in {
+  imports = [./fonts.nix];
+
   programs.ashell = {
     enable = true;
     package = pkgs.unstable.ashell;

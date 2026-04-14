@@ -1,4 +1,6 @@
 _: {
+  imports = [./fonts.nix];
+
   programs.kitty = {
     enable = true;
     font.name = "family='Fira Code Nerd Font' postscript_name=FiraCodeNF-Reg";

@@ -1,21 +1,10 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    brightnessctl
     corefonts
-    ddcutil
-    geoclue2
-    #greetd.tuigreet
     kitty
-    nerd-fonts.fira-code
-    vlc
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  #services.greetd = {
-  #  enable = true;
-  #  settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-  #};
 
   programs = {
     hyprland.enable = true;
@@ -24,13 +13,13 @@
       enable = true;
     };
 
-    firefox = {
-      enable = true;
-      wrapperConfig = {
-        speechSynthesisSupport = false;
-        #pipewireSupport = true;
-      };
-    };
+    #firefox = {
+    #  enable = true;
+    #  wrapperConfig = {
+    #    speechSynthesisSupport = false;
+    #    #pipewireSupport = true;
+    #  };
+    #};
 
     iio-hyprland.enable = true;
   };

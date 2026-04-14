@@ -21,10 +21,6 @@
     ../firefox
   ];
 
-  home.packages = with pkgs; [
-    rofi
-  ];
-
   xdg = {
     enable = true;
     portal.enable = true;
