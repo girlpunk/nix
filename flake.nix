@@ -12,8 +12,10 @@
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
 
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "flake-compat";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+      };
     };
 
     home-manager = {
@@ -35,9 +37,11 @@
     nix-index = {
       url = "github:gvolpe/nix-index";
 
-      inputs.nix-index-database.follows = "nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "flake-compat";
+      inputs = {
+        nix-index-database.follows = "nix-index-database";
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+      };
     };
 
     # Nix linter
@@ -56,16 +60,20 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
 
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "nix-systems";
-      inputs.pre-commit-hooks.follows = "git-hooks";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "nix-systems";
+        pre-commit-hooks.follows = "git-hooks";
+      };
     };
 
     _1password-shell-plugins = {
       url = "github:1Password/shell-plugins";
 
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "nix-systems";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "nix-systems";
+      };
     };
 
     sops-nix = {
@@ -77,8 +85,10 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
 
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit.follows = "git-hooks";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        pre-commit.follows = "git-hooks";
+      };
     };
 
     disko = {
@@ -90,18 +100,22 @@
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
 
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.gitignore.inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        gitignore.inputs.nixpkgs.follows = "nixpkgs";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     mediafeeder = {
       url = "github:girlpunk/MediaFeeder";
 
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.treefmt-nix.follows = "treefmt-nix";
-      inputs.git-hooks-nix.follows = "git-hooks";
-      inputs.flake-compat.follows = "flake-compat";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+        git-hooks-nix.follows = "git-hooks";
+        flake-compat.follows = "flake-compat";
+      };
     };
 
     # Common dependencies

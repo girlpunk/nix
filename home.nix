@@ -31,6 +31,6 @@
     };
   };
 in {
-  modules = modules;
+  inherit modules;
   configs = lib.mergeAttrsList (map make hosts);
 }

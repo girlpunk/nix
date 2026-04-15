@@ -1,4 +1,10 @@
-{pkgs, config, inputs, ...}: {
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: {
   # Add ~/.local/bin to PATH
   environment.localBinInPath = true;
 

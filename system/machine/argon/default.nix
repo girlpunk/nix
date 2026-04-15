@@ -93,17 +93,23 @@
   # Make apps using sound get higher priority automatically
   security.rtkit.enable = true;
 
-  sops.defaultSopsFile = ../../../secrets/argon.yaml;
-  # This will automatically import SSH keys as age keys
-  sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-  # This is the actual specification of the secrets.
-  sops.secrets.PBS_REPOSITORY = {};
-  sops.secrets.PBS_PASSWORD = {};
-  sops.secrets.PBS_FINGERPRINT = {};
-  sops.secrets.PBS_KEY = {};
-  sops.secrets.MARVIN = {
-    mode = "0600";
-    owner = config.users.users.sam.name;
+  sops = {
+    defaultSopsFile = ../../../secrets/argon.yaml;
+
+    # This will automatically import SSH keys as age keys
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+
+    # This is the actual specification of the secrets.
+    secrets = {
+      PBS_REPOSITORY = {};
+      PBS_PASSWORD = {};
+      PBS_FINGERPRINT = {};
+      PBS_KEY = {};
+      MARVIN = {
+        mode = "0600";
+        owner = config.users.users.sam.name;
+      };
+    };
   };
 
   # Don't try and build lots of things at once, you'll run out of disk space
