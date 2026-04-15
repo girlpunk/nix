@@ -1,6 +1,6 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   nix = {
-    package = pkgs.nix;
+    package = lib.mkDefault pkgs.nix;
     buildMachines = [
       {
         hostName = "minos";

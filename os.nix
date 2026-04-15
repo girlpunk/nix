@@ -15,12 +15,13 @@
     "work"
   ];
 
-  modules' = [
+  modules = [
     extraSystemConfig
     inputs.disko.nixosModules.disko
     inputs.lanzaboote.nixosModules.lanzaboote
     inputs.nix-index-database.nixosModules.nix-index
     inputs.sops-nix.nixosModules.sops
+    inputs.home-manager.nixosModules.home-manager
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}
     ./system
   ];
@@ -29,7 +30,7 @@
     ${host} = nixosSystem {
       inherit lib pkgs system;
       specialArgs = {inherit inputs;};
-      modules = modules' ++ [./system/machine/${host}];
+      modules = modules ++ [./system/machine/${host}];
     };
   };
 in

@@ -1,9 +1,10 @@
 _: {
   imports = [
     ../../modules/remoteBuild.nix
-    ../../programs/discord
-    ../../programs/vscode
     ../../programs/activitywatch
+    ../../programs/discord
+    ../../programs/hyprland
+    ../../programs/vscode
   ];
 
   hyprland.monitors = [

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, inputs, ...}: {
   # Add ~/.local/bin to PATH
   environment.localBinInPath = true;
 
@@ -40,4 +40,14 @@
     "root"
     "sam"
   ];
+
+  # Build a home-manager config for me
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.sam.imports = (pkgs.callPackage ../../home.nix {
+      inherit inputs pkgs;
+      inherit (pkgs) system;
+    }).modules ++ [ (../../home/machine + "/sam@${config.networking.hostName}") ];
+  };
 }
