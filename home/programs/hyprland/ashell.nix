@@ -4,7 +4,7 @@
   ...
 }: let
   marvin-info = pkgs.writeShellScript "marvin-info.sh" ''
-    TOKEN=$(cat /run/secrets/MARVIN)
+    TOKEN=$(${lib.getExe' pkgs.coreutils "cat"} /run/secrets/MARVIN)
 
     while true; do
       ${lib.getExe pkgs.curl} -s \
@@ -16,7 +16,7 @@
   '';
 
   marvin-open = pkgs.writeShellScript "marvin-open.sh" ''
-    TOKEN=$(cat /run/secrets/MARVIN)
+    TOKEN=$(${lib.getExe' pkgs.coreutils "cat"} /run/secrets/MARVIN)
 
     ${lib.getExe' pkgs.xdg-utils "xdg-open"} \
       $(

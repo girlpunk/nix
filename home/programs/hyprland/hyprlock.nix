@@ -1,4 +1,8 @@
-_: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   text_color = "rgba(FFFFFFFF)";
   entry_background_color = "rgba(33333311)";
   entry_border_color = "rgba(3B3B3B55)";
@@ -6,6 +10,36 @@ _: let
   font_family = "Rubik Light";
   font_family_clock = "Rubik Light";
   font_material_symbols = "Material Symbols Rounded";
+
+  status = pkgs.writeShellScript "hyprland-status.sh" ''
+    ############ Variables ############
+    enable_battery=false
+    battery_charging=false
+
+    ####### Check availability ########
+    for battery in /sys/class/power_supply/*BAT*; do
+      if [[ -f "$battery/uevent" ]]; then
+        enable_battery=true
+        if [[ $(${lib.getExe' pkgs.coreutils "cat"} /sys/class/power_supply/*/status | ${lib.getExe' pkgs.coreutils "head"} -1) == "Charging" ]]; then
+          battery_charging=true
+        fi
+        break
+      fi
+    done
+
+    ############# Output #############
+    if [[ $enable_battery == true ]]; then
+      if [[ $battery_charging == true ]]; then
+        ${lib.getExe' pkgs.coreutils "echo"} -n "(+) "
+      fi
+      ${lib.getExe' pkgs.coreutils "echo"} -n "$(${lib.getExe' pkgs.coreutils "cat"} /sys/class/power_supply/*/capacity | ${lib.getExe' pkgs.coreutils "head"} -1)"%
+      if [[ $battery_charging == false ]]; then
+        ${lib.getExe' pkgs.coreutils "echo"} -n " remaining"
+      fi
+    fi
+
+    ${lib.getExe' pkgs.coreutils "echo"} ""
+  '';
 in {
   programs.hyprlock = {
     enable = true;
@@ -107,7 +141,7 @@ in {
         {
           # Status
           #monitor =
-          text = ''cmd[update:5000] ${./hyprlock-status.sh}'';
+          text = ''cmd[update:5000] ${status}'';
           shadow_passes = 1;
           shadow_boost = 0.5;
           color = text_color;

@@ -8,7 +8,7 @@
     while true; do
       ${lib.getExe package} status | ${lib.getExe pkgs.jq} -c ". | {text: .text, alt: .tooltip, class: .class, tooltip: .tooltip, percentage: .percentage}"
 
-      sleep 1
+      ${lib.getExe' pkgs.coreutils "sleep"} 1
     done
   '';
 in {

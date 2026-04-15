@@ -4,7 +4,7 @@
   ...
 }: let
   pulse = pkgs.writeShellScript "inhibitor-pulse.sh" ''
-    ${lib.getExe' pkgs.wireplumber "wpctl"} status | grep active && exit 1 || exit 0
+    ${lib.getExe' pkgs.wireplumber "wpctl"} status | ${lib.getExe' pkgs.gnugrep "grep"} active && exit 1 || exit 0
   '';
 
   lock = pkgs.writeShellScript "lock.sh" ''
@@ -12,11 +12,11 @@
     ${pulse} || exit 1
 
     # Start lock screen
-    pidof hyprlock || ${lib.getExe pkgs.hyprlock} --grace 10
+    ${lib.getExe' pkgs.procps "pidof"} hyprlock || ${lib.getExe pkgs.hyprlock} --grace 10
   '';
 
   ac = pkgs.writeShellScript "inhibitor-ac.sh" ''
-    grep 1 /sys/class/power_supply/AC/online && exit 1 || exit 0
+    ${lib.getExe' pkgs.gnugrep "grep"} 1 /sys/class/power_supply/AC/online && exit 1 || exit 0
   '';
 
   dim_screen = pkgs.writeShellScript "dim_screen.sh" ''
@@ -39,6 +39,14 @@
     ${lib.getExe pkgs.brightnessctl} s -q -d 'tpacpi::kbd_backlight' 0
   '';
 
+  brighten_screen = pkgs.writeShellScript "" ''
+    # Restore previous brightness
+    ${lib.getExe pkgs.brightnessctl} -qr
+
+    # Turn on keyboard backlight
+    ${lib.getExe pkgs.brightnessctl} s -q -d 'tpacpi::kbd_backlight' 1
+  '';
+
   outputs_off = pkgs.writeShellScript "outputs_off.sh" ''
     # Skip AC check for longer timeout periods
     if [[ $* != *--always* ]]; then
@@ -51,6 +59,11 @@
 
     # Turn off monitor
     ${lib.getExe' pkgs.hyprland "hyprctl"} dispatch dpms off
+  '';
+
+  outputs_on = pkgs.writeShellScript "outputs_on.sh" ''
+    # Turn on monitor
+    ${lib.getExe' pkgs.hyprland "hyprctl"} dispatch dpms on
   '';
 
   suspend = pkgs.writeShellScript "suspend.sh" ''
@@ -80,12 +93,12 @@ in {
         {
           timeout = 60;
           on-timeout = "" + dim_screen;
-          on-resume = "" + ./idle/brighten_screen.sh;
+          on-resume = "${brighten_screen}";
         }
         {
           timeout = 120;
           on-timeout = "${dim_screen} --always";
-          on-resume = "" + ./idle/brighten_screen.sh;
+          on-resume = "${brighten_screen}";
         }
         {
           timeout = 180;
@@ -94,12 +107,12 @@ in {
         {
           timeout = 300;
           on-timeout = "" + outputs_off;
-          on-resume = "" + ./idle/outputs_on.sh;
+          on-resume = "${outputs_on}";
         }
         {
           timeout = 600;
           on-timeout = "${outputs_off} --always";
-          on-resume = "" + ./idle/outputs_on.sh;
+          on-resume = "${outputs_on}";
         }
         {
           timeout = 420;

@@ -3,7 +3,71 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  random-wallpaper = pkgs.writeShellScript "random-wallpaper.sh" ''
+    monitors=$(${lib.getExe' pkgs.hyprland "hyprctl"} monitors | ${lib.getExe' pkgs.gnugrep "grep"} Monitor | ${lib.getExe' pkgs.gawk "awk"} '{print $2}') # get monitors
+
+    for monitor in $monitors; do
+      wallpaper=$(find /usr/share/wallpapers/*/contents -type f | shuf -n 1)
+      ${lib.getExe' pkgs.hyprland "hyprctl"} hyprpaper preload "$wallpaper"
+      ${lib.getExe' pkgs.hyprland "hyprctl"} hyprpaper wallpaper "$monitor,$wallpaper"
+    done
+
+    ${lib.getExe' pkgs.coreutils "sleep"} 0.25s # wait for wallpaper to load
+
+    ${lib.getExe' pkgs.hyprland "hyprctl"} hyprpaper unload all # unload old wallpaper
+  '';
+
+  confirm-before-exit = pkgs.writeShellScript "confirm-before-exit.sh" ''
+    set -euo pipefail
+    EXIT_TYPE="$${1:?exit type missing}"
+
+    calculate_width() {
+      type_length="$${#1}"
+
+      # make base width depend on the active monitor width
+      # base width is a linear equation that maps 1920p to 11 base width and 4k to 3 base width, more or less
+      active_monitor_width=$(${lib.getExe' pkgs.hyprland "hyprctl"} -j monitors | ${lib.getExe pkgs.jq} ".[] | select(.id == $(${lib.getExe' pkgs.hyprland "hyprctl"} -j activeworkspace | jq -r .monitorID)) | .width")
+      base_width=$(${lib.getExe pkgs.bc} <<<"$active_monitor_width*-0.004+20" | ${lib.getExe' pkgs.gawk "awk"} '{print int($1+0.5)}')
+
+      # this formula is empirical
+      # takes the ceil of division by 2 of the length of the type string and adds to base_width
+      # the result is the percentage of the maximum width the window has to occupy
+      # exit = 13%; reboot = 14%; poweroff = 15%;
+      # other modes will scale accordingly
+      width=$((base_width + (type_length + 1) / 2))%
+      echo $width
+    }
+
+    if [[ $EXIT_TYPE == "exit" ]]; then
+      EXIT_ACTION="$SCRIPT_DIR"/force-exit.sh
+    elif [[ $EXIT_TYPE == "poweroff" ]]; then
+      EXIT_ACTION="sudo poweroff"
+    elif [[ $EXIT_TYPE == "reboot" ]]; then
+      EXIT_ACTION="sudo reboot"
+    else
+      echo "Action unsupported: $EXIT_TYPE"
+      ${lib.getExe pkgs.notify-desktop} "Action unsupported: $EXIT_TYPE"
+      exit 1
+    fi
+
+    calculated_width=99 #$(calculate_width $EXIT_TYPE)
+    echo $calculated_width
+    if [[ "$(${lib.getExe pkgs.rofi} -dmenu -p "Confirm $EXIT_TYPE? [y/N]" -theme-str "listview { enabled: false; } window { width: $calculated_width; }" | ${lib.getExe' pkgs.gawk "awk"} '{print tolower($0)}')" == "y" ]]; then
+      bash -c "$EXIT_ACTION"
+    fi
+  '';
+
+  volume = pkgs.writeShellScript "volume.sh" ''
+    ${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_SINK@ $1
+
+    printf %d\\n $(("$(${lib.getExe' pkgs.wireplumber "wpctl"} get-volume @DEFAULT_SINK@ | ${lib.getExe' pkgs.gnugrep "grep"} -Po '(?<=Volume: )\d+\.\d+')" * 100)) >/run/user/1000/wob.sock
+
+    LOCKFILE=/run/user/1000/volume-notify
+
+    ${lib.getExe' pkgs.util-linux "flock"} -n $LOCKFILE ${lib.getExe' pkgs.pipewire "pw-cat"} -p /home/sam/Music/awa.wav
+  '';
+in {
   options = {
     hyprland = {
       monitors = lib.mkOption {
@@ -24,9 +88,9 @@
       # See https://wiki.hyprland.org/Configuring/Keywords/
 
       # Set programs that you use
-      "$terminal" = "kitty";
-      "$fileManager" = "dolphin";
-      "$menu" = "rofi -show-icons -markup -show drun -modes drun";
+      "$terminal" = lib.getExe pkgs.kitty;
+      "$fileManager" = lib.getExe pkgs.yazi;
+      "$menu" = "${lib.getExe pkgs.rofi} -show-icons -markup -show drun -modes drun";
       # See https://wiki.hyprland.org/Configuring/Keywords/
       "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
 
@@ -47,7 +111,7 @@
         #        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         #        "dbus-update-activation-environment --systemd --all"
 
-        ("" + ./random-wallpaper.sh)
+        "${random-wallpaper}"
         #        "xrdb -merge ~/.Xresources"
       ];
 
@@ -211,11 +275,11 @@
           "$mainMod, C, killactive,"
 
           ## Basics // Exit Hypr // <Super> M ##
-          ("$mainMod, M, exec, " + ./confirm-before-exit.sh + " exit")
+          "$mainMod, M, exec, ${confirm-before-exit} exit"
           ## Basics // Shut Down // <Super> <Shift> M ##
-          ("$mainMod SHIFT, M, exec, " + ./confirm-before-exit.sh + " poweroff")
+          "$mainMod SHIFT, M, exec, ${confirm-before-exit} poweroff"
           ## Basics // Reboot // <Super> <Ctrl> M ##
-          ("$mainMod CTRL, M, exec, " + ./confirm-before-exit.sh + " reboot")
+          "$mainMod CTRL, M, exec, ${confirm-before-exit} reboot"
 
           ## Basics // File Manager // <Super> E ##
           "$mainMod, E, exec, $fileManager"
@@ -271,14 +335,14 @@
           #bind = SHIFT, 107, exec, ~/.config/hypr/scripts/screenshot/captureAll.sh
           ## Navigate // Printscreen area to Clipboard // <PrtSc> ##
           #", 107, exec, hyprshot -m region"
-          ", 107, exec, ${lib.getExe pkgs.grim} -g \"$(${lib.getExe pkgs.slurp})\" -t png - | tee \"$HOME/Pictures/Screenshots/Screenshots_$(date +%Y%m%d_%H%M%S).png\" | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"
+          ", 107, exec, ${lib.getExe pkgs.grim} -g \"$(${lib.getExe pkgs.slurp})\" -t png - | ${lib.getExe' pkgs.coreutils "tee"} \"$HOME/Pictures/Screenshots/Screenshots_$(date +%Y%m%d_%H%M%S).png\" | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"
 
           # Scroll through existing workspaces with mainMod + scroll
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
 
           # Session management
-          "$mainMod, L, exec, hyprlock"
+          "$mainMod, L, exec, ${lib.getExe pkgs.hyprlock}"
           "CTRL, Escape, exec, gnome-system-monitor"
 
           "$mainMod, T, togglegroup"
@@ -296,7 +360,7 @@
               "$mainMod SHIFT, ${toString workspace}, movetoworkspace, ${toString workspace}"
 
               # Move active workspace to a monitor
-              "$mainMod CONTROL, ${toString workspace}, exec, hyprctl dispatch moveworkspacetomonitor ${toString workspace} $(hyprctl activewindow | egrep \"monitor: [[:digit:]]+\" | egrep -o \"[[:digit:]]+\") && hyprctl dispatch workspace ${toString workspace}"
+              "$mainMod CONTROL, ${toString workspace}, exec, ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor ${toString workspace} $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace ${toString workspace}"
             ])
             9
           )
@@ -310,22 +374,22 @@
 
       bindl = [
         # Session management
-        ",switch:Lid Switch, exec, hyprlock"
+        ",switch:Lid Switch, exec, ${lib.getExe pkgs.hyprlock}"
 
-        ",XF86AudioMute,         exec, wpctl set-mute @DEFAULT_SINK@ toggle && pacat /home/jacob/.local/share/Steam/steamui/sounds/deck_ui_volume.wav"
-        ",XF86AudioMicMute,      exec, wpctl set-mute @DEFAULT_SOURCE@ toggle"
+        ",XF86AudioMute,         exec, ${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_SINK@ toggle && ${lib.getExe' pkgs.pipewire "pw-cat"} /home/jacob/.local/share/Steam/steamui/sounds/deck_ui_volume.wav"
+        ",XF86AudioMicMute,      exec, ${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_SOURCE@ toggle"
       ];
 
       bindel = [
-        ("     ,XF86AudioRaiseVolume, exec, " + ./volume.sh + " 5%+")
-        ("     ,XF86AudioLowerVolume, exec, " + ./volume.sh + " 5%-")
-        ("SHIFT,XF86AudioRaiseVolume, exec, " + ./volume.sh + " 1%+")
-        ("SHIFT,XF86AudioLowerVolume, exec, " + ./volume.sh + " 1%-")
+        "     ,XF86AudioRaiseVolume, exec, ${volume} 5%+"
+        "     ,XF86AudioLowerVolume, exec, ${volume} 5%-"
+        "SHIFT,XF86AudioRaiseVolume, exec, ${volume} 1%+"
+        "SHIFT,XF86AudioLowerVolume, exec, ${volume} 1%-"
 
-        "     ,XF86MonBrightnessUp,   exec, brightnessctl -e -m s 5%+ | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "     ,XF86MonBrightnessDown, exec, brightnessctl -e -m s 5%- | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "SHIFT,XF86MonBrightnessUp,   exec, brightnessctl -e -m s 1%+ | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
-        "SHIFT,XF86MonBrightnessDown, exec, brightnessctl -e -m s 1%- | grep -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "     ,XF86MonBrightnessUp,   exec, ${lib.getExe pkgs.brightnessctl} -e -m s 5%+ | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "     ,XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} -e -m s 5%- | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "SHIFT,XF86MonBrightnessUp,   exec, ${lib.getExe pkgs.brightnessctl} -e -m s 1%+ | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
+        "SHIFT,XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} -e -m s 1%- | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"
       ];
 
       ##############################
