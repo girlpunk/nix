@@ -30,7 +30,14 @@
     ${host} = nixosSystem {
       inherit lib pkgs system;
       specialArgs = {inherit inputs;};
-      modules = modules ++ [./system/machine/${host}];
+      modules =
+        modules
+        ++ [
+          ./system/machine/${host}
+          {
+            networking.hostName = lib.mkDefault "${host}";
+          }
+        ];
     };
   };
 in
