@@ -51,18 +51,9 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.sam.imports =
-      (pkgs.callPackage ../../home.nix {
-        inherit inputs pkgs;
-        inherit (pkgs) system;
-      }).modules
-      ++ lib.optional (builtins.pathExists (../../home/machine + "/sam@${config.networking.hostName}")) (../../home/machine + "/sam@${config.networking.hostName}");
+    users.sam.imports = (pkgs.callPackage ../../home.nix {
+      inherit inputs pkgs;
+      inherit (pkgs) system;
+    }).modules ++ [ (../../home/machine + "/sam@${config.networking.hostName}") ];
   };
-
-  warnings =
-    if (!builtins.pathExists (../../home/machine + "/sam@${config.networking.hostName}"))
-    then [
-      "Home configuration does not exist. Expected to find home/machine/sam@${config.networking.hostName}"
-    ]
-    else [];
 }
