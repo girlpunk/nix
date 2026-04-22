@@ -219,7 +219,7 @@
     );
   in
     {
-      homeConfigurations = pkgs.builders.mkHome {};
+      homeConfigurations = (pkgs.builders.mkHome {}).configs;
       nixosConfigurations = pkgs.builders.mkNixos {};
     }
     // inputs.flake-utils.lib.eachDefaultSystem (_: {

@@ -27,7 +27,7 @@
     ${host} = homeManagerConfiguration {
       inherit lib pkgs;
       extraSpecialArgs = {inherit inputs;};
-      modules = modules ++ [./system/machine/${host}];
+      modules = modules ++ [./home/machine/${host}];
     };
   };
 in {
