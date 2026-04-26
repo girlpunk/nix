@@ -39,7 +39,7 @@
     ${lib.getExe pkgs.brightnessctl} s -q -d 'tpacpi::kbd_backlight' 0
   '';
 
-  brighten_screen = pkgs.writeShellScript "" ''
+  brighten_screen = pkgs.writeShellScript "brighten_screen.sh" ''
     # Restore previous brightness
     ${lib.getExe pkgs.brightnessctl} -qr
 
