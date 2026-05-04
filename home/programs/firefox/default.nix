@@ -64,6 +64,7 @@
     };
     profiles.default = {
       search = {
+        force = true;
         default = "kagi";
 
         engines = {
