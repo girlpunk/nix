@@ -5,6 +5,7 @@ _: {
     ../../programs/discord
     ../../programs/hyprland
     ../../programs/vscode
+    ../../programs/android
   ];
 
   hyprland.monitors = [
