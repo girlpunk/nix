@@ -10,13 +10,17 @@ let
     cmdLineToolsVersion = "19.0";
     toolsVersion = "26.1.1";
     platformToolsVersion = "36.0.0";
-    buildToolsVersions = [ "36.1.0" ];
-    platformVersions = ["36.1"];
+    buildToolsVersions = [
+      "36.0.0"
+      "35.0.0"
+      "34.0.0"
+    ];
+    platformVersions = ["36" "34"];
     includeSources = true;
 
     useGoogleAPIs = true;
 
-    includeExtras = ["extras;google;gcm"];
+    #includeExtras = ["extras;google;gcm"];
   };
 in
 {
