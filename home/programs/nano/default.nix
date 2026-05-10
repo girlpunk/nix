@@ -2,7 +2,7 @@
   home = {
     packages = [pkgs.nano];
 
-    file.nanorc = {
+    file.".nanorc" = {
       text = ''
         ## Interpret digits given on the command line after a colon after a filename
         ## as the line number to go to in that file.
