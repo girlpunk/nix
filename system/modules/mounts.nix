@@ -55,16 +55,16 @@
     enable = false;
   };
 
-  fileSystems."/media/juggernaut/TV" = {
-    device = "//juggernaut.home.foxocube.xyz/Storage_Media_TV";
-    fsType = "cifs";
-    options = [
-      "credentials=/etc/nixos/smb-secret/juggernaut"
-      "x-systemd.automount"
-      "noauto"
-      "uid=1000" # ${toString config.users.users.sam.uid}"
-      "gid=100"
-      "x-systemd.idle-timeout=60,x-systemd.mount-timeout=5s"
-    ];
-  };
+  #fileSystems."/media/juggernaut/TV" = {
+  #  device = "//juggernaut.home.foxocube.xyz/Storage_Media_TV";
+  #  fsType = "cifs";
+  #  options = [
+  #    "credentials=/etc/nixos/smb-secret/juggernaut"
+  #    "x-systemd.automount"
+  #    "noauto"
+  #    "uid=1000" # ${toString config.users.users.sam.uid}"
+  #    "gid=100"
+  #    "x-systemd.idle-timeout=60,x-systemd.mount-timeout=5s"
+  #  ];
+  #};
 }
