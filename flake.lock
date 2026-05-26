@@ -10,11 +10,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778522676,
-        "narHash": "sha256-Fg1QA+D7UVYd4z+iTiQRV7IfFJI/8mNopkvzJXp1Mgc=",
+        "lastModified": 1778798819,
+        "narHash": "sha256-VLcQJRpfVpiZpvfYvudyHUVPQcoKiAxW+LzfXH3IUrc=",
         "owner": "1Password",
         "repo": "shell-plugins",
-        "rev": "41b719b02fff686fa3a1de9de68d35ce0198400c",
+        "rev": "00a6fcaf68d1fbde7cbd929a8b7173ea2e4041a6",
         "type": "github"
       },
       "original": {
@@ -290,11 +290,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1778683849,
-        "narHash": "sha256-fKMHYZexPtUUVVvGRake8HE0qXxSdKCtUGdNYqRFNec=",
+        "lastModified": 1778841351,
+        "narHash": "sha256-a52shxptMqdBLiDkUq1rT7IQB3jRgZLWLvcZaMYX+Gg=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "998d3af07f57603710674e7cb337b0814d925caf",
+        "rev": "b74b1f934f03b74df2214e06e26a8c9098236602",
         "type": "github"
       },
       "original": {
