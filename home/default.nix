@@ -29,6 +29,7 @@
       watch
       wget
       # yt-dlp
+      (pkgs.callPackage programs/treesize {})
     ])
     (lib.mkIf osConfig.virtualisation.docker.enable (with pkgs; [
       docker-compose # docker manager
