@@ -10,25 +10,25 @@
 
   packages = lib.mkMerge [
     (with pkgs; [
+      _1password-cli
+      alejandra
+      # comma
       dig # dns command-line tool
       duf # disk usage/free utility
       dust
       eza # a better `ls`
-      killall # kill processes by name
-      ncdu # disk space info (a better du)
-      tree # display files in a tree view
-      jq
+      # ffmpeg-headless
       file
+      jq
+      killall # kill processes by name
+      # kubectl
+      ncdu # disk space info (a better du)
       tree
-      #    kubectl
-      wget
-      #    ffmpeg-headless
-      #    yt-dlp
-      watch
-      _1password-cli
-      alejandra
+      tree # display files in a tree view
       treefmt
-      #    comma
+      watch
+      wget
+      # yt-dlp
     ])
     (lib.mkIf osConfig.virtualisation.docker.enable (with pkgs; [
       docker-compose # docker manager

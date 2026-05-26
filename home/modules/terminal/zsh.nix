@@ -63,7 +63,7 @@
           "web-search"
           "terraform"
         ]
-        (lib.mkIf (!osConfig.virtualisation.docker.enable) [
+        (lib.mkIf osConfig.virtualisation.docker.enable [
           "docker"
           "docker-compose"
         ])

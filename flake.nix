@@ -141,7 +141,7 @@
       _: let
         typos_config = (pkgs.formats.toml {}).generate "typos.toml" {
           files = {
-            extend-exclude = ["secrets/*.yaml"];
+            extend-exclude = ["secrets/*.yaml" ".editorconfig"];
           };
 
           default.extend-identifiers = {

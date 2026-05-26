@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }: {
@@ -51,9 +50,11 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.sam.imports = (pkgs.callPackage ../../home.nix {
-      inherit inputs pkgs;
-      inherit (pkgs) system;
-    }).modules ++ [ (../../home/machine + "/sam@${config.networking.hostName}") ];
+    users.sam.imports =
+      (pkgs.callPackage ../../home.nix {
+        inherit inputs pkgs;
+        inherit (pkgs) system;
+      }).modules
+      ++ [(../../home/machine + "/sam@${config.networking.hostName}")];
   };
 }
