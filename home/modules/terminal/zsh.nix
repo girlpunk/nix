@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  osConfig,
   ...
 }: {
   home.shell.enableZshIntegration = true;
@@ -38,30 +39,34 @@
 
         zbell_ignore=($EDITOR $PAGER dotnet nano)
       '';
-      plugins = [
-        "1password"
-        "colored-man-pages"
-        "command-not-found"
-        "direnv"
-        "docker"
-        "docker-compose"
-        "dotnet"
-        "eza"
-        #git
-        "gitfast"
-        "helm"
-        "kitty"
-        "lol"
-        "pip"
-        "pyenv"
-        "safe-paste"
-        "screen"
-        "zbell"
-        "zsh-syntax-highlighting"
-        "tailscale"
-        "z"
-        "web-search"
-        "terraform"
+      plugins = lib.mkMerge [
+        [
+          "1password"
+          "colored-man-pages"
+          "command-not-found"
+          "direnv"
+          "dotnet"
+          "eza"
+          #git
+          "gitfast"
+          "helm"
+          "kitty"
+          "lol"
+          "pip"
+          "pyenv"
+          "safe-paste"
+          "screen"
+          "zbell"
+          "zsh-syntax-highlighting"
+          "tailscale"
+          "z"
+          "web-search"
+          "terraform"
+        ]
+        (lib.mkIf (!osConfig.virtualisation.docker.enable) [
+          "docker"
+          "docker-compose"
+        ])
       ];
     };
 

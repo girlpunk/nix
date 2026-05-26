@@ -1,29 +1,38 @@
-{pkgs, ...}: let
+{
+  lib,
+  osConfig,
+  pkgs,
+  ...
+}: let
   username = "sam";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
 
-  packages = with pkgs; [
-    dig # dns command-line tool
-    docker-compose # docker manager
-    duf # disk usage/free utility
-    dust
-    eza # a better `ls`
-    killall # kill processes by name
-    ncdu # disk space info (a better du)
-    tree # display files in a tree view
-    jq
-    file
-    tree
-    #    kubectl
-    wget
-    #    ffmpeg-headless
-    #    yt-dlp
-    watch
-    _1password-cli
-    alejandra
-    treefmt
-    #    comma
+  packages = lib.mkMerge [
+    (with pkgs; [
+      dig # dns command-line tool
+      duf # disk usage/free utility
+      dust
+      eza # a better `ls`
+      killall # kill processes by name
+      ncdu # disk space info (a better du)
+      tree # display files in a tree view
+      jq
+      file
+      tree
+      #    kubectl
+      wget
+      #    ffmpeg-headless
+      #    yt-dlp
+      watch
+      _1password-cli
+      alejandra
+      treefmt
+      #    comma
+    ])
+    (lib.mkIf osConfig.virtualisation.docker.enable (with pkgs; [
+      docker-compose # docker manager
+    ]))
   ];
 in {
   imports = [
