@@ -20,6 +20,7 @@
     ../../modules/remoteBuild.nix
     ../../programs/1password-gui.nix
     #../../programs/bambu-studio.nix
+    ../../programs/authentik
     ../../programs/dotnet.nix
     ../../programs/jetbrains-gateway.nix
     ../../programs/kubernetes-client.nix
