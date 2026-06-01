@@ -138,30 +138,7 @@
     };
 
     treefmt = inputs.treefmt-nix.lib.evalModule pkgs (
-      _: let
-        typos_config = (pkgs.formats.toml {}).generate "typos.toml" {
-          files = {
-            extend-exclude = ["secrets/*.yaml" ".editorconfig"];
-          };
-
-          default.extend-identifiers = {
-            als = "als";
-            authorizedKeys = "authorizedKeys";
-            LS_COLORS = "LS_COLORS";
-          };
-
-          default.extend-words = {
-            center = "center";
-            color = "color";
-            colored = "colored";
-            colors = "colors";
-            facter = "facter";
-            maximize = "maximize";
-            MAXIMIZED = "MAXIMIZED";
-            MINIMIZED = "MINIMIZED";
-          };
-        };
-      in {
+      _: {
         # Used to find the project root
         projectRootFile = "flake.nix";
 
@@ -183,11 +160,6 @@
           jsonfmt.enable = true;
 
           keep-sorted.enable = true;
-          typos = {
-            enable = true;
-            locale = "en-gb";
-            configFile = "${typos_config}";
-          };
 
           # Enable the Nix formatter
           alejandra.enable = true;

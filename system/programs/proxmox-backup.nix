@@ -5,7 +5,6 @@
 }: {
   systemd = {
     timers.proxmox-backup = {
-      enable = false;
       wantedBy = ["timers.target"];
 
       timerConfig = {

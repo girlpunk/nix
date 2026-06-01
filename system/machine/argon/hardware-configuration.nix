@@ -43,7 +43,9 @@
     };
 
     kernelModules = ["i2c-dev"];
-    extraModulePackages = [config.boot.kernelPackages.ddcci-driver];
+    extraModulePackages = with config.boot.kernelPackages; [
+      ddcci-driver
+    ];
 
     consoleLogLevel = 3;
     kernelParams = [
