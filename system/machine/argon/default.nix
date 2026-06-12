@@ -55,11 +55,9 @@
     cryptsetup
     #element-desktop
     freecad
-    kubectl
-    kubectl-cnpg
     onlyoffice-desktopeditors
     sbctl
-    unstable.bambu-studio
+    #unstable.bambu-studio
     usbutils
     #wine
     #wireshark

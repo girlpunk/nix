@@ -41,7 +41,7 @@
 
   services.resolved = {
     enable = true;
-    fallbackDns = [
+    settings.Resolve.FallbackDNS = [
       "10.0.5.1"
     ];
   };

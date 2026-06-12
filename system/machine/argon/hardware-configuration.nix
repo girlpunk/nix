@@ -69,14 +69,15 @@
     };
   };
 
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=1h
-  '';
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "1h";
 
   fileSystems = {
     "/" = {
       device = "/dev/main/root";
       fsType = "ext4";
+      options = [
+        "x-systemd.device-timeout=infinity" # Wait forever for encyrption keys
+      ];
     };
 
     "/nix" = {

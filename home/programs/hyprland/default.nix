@@ -88,7 +88,7 @@
   };
 
   programs = {
-    ssh.matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+    ssh.settings."*".identityAgent = "~/.1password/agent.sock";
     git.settings.gpg.ssh.program = lib.getExe' pkgs._1password-gui "op-ssh-sign";
   };
 }

@@ -11,4 +11,6 @@ _: {
       name = "hicolor";
     };
   };
+
+  gtk.gtk4.theme = null;
 }

@@ -3,7 +3,7 @@ _: {
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       "*" = {
         controlPersist = "5m";
         controlMaster = "auto";

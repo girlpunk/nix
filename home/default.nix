@@ -51,8 +51,12 @@ in {
     inherit configHome;
     enable = true;
     autostart.enable = true;
-    userDirs.enable = true;
-    userDirs.createDirectories = true;
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+      setSessionVariables = false;
+    };
   };
 
   home = {

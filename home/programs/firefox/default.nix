@@ -1,7 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  ...
+}: {
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-bin;
+    configPath = ".mozilla/firefox";
 
     languagePacks = ["en-GB"];
 

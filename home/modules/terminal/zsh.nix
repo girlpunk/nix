@@ -2,12 +2,14 @@
   lib,
   pkgs,
   osConfig,
+  config,
   ...
 }: {
   home.shell.enableZshIntegration = true;
 
   programs.zsh = {
     enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
 
     autosuggestion = {
       enable = true;

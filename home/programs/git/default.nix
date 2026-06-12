@@ -113,7 +113,10 @@ in {
         settings.git_protocol = "ssh";
       };
 
-      mergiraf.enable = true;
+      mergiraf = {
+        enable = true;
+        enableGitIntegration = true;
+      };
 
       difftastic = {
         enable = true;
