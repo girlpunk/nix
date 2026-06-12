@@ -78,6 +78,7 @@ in {
 
   config.wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     systemd.enableXdgAutostart = true;
 
     settings = {
@@ -111,7 +112,7 @@ in {
         #        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         #        "dbus-update-activation-environment --systemd --all"
 
-        "${random-wallpaper}"
+        # "${random-wallpaper}"
         #        "xrdb -merge ~/.Xresources"
       ];
 
@@ -212,7 +213,6 @@ in {
 
       # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
       dwindle = {
-        pseudotile = true; # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true; # You probably want this
       };
 
@@ -398,6 +398,24 @@ in {
 
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
+
+      #windowrule = [
+      #  "match:class .*, suppress_event maximize" # You'll probably like this.
+
+      #  "match:class kitty, workspace 1"
+
+      #  "match:class firefox, workspace 2"
+
+      #  "match:title ^(.*)(VSCodium)$, workspace 3"
+      #  "match:class code, workspace 3"
+      #  "match:class ^jetbrains-.*$, workspace 3"
+      #  "match:class ^jetbrains-.*$,match:float true, workspace 3, no_initial_focus on"
+
+      #  "match:class cinny$, workspace 5"
+      #  "match:title ^(.*)(Discord)$, workspace 5"
+      #  "match:title ^Discord Updater$, workspace 5"
+      #  "match:title ^(Element)(.*)$, workspace 5"
+      #];
 
       windowrulev2 = [
         "suppressevent maximize, class:.*" # You'll probably like this.

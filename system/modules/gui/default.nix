@@ -7,10 +7,22 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   programs = {
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
 
     regreet = {
       enable = true;
+    };
+
+    uwsm = {
+      enable = true;
+      waylandCompositors.hyprland = {
+        prettyName = "Hyprland";
+        comment = "Hyprland compositor managed by UWSM";
+        binPath = "/run/current-system/sw/bin/Hyprland";
+      };
     };
 
     #firefox = {
