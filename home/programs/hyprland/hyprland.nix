@@ -4,19 +4,6 @@
   pkgs,
   ...
 }: let
-  random-wallpaper = pkgs.writeShellScript "random-wallpaper.sh" ''
-    monitors=$(${lib.getExe' pkgs.hyprland "hyprctl"} monitors | ${lib.getExe' pkgs.gnugrep "grep"} Monitor | ${lib.getExe' pkgs.gawk "awk"} '{print $2}') # get monitors
-
-    for monitor in $monitors; do
-      wallpaper=$(find /usr/share/wallpapers/*/contents -type f | shuf -n 1)
-      ${lib.getExe' pkgs.hyprland "hyprctl"} hyprpaper preload "$wallpaper"
-      ${lib.getExe' pkgs.hyprland "hyprctl"} hyprpaper wallpaper "$monitor,$wallpaper"
-    done
-
-    ${lib.getExe' pkgs.coreutils "sleep"} 0.25s # wait for wallpaper to load
-
-    ${lib.getExe' pkgs.hyprland "hyprctl"} hyprpaper unload all # unload old wallpaper
-  '';
 
   confirm-before-exit = pkgs.writeShellScript "confirm-before-exit.sh" ''
     set -euo pipefail

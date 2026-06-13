@@ -1,4 +1,11 @@
 {pkgs, ...}: let
+
+  ### N.B. STEPS REQUIRED TO MAKE THIS WORK
+  # 1. sudo ssh-keygen -f /root/.ssh/nixremote -t ed25519
+  # 2. sudo cat /root/.ssh/nixremote.pub
+  # 3. Take key and put it in system/machine/minos/build-user.nix
+  # 4. Commit and push, then rebuild minos
+
   sshConfig = pkgs.writeTextFile {
     name = "config";
     text = ''
