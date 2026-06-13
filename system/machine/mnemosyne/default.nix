@@ -8,6 +8,8 @@
   imports = [
     ./hardware-configuration.nix
 
+    ./apps/mediafeeder.nix
+
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
