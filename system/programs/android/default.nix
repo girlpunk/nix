@@ -1,5 +1,4 @@
-{pkgs, ...}:
-let
+{pkgs, ...}: let
   androidEnv = pkgs.androidenv.override {licenseAccepted = true;};
 
   # Versions are from these two
@@ -22,8 +21,7 @@ let
 
     #includeExtras = ["extras;google;gcm"];
   };
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     (android-studio.withSdk androidComposition.androidsdk)
     androidComposition.androidsdk

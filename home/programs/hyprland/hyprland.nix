@@ -4,7 +4,6 @@
   pkgs,
   ...
 }: let
-
   confirm-before-exit = pkgs.writeShellScript "confirm-before-exit.sh" ''
     set -euo pipefail
     EXIT_TYPE="$${1:?exit type missing}"
