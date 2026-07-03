@@ -17,7 +17,7 @@
     enable = true;
     wslConf.automount.root = "/mnt";
     defaultUser = "sam";
-    docker-desktop.enable = true;
+    #docker-desktop.enable = true;
     startMenuLaunchers = true;
   };
 
@@ -37,7 +37,5 @@
     awscli2
   ];
 
-  virtualisation.docker = {
-    enable = lib.mkForce false;
-  };
+  virtualisation.docker.daemon.settings.iptables = false;
 }

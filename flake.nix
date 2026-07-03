@@ -134,7 +134,12 @@
 
     pkgs = import nixpkgs {
       inherit overlays system;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "docker-28.5.2"
+        ];
+      };
     };
 
     treefmt = inputs.treefmt-nix.lib.evalModule pkgs (
