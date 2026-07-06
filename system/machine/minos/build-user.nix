@@ -6,6 +6,7 @@
     openssh = {
       authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFOudaU90iN3Gw5oZn7F+B61TwngX1L1rMiKfJHzv3ik root@argon"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILrpdrAWlcHJg4fbVyFIgJ3Rl6Hr9zuN2HVUkDg4CmCb root@mnemosyne"
       ];
     };
     isSystemUser = true;
