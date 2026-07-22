@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     corefonts
     kitty
@@ -21,7 +25,7 @@
       waylandCompositors.hyprland = {
         prettyName = "Hyprland";
         comment = "Hyprland compositor managed by UWSM";
-        binPath = "/run/current-system/sw/bin/Hyprland";
+        binPath = lib.getExe' pkgs.hyprland "start-hyprland";
       };
     };
 

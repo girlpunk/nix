@@ -13,6 +13,7 @@
       isNormalUser = true;
       extraGroups = [
         "wheel"
+        "dialout"
         "docker"
         "i2c"
         "wireshark"

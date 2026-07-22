@@ -20,11 +20,11 @@
     #inherit (inputs.nix-index-database.packages.${system}) nix-index-database nix-index-small-database;
     #inherit (inputs.nixpkgs-unstable.packages.${system}) jetbrains.resharper;
 
-    inherit (inputs.hyprland.packages.${system}) hyprland;
-    inherit (inputs.hyprland.packages.${system}) xdg-desktop-portal-hyprland;
-    xorg = {
-      inherit (inputs.hyprland.packages.${system}) libXcursor libxcb libXdmcp xcbutilerrors xcbutilrenderutil xcbutilwm;
-    };
+    #inherit (inputs.hyprland.packages.${system}) hyprland;
+    #inherit (inputs.hyprland.packages.${system}) xdg-desktop-portal-hyprland;
+    #xorg = {
+    #  inherit (inputs.hyprland.packages.${system}) libXcursor libxcb libXdmcp xcbutilerrors xcbutilrenderutil xcbutilwm;
+    #};
 
     builders = {
       mkHome = {

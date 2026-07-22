@@ -57,15 +57,15 @@
       inputs.systems.follows = "nix-systems";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland/v0.52.2";
+    #hyprland = {
+    #  url = "github:hyprwm/Hyprland/v0.52.2";
 
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "nix-systems";
-        pre-commit-hooks.follows = "git-hooks";
-      };
-    };
+    #  inputs = {
+    #    nixpkgs.follows = "nixpkgs";
+    #    systems.follows = "nix-systems";
+    #    pre-commit-hooks.follows = "git-hooks";
+    #  };
+    #};
 
     _1password-shell-plugins = {
       url = "github:1Password/shell-plugins";

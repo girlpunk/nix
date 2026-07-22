@@ -159,7 +159,7 @@
       enable = true;
 
       # After next upgrade
-      # pd.enable = true;
+      pd.enable = true;
 
       settings = {
         TLP_PROFILE_DEFAULT = "BAL";

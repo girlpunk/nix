@@ -10,7 +10,17 @@ _: {
 
   hyprland.monitors = [
     # See https://wiki.hyprland.org/Configuring/Monitors/
-    "eDP-1,preferred,auto,1"
-    "HDMI-A-2,preferred,auto-left,1"
+    {
+      output = "eDP-1";
+      mode = "preferred";
+      position = "auto";
+      scale = "1";
+    }
+    {
+      output = "HDMI-A-2";
+      mode = "preferred";
+      position = "auto-left";
+      scale = "1";
+    }
   ];
 }
