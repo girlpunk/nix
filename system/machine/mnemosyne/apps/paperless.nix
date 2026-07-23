@@ -9,14 +9,13 @@ _: {
     # host  all all ::1/128      md5
     authentication = ''
       host  all all 10.0.5.0/24 md5
-      host  all all 192.168.42.24/32 md5
     '';
 
-    ensureDatabases = ["mediafeeder"];
+    ensureDatabases = ["paperless"];
 
     ensureUsers = [
       {
-        name = "mediafeeder";
+        name = "paperless";
         ensureDBOwnership = true;
       }
     ];

@@ -8,12 +8,25 @@
   imports = [
     ./hardware-configuration.nix
 
+    ./apps/adventurelog.nix
+    ./apps/authentik.nix
+    ./apps/dawarich.nix
+    ./apps/emf.nix
+    ./apps/immich.nix
+    ./apps/inventory-sharp.nix
+    ./apps/kavita.nix
+    ./apps/mastodon.nix
+    ./apps/matrix.nix
     ./apps/mediafeeder.nix
+    ./apps/openproject.nix
+    ./apps/outline.nix
+    ./apps/paperless.nix
+    ./apps/tandoor.nix
 
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
-    ../../modules/remoteBuild.nix
+    # ../../modules/remoteBuild.nix
     ../../programs/sshd.nix
   ];
 
@@ -39,12 +52,15 @@
 
     useNetworkd = true;
     useDHCP = false;
+
+    firewall.allowedTCPPorts = [5432];
   };
 
   services.resolved = {
     enable = true;
     settings.Resolve.FallbackDNS = [
       "10.0.5.1"
+      "2001:678:b04:105::1"
     ];
   };
 
@@ -53,10 +69,17 @@
     networks."40-ens18" = {
       matchConfig.Name = "ens18";
 
-      address = ["10.0.5.201/24"];
-      gateway = ["10.0.5.1"];
+      address = [
+        "10.0.5.201/24"
+        "2001:678:b07:105::201/64"
+      ];
+      gateway = [
+        "10.0.5.1"
+        "2001:678:b04:105::1"
+      ];
       dns = [
         "10.0.5.1"
+        "2001:678:b04:105::1"
       ];
 
       networkConfig = {
