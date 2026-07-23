@@ -1,5 +1,4 @@
-_: {
-  #home.packages = [ pkgs.neofetch ];
+{pkgs, ...}: {
   #xdg.configFile."hyfetch.json".source = ./hyfetch.json;
   #xdg.configFile."neofetch/config.conf".source = configSrc;
 
@@ -25,6 +24,13 @@ _: {
 
   programs.fastfetch = {
     enable = true;
+    package = pkgs.fastfetch.override {
+      enlightenmentSupport = false;
+      gnomeSupport = false;
+      x11Support = false;
+      xfceSupport = false;
+    };
+
     settings = {
       "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
       logo = {
