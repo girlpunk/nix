@@ -43,7 +43,6 @@
       '';
       plugins = lib.mkMerge [
         [
-          "1password"
           "colored-man-pages"
           "command-not-found"
           "direnv"
@@ -68,6 +67,9 @@
         (lib.mkIf osConfig.virtualisation.docker.enable [
           "docker"
           "docker-compose"
+        ])
+        (lib.mkIf (!config.defaultGit.work) [
+          "1password"
         ])
       ];
     };

@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   osConfig,
   pkgs,
@@ -10,9 +11,7 @@
 
   packages = lib.mkMerge [
     (with pkgs; [
-      _1password-cli
       alejandra
-      # comma
       dig # dns command-line tool
       duf # disk usage/free utility
       dust
@@ -34,6 +33,9 @@
     (lib.mkIf osConfig.virtualisation.docker.enable (with pkgs; [
       docker-compose # docker manager
     ]))
+    (lib.mkIf (!config.defaultGit.work) [
+      pkgs._1password-cli
+    ])
   ];
 in {
   imports = [
