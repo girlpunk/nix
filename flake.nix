@@ -115,12 +115,34 @@
         treefmt-nix.follows = "treefmt-nix";
         git-hooks-nix.follows = "git-hooks";
         flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        make-shell.follows = "make-shell";
+      };
+    };
+
+    faedupes = {
+      url = "/home/sam/programs/faedupes";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+        git-hooks-nix.follows = "git-hooks";
+        treefmt-nix.follows = "treefmt-nix";
+        flake-parts.follows = "flake-parts";
+        make-shell.follows = "make-shell";
       };
     };
 
     # Common dependencies
     nix-systems.url = "github:nix-systems/default";
     flake-compat.url = "github:NixOS/flake-compat";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    make-shell = {
+      url = "github:nicknovitski/make-shell";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+      };
+    };
   };
 
   outputs = {

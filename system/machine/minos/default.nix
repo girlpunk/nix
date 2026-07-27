@@ -76,6 +76,11 @@
 
   networking.firewall.allowedTCPPorts = [5107];
 
+  environment.systemPackages = [
+    inputs.faedupes.packages.x86_64-linux.faedupes
+    pkgs.unstable.immich-go
+  ];
+
   nix = {
     extraOptions = ''
       secret-key-files = /etc/nix/cache-priv-key.pem
