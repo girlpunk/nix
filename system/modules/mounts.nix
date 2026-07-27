@@ -1,9 +1,9 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
+  boot.supportedFilesystems = [ "nfs" ];
+
   services.autofs = {
     autoMaster = let
       share = pkgs.writeScript "auto-share" ''
-        #!/bin/bash
-
         # This file must be executable to work! chmod 755!
 
         # Automagically mount CIFS shares in the network, similar to
@@ -30,12 +30,9 @@
         opts="-fstype=cifs"
 
         creds=/etc/nixos/smb-secret/$key
-        if [ -f "$creds" ]; then
-            opts="$opts"',uid=$UID,gid=$GID,credentials='"$creds"
-            smbopts="-A $creds"
-        fi
+        opts="$opts"',uid=$UID,gid=$GID,credentials='"$creds"
 
-        smbclient $smbopts -gL "$key" 2>/dev/null| awk -v "key=$key" -v "opts=$opts" -F '|' -- '
+        ${lib.getExe' pkgs.samba "smbclient"} -A "$creds" -gL "$key" 2>/dev/null| awk -v "key=$key" -v "opts=$opts" -F '|' -- '
                 BEGIN   { ORS=""; first=1 }
                 /Disk/  {
                           if (first)
@@ -49,10 +46,10 @@
                 '
 
       '';
-      top = "/media/juggernaut ${share} juggernaut --timeout 300 browse --ghost";
-    in
-      top;
-    enable = false;
+    in ''
+      /media/juggernaut ${share} juggernaut --timeout 300 browse --ghost
+    '';
+    enable = true;
   };
 
   #fileSystems."/media/juggernaut/TV" = {
