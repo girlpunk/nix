@@ -1,6 +1,5 @@
 {
   inputs,
-  system,
   pkgs,
   ...
 }: let
@@ -9,7 +8,7 @@
 
   modules = [
     ./home
-    inputs.nix-index.homeManagerModules.${system}.default
+    inputs.nix-index.homeModules.default
     inputs._1password-shell-plugins.hmModules.default
     inputs.nix-index-database.homeModules.nix-index
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}
