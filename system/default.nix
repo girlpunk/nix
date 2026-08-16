@@ -94,8 +94,8 @@
     nix-ld.libraries = with pkgs; [
       # Add any missing dynamic libraries for unpackaged programs
       # here, NOT in environment.systemPackages
-      icu
-      ncurses6
+      #icu
+      #ncurses6
     ];
   };
 }
