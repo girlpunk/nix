@@ -79,7 +79,10 @@
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
 
-    resolved.enable = true;
+    resolved = {
+      enable = true;
+      settings.Resolve.MulticastDNS = "yes";
+    };
 
     #avahi.enable = true;
   };
