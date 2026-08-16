@@ -30,7 +30,7 @@
       # yt-dlp
       (pkgs.callPackage programs/treesize {})
     ])
-    (lib.mkIf osConfig.virtualisation.docker.enable (with pkgs; [
+    (lib.mkIf (if osConfig != null then osConfig.virtualisation.docker.enable else false) (with pkgs; [
       docker-compose # docker manager
     ]))
     (lib.mkIf (!config.defaultGit.work) [
