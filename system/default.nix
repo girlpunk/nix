@@ -27,6 +27,10 @@
       ];
       auto-optimise-store = true;
     };
+    optimise = {
+      automatic = true;
+      persistent = true;
+    };
   };
 
   # Virtualization settings
