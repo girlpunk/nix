@@ -508,7 +508,7 @@ in {
 
       hl.bind("switch:Lid Switch", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprlock}"), { locked = true })
       hl.bind("XF86AudioMute", hl.dsp.exec_cmd("${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_SINK@ toggle && ${lib.getExe' pkgs.pipewire "pw-cat"} $HOME/.local/share/Steam/steamui/sounds/deck_ui_volume.wav"), { locked = true })
-      hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_SOURCE@ toggle"), { locked = true })
+      hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("${lib.getExe' pkgs.wireplumber "wpctl"}set-mute @DEFAULT_SOURCE@ toggle"), { locked = true })
 
       hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag())
       hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
@@ -577,14 +577,65 @@ in {
           workspace = "3",
       })
 
-      hl.window_rule({
-          match = {
-              class = "^jetbrains-.*$",
-              float = 1,
-          },
-          no_initial_focus = true,
-          workspace = "3",
-      })
+hl.window_rule({
+    match = {
+        class = "jetbrains-gateway",
+        title = "^Welcome to.*$"
+    },
+    group = "set"
+})
+
+hl.window_rule({
+    match = {
+        class = "jetbrains-gateway",
+        title = "^Gateway to.*$",
+        float = true
+    },
+    tile = true
+})
+
+hl.window_rule({
+    match = {
+        class = "^jetbrains-.*$",
+        float = true
+    },
+    no_initial_focus = true
+})
+
+hl.window_rule({
+    match = {
+        class = "^(.*jetbrains.*)$",
+        title = "^(win.*)$"
+    },
+    no_initial_focus = true
+})
+
+hl.window_rule({
+    match = {
+        class = "^(.*jetbrains.*)$",
+        title = "^$",
+        float = true
+    },
+    stay_focused = true
+})
+
+hl.window_rule({
+    match = {
+        class = "^(.*jetbrains.*)$",
+        title = "^\\s$"
+    },
+    no_initial_focus = true
+})
+
+
+hl.window_rule({
+    match = {
+        class = "^jetbrains-.*$",
+        float = 1,
+    },
+    no_initial_focus = true,
+    workspace = "3",
+})
 
       hl.window_rule({
           match = {

@@ -13,7 +13,7 @@
   programs = {
     hyprland = {
       enable = true;
-      withUWSM = true;
+      #withUWSM = true;
     };
 
     regreet = {
@@ -21,11 +21,13 @@
     };
 
     uwsm = {
-      enable = true;
-      waylandCompositors.hyprland = {
-        prettyName = "Hyprland";
-        comment = "Hyprland compositor managed by UWSM";
-        binPath = lib.getExe' pkgs.hyprland "start-hyprland";
+      enable = false;
+      waylandCompositors = {
+        hyprland = {
+          prettyName = "Hyprland";
+          comment = "Hyprland compositor managed by UWSM";
+          binPath = lib.getExe' pkgs.hyprland "start-hyprland";
+        };
       };
     };
 

@@ -61,7 +61,9 @@
     usbutils
     #wine
     #wireshark
+    nmap
     yazi
+    mixxx
   ];
 
   services = {
@@ -111,6 +113,7 @@
         mode = "0600";
         owner = config.users.users.sam.name;
       };
+      juggernaut = {};
     };
   };
 
