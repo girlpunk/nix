@@ -28,6 +28,7 @@
     git-filter-repo
     awscli2
     xdg-utils
+    fontconfig
   ];
 
   virtualisation.docker.daemon.settings.iptables = false;
