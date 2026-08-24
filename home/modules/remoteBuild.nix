@@ -9,7 +9,7 @@
       {
         hostName = "minos";
         protocol = "ssh-ng";
-        maxJobs = 4;
+        maxJobs = 8;
         speedFactor = 2;
         #supportedFeatures = [
         #  "nixos-test"
