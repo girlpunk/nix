@@ -13,7 +13,6 @@
 
     ../../modules/mounts.nix
     ../../programs/android
-    ../../programs/kubernetes-client.nix
     ../../programs/rider
     ../../programs/sshd.nix
     ../../programs/steam.nix

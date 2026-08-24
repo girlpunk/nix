@@ -101,12 +101,6 @@
       zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
       zstyle ':completion:*' group-name ""
 
-      # If kubectl is installed, setup completion
-      if command -v -- kubectl > /dev/null 2>&1; then
-        source <(kubectl completion zsh)
-        source <(kubectl cnpg completion zsh)
-      fi
-
       # If Terraform is installed, setup completion
       if command -v -- terraform > /dev/null 2>&1; then
           complete -o nospace -C terraform terraform

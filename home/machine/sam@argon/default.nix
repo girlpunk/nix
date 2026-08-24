@@ -4,6 +4,7 @@ _: {
     ../../programs/activitywatch
     ../../programs/discord
     ../../programs/hyprland
+    ../../programs/kubernetes-client
     ../../programs/vscode
     #../../programs/android
   ];

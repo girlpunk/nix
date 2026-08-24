@@ -23,7 +23,6 @@
     ../../programs/authentik
     ../../programs/dotnet.nix
     ../../programs/jetbrains-gateway.nix
-    ../../programs/kubernetes-client.nix
     ../../programs/proxmox-backup.nix
     ../../programs/sshd.nix
     #../../programs/steam.nix

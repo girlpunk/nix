@@ -1,7 +1,8 @@
 _: {
   imports = [
     ../../programs/activitywatch
-    ../../programs/vscode
     ../../programs/android
+    ../../programs/kubernetes-client
+    ../../programs/vscode
   ];
 }
