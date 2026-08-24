@@ -68,7 +68,7 @@ _: {
             {
               properties = {
                 branch_max_length = 25;
-                cache_duration = "none";
+                cache_duration = "1m";
                 fetch_stash_count = true;
                 fetch_status = true;
                 fetch_upstream_icon = true;
@@ -90,7 +90,7 @@ _: {
             }
             {
               properties = {
-                cache_duration = "none";
+                cache_duration = "5m";
                 fetch_version = true;
               };
               template = "  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ";
@@ -102,7 +102,7 @@ _: {
             }
             {
               properties = {
-                cache_duration = "none";
+                cache_duration = "5m";
                 fetch_version = true;
               };
               template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ";
@@ -114,7 +114,7 @@ _: {
             }
             {
               properties = {
-                cache_duration = "none";
+                cache_duration = "5m";
                 fetch_version = true;
               };
               template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ";
@@ -126,7 +126,7 @@ _: {
             }
             {
               properties = {
-                cache_duration = "none";
+                cache_duration = "5m";
                 display_mode = "files";
                 fetch_virtual_env = false;
               };
@@ -139,7 +139,7 @@ _: {
             }
             {
               properties = {
-                cache_duration = "none";
+                cache_duration = "5m";
                 display_mode = "files";
                 fetch_version = true;
               };
@@ -152,7 +152,7 @@ _: {
             }
             {
               properties = {
-                cache_duration = "none";
+                cache_duration = "5m";
                 display_mode = "files";
                 fetch_version = false;
               };
@@ -165,7 +165,7 @@ _: {
             }
             {
               properties = {
-                cache_duration = "none";
+                cache_duration = "5m";
                 display_mode = "files";
                 fetch_version = false;
               };
@@ -178,7 +178,7 @@ _: {
             }
             {
               properties = {
-                cache_duration = "none";
+                cache_duration = "5m";
                 display_default = false;
               };
               template = "  {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ";
