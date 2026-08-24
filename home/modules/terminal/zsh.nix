@@ -58,16 +58,19 @@
           "safe-paste"
           "screen"
           "zbell"
-          "zsh-syntax-highlighting"
           "tailscale"
           "z"
           "web-search"
           "terraform"
         ]
-        (lib.mkIf (if osConfig != null then osConfig.virtualisation.docker.enable else false) [
-          "docker"
-          "docker-compose"
-        ])
+        (lib.mkIf (
+            if osConfig != null
+            then osConfig.virtualisation.docker.enable
+            else false
+          ) [
+            "docker"
+            "docker-compose"
+          ])
         (lib.mkIf (!config.defaultGit.work) [
           "1password"
         ])
@@ -132,9 +135,7 @@
         setopt incappendhistory
       '';
       zshConfig = lib.mkOrder 1500 ''
-        eval "$(${lib.getExe pkgs.direnv} hook zsh)"
-
-        eval "$(${lib.getExe pkgs.oh-my-posh} init zsh --config ~/.config/oh-my-posh/config.json)"
+        # direnv and oh-my-posh are initialised by their home-manager modules
 
         if command -v -- hyfetch > /dev/null 2>&1; then
           hyfetch
@@ -150,24 +151,6 @@
       ];
 
     plugins = [
-      {
-        name = "zsh-autosuggestions";
-        src = pkgs.fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-autosuggestions";
-          rev = "v0.7.1";
-          hash = "sha256-vpTyYq9ZgfgdDsWzjxVAE7FZH4MALMNZIFyEOBLm5Qo=";
-        };
-      }
-      {
-        name = "zsh-syntax-highlighting";
-        src = pkgs.fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-syntax-highlighting";
-          rev = "0.8.0";
-          hash = "sha256-iJdWopZwHpSyYl5/FQXEW7gl/SrKaYDEtTH9cGP7iPo=";
-        };
-      }
       {
         name = "windows-terminal-zsh-integration";
         src = pkgs.fetchFromGitHub {

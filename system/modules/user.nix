@@ -32,7 +32,6 @@
   programs = {
     zsh = {
       enable = true;
-      ohMyZsh.enable = true;
     };
 
     _1password.enable = true;
