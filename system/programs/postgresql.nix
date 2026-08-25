@@ -19,9 +19,5 @@
         effective_io_concurrency = 256;
       };
     };
-
-    postgresqlBackup = {
-      enable = true;
-    };
   };
 }

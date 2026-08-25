@@ -16,11 +16,11 @@
     ./apps/inventory-sharp.nix
     ./apps/kavita.nix
     ./apps/mastodon.nix
-    ./apps/matrix.nix
     ./apps/mediafeeder.nix
     ./apps/openproject.nix
     ./apps/outline.nix
     ./apps/paperless.nix
+    ./apps/postgresql-backup.nix
     ./apps/tandoor.nix
 
     inputs.nixos-hardware.nixosModules.common-cpu-intel
