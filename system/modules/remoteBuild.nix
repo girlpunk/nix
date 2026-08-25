@@ -43,8 +43,12 @@ in {
     distributedBuilds = true;
     settings = {
       builders-use-substitutes = true;
+      # The NFS cold cache on minos holds paths that have aged out of its
+      # local store; the minos public key (trusted above in system/default.nix)
+      # signs them, and the hot ssh-ng cache is tried first.
       substituters = [
         "ssh-ng://minos"
+        "http://192.168.42.24:8000/"
       ];
     };
   };
