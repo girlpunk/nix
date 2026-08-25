@@ -23,5 +23,10 @@ _: {
     device = "192.168.42.4:/Storage/Media/eBooks";
     fsType = "nfs";
     mountPoint = "/mnt/ebooks";
+    options = [
+      "noatime"
+      "rsize=1048576"
+      "wsize=1048576"
+    ];
   };
 }
