@@ -1,5 +1,9 @@
-{pkgs, lib, ...}: {
-  boot.supportedFilesystems = [ "nfs" ];
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  boot.supportedFilesystems = ["nfs"];
 
   services.autofs = {
     autoMaster = let

@@ -1,5 +1,4 @@
-_:
-{
+_: {
   services = {
     kavita.enable = true;
     kavita.tokenKeyFile = "/var/lib/kavita/key";

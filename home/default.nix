@@ -22,7 +22,6 @@
       killall # kill processes by name
       # kubectl
       ncdu # disk space info (a better du)
-      tree
       tree # display files in a tree view
       treefmt
       watch
@@ -30,9 +29,13 @@
       # yt-dlp
       (pkgs.callPackage programs/treesize {})
     ])
-    (lib.mkIf (if osConfig != null then osConfig.virtualisation.docker.enable else false) (with pkgs; [
-      docker-compose # docker manager
-    ]))
+    (lib.mkIf (
+        if osConfig != null
+        then osConfig.virtualisation.docker.enable
+        else false
+      ) (with pkgs; [
+        docker-compose # docker manager
+      ]))
     (lib.mkIf (!config.defaultGit.work) [
       pkgs._1password-cli
     ])

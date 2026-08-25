@@ -1,9 +1,9 @@
 {pkgs, ...}: let
   dotnet = with pkgs.dotnetCorePackages;
     combinePackages [
-      dotnet_9.sdk
       dotnet_10.sdk
       # pkgs.unstable.dotnetCorePackages.dotnet_10.sdk
+      # dotnet_11.sdk
     ];
 in {
   environment = {
