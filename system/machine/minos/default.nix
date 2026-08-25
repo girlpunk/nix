@@ -100,7 +100,12 @@
   services.nginx = {
     enable = true;
     virtualHosts."nix-cold-cache" = {
-      listen = [{port = 8000;}];
+      listen = [
+        {
+          port = 8000;
+          addr = "0.0.0.0";
+        }
+      ];
       root = "/var/lib/nix-cold";
     };
   };
