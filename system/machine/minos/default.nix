@@ -14,6 +14,7 @@
 
     ../../modules/mounts.nix
     ../../programs/android
+    ../../programs/ollama.nix
     ../../programs/rider
     ../../programs/sshd.nix
     ../../programs/steam.nix

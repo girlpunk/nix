@@ -16,9 +16,13 @@ on a D: drive, `/mnt/d` auto-mounted).
 | ---------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `argon`          | Intel laptop, Hyprland GUI                  | NetworkManager + WireGuard; builds offloaded to minos; not reachable by name from WSL                                            |
 | `minos`          | Proxmox VM, **build server + binary cache** | 192.168.42.24, `home.foxocube.xyz`; 8-way parallelism (builder `maxJobs = 8`)                                                    |
-| `mnemosyne`      | Proxmox VM, homelab server                  | shared Postgres for 10+ apps (`system/programs/postgresql.nix`); NFS client to NAS (e-books for Kavita/Calibre at `/mnt/ebooks`) |
+| `mnemosyne`      | Proxmox VM, homelab server                  | shared Postgres (13 DBs, tuned for 4 vCPU / 40 GB, `system/programs/postgresql.nix`); per-DB `pg_dump -Fc` backup daily at 01:15, 14-day retention (`system/machine/mnemosyne/apps/postgresql-backup.nix`); NFS client to NAS (e-books for Kavita/Calibre at `/mnt/ebooks`) |
 | `work`           | NixOS-WSL, this dev machine                 | `inputs.nixos-wsl`; no SSH from here to any machine (argon unresolvable, minos key rejected)                                     |
 | `home-assistant` | home-manager only                           |                                                                                                                                  |
+
+`minos` and `mnemosyne` are Proxmox KVM VMs: guest-side C-state tuning
+(`max_cstate` etc.) is a no-op inside a KVM guest — CPU/latency tuning has to
+happen on the Proxmox host (BIOS C-states, vCPU pinning), not in this repo.
 
 NAS "**juggernaut**" at 192.168.42.4: NFS exports (`/Storage/NixCold`,
 `/Storage/Media/eBooks`) + CIFS media shares (`/media/juggernaut` autofs via
@@ -59,8 +63,10 @@ shared ones (see "Nix settings gotchas").
   offloads from `http://127.0.0.1:8000/`. 90-day retention via
   `systemd.services.nix-cold-cache-ageout` (narinfo + matching `.nar.xz`).
 - **GC**: `programs.nh.clean` runs `nh clean --keep-since 4d --keep 3` (store GC
-  included) on all hosts **except minos**, which forces `--no-gc` on minos so
-  its own weekly GC can't destroy the 14-day hot cache. No `nix.gc.automatic`
+  included) on all hosts **except minos**, which forces `--no-gc` so `nh
+  clean`'s store GC can't ever touch the 14-day hot cache (offload/delete is
+  handled by the daily `nix-store-ageout` unit above). argon also has a disk
+  guard: `nix.settings.min-free = 2147483648` (2 GB). No `nix.gc.automatic`
   anywhere (conflicts with nh clean).
 - Signatures survive the offload: `nix copy --to file://` carries store-DB
   signatures into the exported narinfo; substituted paths keep their upstream
