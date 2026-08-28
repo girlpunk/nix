@@ -32,4 +32,9 @@
   ];
 
   virtualisation.docker.daemon.settings.iptables = false;
+
+  systemd.units."wsl-mnt-guard.service".enable = false;
+  # = {
+  #  serviceConfig.ExecStart = lib.getExe' pkgs.coreutils "true";
+  #};
 }
