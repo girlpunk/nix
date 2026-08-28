@@ -141,6 +141,7 @@
           hyfetch
         else
           echo "No Hyfetch, no pretty logo :("
+          fastfetch
         fi
       '';
     in
