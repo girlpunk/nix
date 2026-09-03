@@ -6,19 +6,17 @@ Project reference for AI agents (and humans) working in this repo.
 
 Foxocube's NixOS + home-manager single-flake configuration for a homelab. NixOS
 26.05 (nixpkgs `nixos-26.05`), Nix 2.34.x via `pkgs.nixVersions.latest`.
-Deployment is via **nh**: `nh os switch .#<host> -u` and
-`nh home switch .#sam@<host> -u`. The `work` machine _is_ the dev box (NixOS-WSL
-on a D: drive, `/mnt/d` auto-mounted).
+Deployment is via **nh**: `nh os switch .#<host>`. The `work` machine _is_ the dev box (NixOS-WSL on a D: drive, `/mnt/d` auto-mounted).
 
 ## Machines
 
-| host             | what                                        | notes                                                                                                                            |
-| ---------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `argon`          | Intel laptop, Hyprland GUI                  | NetworkManager + WireGuard; builds offloaded to minos; not reachable by name from WSL                                            |
-| `minos`          | Proxmox VM, **build server + binary cache** | 192.168.42.24, `home.foxocube.xyz`; 8-way parallelism (builder `maxJobs = 8`)                                                    |
+| host             | what                                        | notes                                                                                                                                                                                                                                                                       |
+| ---------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `argon`          | Intel laptop, Hyprland GUI                  | NetworkManager + WireGuard; builds offloaded to minos; not reachable by name from WSL                                                                                                                                                                                       |
+| `minos`          | Proxmox VM, **build server + binary cache** | 192.168.42.24, `home.foxocube.xyz`; 8-way parallelism (builder `maxJobs = 8`)                                                                                                                                                                                               |
 | `mnemosyne`      | Proxmox VM, homelab server                  | shared Postgres (13 DBs, tuned for 4 vCPU / 40 GB, `system/programs/postgresql.nix`); per-DB `pg_dump -Fc` backup daily at 01:15, 14-day retention (`system/machine/mnemosyne/apps/postgresql-backup.nix`); NFS client to NAS (e-books for Kavita/Calibre at `/mnt/ebooks`) |
-| `work`           | NixOS-WSL, this dev machine                 | `inputs.nixos-wsl`; no SSH from here to any machine (argon unresolvable, minos key rejected)                                     |
-| `home-assistant` | home-manager only                           |                                                                                                                                  |
+| `work`           | NixOS-WSL, this dev machine                 | `inputs.nixos-wsl`; no SSH from here to any machine (argon unresolvable, minos key rejected)                                                                                                                                                                                |
+| `home-assistant` | home-manager only                           |                                                                                                                                                                                                                                                                             |
 
 `minos` and `mnemosyne` are Proxmox KVM VMs: guest-side C-state tuning
 (`max_cstate` etc.) is a no-op inside a KVM guest — CPU/latency tuning has to
@@ -27,6 +25,34 @@ happen on the Proxmox host (BIOS C-states, vCPU pinning), not in this repo.
 NAS "**juggernaut**" at 192.168.42.4: NFS exports (`/Storage/NixCold`,
 `/Storage/Media/eBooks`) + CIFS media shares (`/media/juggernaut` autofs via
 `system/modules/mounts.nix`).
+
+## opencode on minos (local LLM + web UI)
+
+- `system/programs/ollama.nix`: local model inference (CPU — minos has no GPU;
+  the spare FirePro V4800 was ruled out: 3 GB VRAM + Kepler = dead end for
+  modern ROCm/CUDA/Vulkan stacks). Pulls `qwen3:30b` + `qwen3:8b` on boot, 32k
+  context, one model resident at a time. If a real GPU (8–12 GB+) ever lands:
+  swap the package to `pkgs.ollama-cuda` / `-rocm` and bump model size.
+- `home/machine/sam@minos/default.nix`: opencode config (Ollama provider,
+  `baseURL = http://127.0.0.1:11434/v1`, default model `ollama/qwen3:30b`) and
+  an `opencode-web` systemd **user** service serving the web UI on
+  `0.0.0.0:4096`. It stays down until `~/.config/opencode-web.env` (0600,
+  `OPENCODE_SERVER_PASSWORD=...`, kept **outside** the repo) exists.
+- One-time setup: Proxmox — bump the VM to 48 GB RAM. minos — create the env
+  file above. work — `ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519` and have its
+  public key added to minos' `/home/sam/.ssh/authorized_keys` (this fixes the
+  "minos key rejected" gap in the table above). Optional:
+  `loginctl
+  enable-linger sam` on minos so the web service runs without a
+  login session.
+- Deploy/apply: push → on minos `git pull && nh build minos`. First build
+  compiles `ollama-cpu` (10–30 min) and first boot downloads ~20 GB of model
+  weights.
+- Access: browser `http://192.168.42.24:4096` (user `opencode` + password); or
+  `ssh minos` → `tmux` → `opencode`; or
+  `opencode attach
+  http://127.0.0.1:4096` to drive the same server from the
+  TUI.
 
 ## Repo layout
 
@@ -63,9 +89,10 @@ shared ones (see "Nix settings gotchas").
   offloads from `http://127.0.0.1:8000/`. 90-day retention via
   `systemd.services.nix-cold-cache-ageout` (narinfo + matching `.nar.xz`).
 - **GC**: `programs.nh.clean` runs `nh clean --keep-since 4d --keep 3` (store GC
-  included) on all hosts **except minos**, which forces `--no-gc` so `nh
-  clean`'s store GC can't ever touch the 14-day hot cache (offload/delete is
-  handled by the daily `nix-store-ageout` unit above). argon also has a disk
+  included) on all hosts **except minos**, which forces `--no-gc` so
+  `nh
+  clean`'s store GC can't ever touch the 14-day hot cache (offload/delete
+  is handled by the daily `nix-store-ageout` unit above). argon also has a disk
   guard: `nix.settings.min-free = 2147483648` (2 GB). No `nix.gc.automatic`
   anywhere (conflicts with nh clean).
 - Signatures survive the offload: `nix copy --to file://` carries store-DB
@@ -100,15 +127,12 @@ shared ones (see "Nix settings gotchas").
 - Smoke-test systemd script bodies by extracting them from a stub eval,
   sed-swapping the hardcoded paths, and running against scratch dirs in
   `/tmp/opencode`.
-- Checks: `nix build .#checks.x86_64-linux.formatting` (treefmt),
-  `nix build .#checks.x86_64-linux.pre-commit-check`; `nix fmt` (formats the
-  whole repo) and `nix flake check` (runs all checks) also work from here.
+- Checks: `nix fmt` (formats the whole repo) and `nix flake check` (runs all
+  checks) also work from here.
 - Reference nixpkgs checkout at `/mnt/d/nixpkgs` for module lookups — note it
   tracks `master` and may be newer than the pinned flake input; if the layout
   disagrees, verify against the rev in `flake.lock`.
-- Direct formatting: find alejandra in the store, e.g.
-  `ls -d /nix/store/*-alejandra-* | grep -v drv | head -1` then
-  `/bin/alejandra -c <files>` (in-place without `-c`; there is no `-i` flag).
+- Direct formatting: use `nix fmt`
 - No `python3` on PATH — use `jq` for JSON.
 - WSL store paths are **immutable** (`chattr +i`); `cp -a/-r` carries the flag
   into copies and non-root can't clear it — simulate store paths with
@@ -123,3 +147,4 @@ shared ones (see "Nix settings gotchas").
   `home/machine/sam@<host>/`).
 - Working tree is frequently dirty (user edits alongside agents); never assume
   clean, don't commit unless asked.
+

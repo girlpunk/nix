@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
     ../../programs/activitywatch
     ../../programs/android
@@ -45,17 +41,17 @@
   # Serves the opencode web UI for browser access from other machines.
   # The password lives in ~/.config/opencode-web.env (0600) on minos, outside
   # the repo. The service stays down until that file exists.
-  systemd.user.services."opencode-web" = {
-    description = "OpenCode web UI";
-    after = ["network.target"];
-    wantedBy = ["default.target"];
+  #systemd.user.services."opencode-web" = {
+  #  description = "OpenCode web UI";
+  #  after = ["network.target"];
+  #  wantedBy = ["default.target"];
 
-    serviceConfig = {
-      ExecStart = "${pkgs.opencode}/bin/opencode web --hostname 0.0.0.0 --port 4096";
-      WorkingDirectory = "${config.home.homeDirectory}";
-      EnvironmentFile = "${config.home.homeDirectory}/.config/opencode-web.env";
-      Restart = "always";
-      RestartSec = 5;
-    };
-  };
+  #  serviceConfig = {
+  #    ExecStart = "${pkgs.opencode}/bin/opencode web --hostname 0.0.0.0 --port 4096";
+  #    WorkingDirectory = "${config.home.homeDirectory}";
+  #    EnvironmentFile = "${config.home.homeDirectory}/.config/opencode-web.env";
+  #    Restart = "always";
+  #    RestartSec = 5;
+  #  };
+  #};
 }

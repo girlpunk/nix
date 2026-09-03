@@ -1,4 +1,4 @@
-pkgs: {
+{pkgs, ...}: {
   # Local LLM inference for opencode (see home/machine/sam@minos). No GPU on
   # minos, so CPU build; swap the package for pkgs.ollama-cuda / -rocm /
   # -vulkan if that ever changes.
