@@ -61,6 +61,7 @@
         "izer@camelcamelcamel.com" = moz "the-camelizer-price-history-ch";
         "uBlock0@raymondhill.net" = moz "ublock-origin";
         "wappalyzer@crunchlabz.com" = moz "wappalyzer";
+        "marcoagpinto@mail.telepac.pt" = moz "british-english-dictionary-2";
       };
     };
     profiles.default = {
