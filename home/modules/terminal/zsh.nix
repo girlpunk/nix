@@ -123,7 +123,6 @@
       if [ -f "/mnt/c/Program Files/Microsoft SDKs/Azure/CLI2/Scripts/az.completion.sh" ]; then
         eval "$(register-python-argcomplete az)"
       fi
-
     '';
 
     enableCompletion = true;
@@ -136,13 +135,7 @@
       '';
       zshConfig = lib.mkOrder 1500 ''
         # direnv and oh-my-posh are initialised by their home-manager modules
-
-        if command -v -- hyfetch > /dev/null 2>&1; then
-          hyfetch
-        else
-          echo "No Hyfetch, no pretty logo :("
-          fastfetch
-        fi
+        ${lib.getExe pkgs.hyfetch}
       '';
     in
       lib.mkMerge [
