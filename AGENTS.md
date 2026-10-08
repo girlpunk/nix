@@ -6,7 +6,8 @@ Project reference for AI agents (and humans) working in this repo.
 
 Foxocube's NixOS + home-manager single-flake configuration for a homelab. NixOS
 26.05 (nixpkgs `nixos-26.05`), Nix 2.34.x via `pkgs.nixVersions.latest`.
-Deployment is via **nh**: `nh os switch .#<host>`. The `work` machine _is_ the dev box (NixOS-WSL on a D: drive, `/mnt/d` auto-mounted).
+Deployment is via **nh**: `nh os switch .#<host>`. The `work` machine _is_ the
+dev box (NixOS-WSL on a D: drive, `/mnt/d` auto-mounted).
 
 ## Machines
 
@@ -147,4 +148,3 @@ shared ones (see "Nix settings gotchas").
   `home/machine/sam@<host>/`).
 - Working tree is frequently dirty (user edits alongside agents); never assume
   clean, don't commit unless asked.
-

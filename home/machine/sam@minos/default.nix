@@ -3,14 +3,12 @@
     ../../programs/activitywatch
     ../../programs/android
     ../../programs/kubernetes-client
+    ../../programs/opencode
     ../../programs/vscode
   ];
 
   programs.opencode = {
-    enable = true;
-
     settings = {
-      "$schema" = "https://opencode.ai/config.json";
       model = "ollama/qwen3:30b";
       provider = {
         ollama = {
@@ -28,12 +26,6 @@
             };
           };
         };
-      };
-    };
-
-    tui = {
-      attention = {
-        enabled = true;
       };
     };
   };

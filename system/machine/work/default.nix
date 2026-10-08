@@ -25,10 +25,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    git-filter-repo
-    awscli2
-    xdg-utils
     fontconfig
+    git-filter-repo
+    xdg-utils
   ];
 
   virtualisation.docker.daemon.settings.iptables = false;
