@@ -51,7 +51,7 @@
     cryptsetup
     #element-desktop
     freecad
-    mixxx
+    #mixxx
     nmap
     onlyoffice-desktopeditors
     sbctl
@@ -59,6 +59,7 @@
     usbutils
     #wine
     #wireshark
+    yazi
   ];
 
   services = {

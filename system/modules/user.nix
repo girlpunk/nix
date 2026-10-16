@@ -12,10 +12,16 @@
     users.sam = {
       isNormalUser = true;
       extraGroups = [
-        "wheel"
+        "adm"
         "dialout"
         "docker"
         "i2c"
+        "lpadmin"
+        "networkmanager"
+        "nm-openvpn"
+        "systemd-network"
+        "users"
+        "wheel"
         "wireshark"
       ];
       openssh = {
