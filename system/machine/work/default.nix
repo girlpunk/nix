@@ -28,6 +28,7 @@
     fontconfig
     git-filter-repo
     xdg-utils
+    python3
   ];
 
   virtualisation.docker.daemon.settings.iptables = false;

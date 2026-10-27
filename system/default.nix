@@ -58,6 +58,7 @@
     nano
     pciutils
     wget
+    yazi
   ];
 
   services = {

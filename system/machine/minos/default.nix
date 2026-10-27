@@ -77,6 +77,8 @@
 
   networking.firewall.allowedTCPPorts = [
     5107
+
+    # Nix cold cache
     8000
   ];
 

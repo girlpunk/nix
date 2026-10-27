@@ -54,15 +54,14 @@
     cryptsetup
     #element-desktop
     freecad
+    mixxx
+    nmap
     onlyoffice-desktopeditors
     sbctl
     #unstable.bambu-studio
     usbutils
     #wine
     #wireshark
-    nmap
-    yazi
-    mixxx
   ];
 
   services = {

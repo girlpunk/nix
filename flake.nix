@@ -192,7 +192,7 @@
           # Enable the Nix formatter
           alejandra.enable = true;
           deadnix.enable = true;
-          #nixf-diagnose.enable = true;
+          nixf-diagnose.enable = true;
           #nixfmt.enable = true;
           #nixpkgs-fmt.enable = true;
           statix.enable = true;
@@ -231,7 +231,7 @@
         pre-commit-check = inputs.git-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
-            #nixfmt.enable = true;
+            nixfmt.enable = true;
           };
         };
       };
