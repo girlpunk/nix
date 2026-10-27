@@ -19,6 +19,8 @@
 
     opencode = {
       settings = {
+        plugin = ["opencode-concurrency-limit"];
+
         provider = {
           litellm = {
             npm = "@ai-sdk/openai-compatible";
@@ -29,9 +31,11 @@
             models = {
               "qwen3.8-27b" = {
                 name = "qwen3.8-27b";
+                options = { concurrency = 1; };
               };
               hermes-agent = {
                 name = "Giles";
+                options = { concurrency = 1; };
               };
             };
           };

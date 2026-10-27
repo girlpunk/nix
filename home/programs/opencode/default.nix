@@ -48,6 +48,7 @@
 in {
   programs.opencode = {
     enable = true;
+
     settings = {
       "$schema" = "https://opencode.ai/config.json";
 
@@ -58,7 +59,7 @@ in {
 
         "@tarquinen/opencode-dcp@3.2.0" # context pruning"
         [
-          "@plannotator/opencode@0.27.17" # visual plan review
+          "@plannotator/opencode@0.28.8" # visual plan review
           {
             workflow = "plan-agent";
             planningAgents = omo.agents;
@@ -82,9 +83,11 @@ in {
           "awk *" = "allow";
           "diff *" = "allow";
           "echo *" = "allow";
-          "find *" = "allow";
           "file *" = "allow";
+          "find *" = "allow";
+          "git diff *" = "allow";
           "git grep *" = "allow";
+          "git log *" = "allow";
           "git show *" = "allow";
           "git status *" = "allow";
           "grep *" = "allow";
@@ -94,8 +97,6 @@ in {
           "sed *" = "allow";
           "which *" = "allow";
         };
-        webfetch = "ask";
-        websearch = "ask";
       };
     };
 
@@ -107,12 +108,49 @@ in {
       # The OMO installer mirrors the plugin entry into tui.json too.
       plugin = ["oh-my-openagent@${omo.version}"];
     };
+
+    commands = {
+      plannotator-annotate = ''
+        ---
+        description: Open interactive annotation UI for a file, folder, or URL
+        ---
+
+        Run `plannotator annotate $ARGUMENTS` with Bash, in the foreground, and wait for it to finish.
+
+        Relay its stdout to the user. If annotations come back, address them now. If the command reports that the arguments could not be resolved to a file, URL, or folder, work out which target the user meant and re-run it with that concrete path.
+
+        Do not ask the user to run the command themselves.
+      '';
+      plannotator-last = ''
+        ---
+        description: Annotate the last assistant message
+        ---
+
+        Run `plannotator last $ARGUMENTS` with Bash, in the foreground, and wait for it to finish. Send no message before running it: the command targets the latest rendered assistant response, so a preamble becomes the thing being annotated.
+
+        Relay its stdout to the user and carry any returned feedback into your next response. An approval can still carry notes; treat those as guidance, not a change request.
+
+        Do not ask the user to run the command themselves.
+      '';
+      plannotator-review = ''
+        ---
+        description: Open interactive code review for current changes, a directory, or a PR URL; pass --git or --gitbutler to force that provider, --base <ref> / --diff-type <type> to pin the session's opening diff (session-only, git-only)
+        ---
+
+        Run `plannotator review $ARGUMENTS` with Bash, in the foreground, and wait for it to finish.
+
+        Relay its stdout to the user. If it returns feedback or annotations, address them now. If it returns an approval, say the review passed and continue.
+
+        Do not ask the user to run the command themselves.
+      '';
+    };
   };
 
   home.packages = with pkgs; [
     bintools
     xxd
     pkgs.unstable.codegraph
+    pkgs.unstable.herdr
   ];
 
   xdg.configFile = {
