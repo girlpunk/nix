@@ -10,7 +10,7 @@
 
     # WSL Compatibility
     nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
+      url = "github:nix-community/NixOS-WSL/release-26.05";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -25,7 +25,8 @@
     };
 
     nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database = {
@@ -83,7 +84,7 @@
     };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      url = "github:nix-community/lanzaboote/v1.2.0";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
