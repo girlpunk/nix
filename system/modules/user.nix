@@ -52,8 +52,8 @@
     useUserPackages = true;
     users.sam.imports =
       (pkgs.callPackage ../../home.nix {
-        inherit inputs pkgs;
-        inherit (pkgs) system;
+        inherit inputs;
+        inherit (pkgs) system overlays;
       }).modules
       ++ [(../../home/machine + "/sam@${config.networking.hostName}")];
   };

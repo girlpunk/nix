@@ -43,9 +43,6 @@
     hostName = "argon";
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/London";
-
   environment.systemPackages = with pkgs; [
     inputs.mediafeeder.packages.x86_64-linux.mediafeeder-bridges
     (pkgs.callPackage ../../programs/amazing-marvin {})
@@ -116,10 +113,10 @@
   };
 
   # Don't try and build lots of things at once, you'll run out of disk space
-  nix = {
-    settings.max-jobs = 2;
-    settings.min-free = 2147483648;
-    settings.max-free = 10737418240;
+  nix.settings = {
+    max-jobs = 2;
+    min-free = 2147483648;
+    max-free = 10737418240;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

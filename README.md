@@ -7,20 +7,20 @@
 1. ```powershell
    wsl --install --no-distribution
    ```
-2. https://github.com/nix-community/NixOS-WSL/releases/latest
-3. ```bash
+1. https://github.com/nix-community/NixOS-WSL/releases/latest
+1. ```bash
    nix-shell -p git
    mkdir ~/programs
    cd ~/programs
    git clone https://github.com/girlpunk/nix
    sudo nixos-rebuild boot --flake .#work
    ```
-4. ```powershell
+1. ```powershell
    wsl -t NixOS
    wsl -d NixOS --user root exit
    wsl -t NixOS
    ```
-5. ```zsh
+1. ```zsh
    q
    mv -v /home/nixos/programs .
    sudo rm -rv /home/nixos

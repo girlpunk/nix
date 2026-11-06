@@ -1,7 +1,4 @@
-{
-  inputs,
-  system,
-}: let
+{inputs}: let
   # nixos-version needs this to work with flakes
   libVersionOverlay = import "${inputs.nixpkgs}/lib/flake-version-info.nix" inputs.nixpkgs;
 
@@ -16,48 +13,9 @@
       libVersionOverlay;
   };
 
-  overlays = f: _p: {
-    #inherit (inputs.nix-index-database.packages.${system}) nix-index-database nix-index-small-database;
-    #inherit (inputs.nixpkgs-unstable.packages.${system}) jetbrains.resharper;
-
-    #inherit (inputs.hyprland.packages.${system}) hyprland;
-    #inherit (inputs.hyprland.packages.${system}) xdg-desktop-portal-hyprland;
-    #xorg = {
-    #  inherit (inputs.hyprland.packages.${system}) libXcursor libxcb libXdmcp xcbutilerrors xcbutilrenderutil xcbutilwm;
-    #};
-
-    builders = {
-      mkHome = {
-        pkgs ? f,
-        extraHomeConfig ? {},
-      }:
-        import ../home.nix {
-          inherit
-            extraHomeConfig
-            inputs
-            pkgs
-            system
-            ;
-        };
-
-      mkNixos = {
-        pkgs ? f,
-        extraSystemConfig ? {},
-      }:
-        import ../os.nix {
-          inherit
-            extraSystemConfig
-            inputs
-            pkgs
-            system
-            ;
-        };
-    };
-
-    #nix-search = inputs.nix-search.packages.${system}.default;
-
+  overlays = f: p: {
     unstable = import inputs.nixpkgs-unstable {
-      inherit system;
+      inherit (p) system;
       config.allowUnfree = true;
     };
 
@@ -93,9 +51,7 @@
 in [
   libOverlay
   overlays
-  #inputs.nix-index.overlays.${system}.default
   #inputs.nurpkgs.overlays.default
-  #inputs.neovim-flake.overlays.${system}.default
   #inputs.statix.overlays.default
   #(import ../home/overlays/bat-lvl)
   #(import ../home/overlays/bazecor)

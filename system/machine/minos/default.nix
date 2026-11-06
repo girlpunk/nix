@@ -31,8 +31,6 @@
     };
   };
 
-  services.qemuGuest.enable = true;
-
   networking = {
     hostName = "minos";
 
@@ -46,11 +44,28 @@
     useDHCP = false;
   };
 
-  services.resolved = {
-    enable = true;
-    settings.Resolve.FallbackDNS = [
-      "192.168.42.254"
-    ];
+  services = {
+    qemuGuest.enable = true;
+
+    resolved = {
+      enable = true;
+      settings.Resolve.FallbackDNS = [
+        "192.168.42.254"
+      ];
+    };
+
+    nginx = {
+      enable = true;
+      virtualHosts."nix-cold-cache" = {
+        listen = [
+          {
+            port = 8000;
+            addr = "0.0.0.0";
+          }
+        ];
+        root = "/var/lib/nix-cold";
+      };
+    };
   };
 
   systemd.network = {
@@ -98,19 +113,6 @@
       "_netdev"
       "nofail"
     ];
-  };
-
-  services.nginx = {
-    enable = true;
-    virtualHosts."nix-cold-cache" = {
-      listen = [
-        {
-          port = 8000;
-          addr = "0.0.0.0";
-        }
-      ];
-      root = "/var/lib/nix-cold";
-    };
   };
 
   nix = {

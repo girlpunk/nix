@@ -43,17 +43,14 @@ NAS "**juggernaut**" at 192.168.42.4: NFS exports (`/Storage/NixCold`,
   file above. work — `ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519` and have its
   public key added to minos' `/home/sam/.ssh/authorized_keys` (this fixes the
   "minos key rejected" gap in the table above). Optional:
-  `loginctl
-  enable-linger sam` on minos so the web service runs without a
-  login session.
+  `loginctl enable-linger sam` on minos so the web service runs without a login
+  session.
 - Deploy/apply: push → on minos `git pull && nh build minos`. First build
   compiles `ollama-cpu` (10–30 min) and first boot downloads ~20 GB of model
   weights.
 - Access: browser `http://192.168.42.24:4096` (user `opencode` + password); or
-  `ssh minos` → `tmux` → `opencode`; or
-  `opencode attach
-  http://127.0.0.1:4096` to drive the same server from the
-  TUI.
+  `ssh minos` → `tmux` → `opencode`; or `opencode attach http://127.0.0.1:4096`
+  to drive the same server from the TUI.
 
 ## Repo layout
 
@@ -91,9 +88,8 @@ shared ones (see "Nix settings gotchas").
   `systemd.services.nix-cold-cache-ageout` (narinfo + matching `.nar.xz`).
 - **GC**: `programs.nh.clean` runs `nh clean --keep-since 4d --keep 3` (store GC
   included) on all hosts **except minos**, which forces `--no-gc` so
-  `nh
-  clean`'s store GC can't ever touch the 14-day hot cache (offload/delete
-  is handled by the daily `nix-store-ageout` unit above). argon also has a disk
+  `nh clean`'s store GC can't ever touch the 14-day hot cache (offload/delete is
+  handled by the daily `nix-store-ageout` unit above). argon also has a disk
   guard: `nix.settings.min-free = 2147483648` (2 GB). No `nix.gc.automatic`
   anywhere (conflicts with nh clean).
 - Signatures survive the offload: `nix copy --to file://` carries store-DB

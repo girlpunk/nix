@@ -53,8 +53,7 @@
 
     ${lib.getExe' pkgs.util-linux "flock"} -n $LOCKFILE ${lib.getExe' pkgs.pipewire "pw-cat"} -p /home/sam/Music/awa.wav
   '';
-
-  mainMod = "SUPER";
+  # mainMod = "SUPER";
 in {
   options = {
     hyprland = {
@@ -429,305 +428,305 @@ in {
     };
 
     extraConfig = ''
-      local fileManager = "${lib.getExe pkgs.yazi}"
-      local mainMod = "SUPER"
-      local menu = "${lib.getExe pkgs.rofi} -show-icons -markup -show drun -modes drun"
-      local terminal = "${lib.getExe pkgs.kitty}"
+            local fileManager = "${lib.getExe pkgs.yazi}"
+            local mainMod = "SUPER"
+            local menu = "${lib.getExe pkgs.rofi} -show-icons -markup -show drun -modes drun"
+            local terminal = "${lib.getExe pkgs.kitty}"
 
-      hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-      hl.bind(mainMod .. " + C", hl.dsp.window.close())
-      hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("${confirm-before-exit} exit"))
-      hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("${confirm-before-exit} poweroff"))
-      hl.bind(mainMod .. " + CTRL + M", hl.dsp.exec_cmd("${confirm-before-exit} reboot"))
-      hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-      hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-      hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-      hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-      hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
-      hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-      hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
-      hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
-      hl.bind(mainMod .. " + CTRL + left", function() local w = hl.get_active_workspace(); if not w then return end; hl.dispatch(hl.dsp.workspace.move({ workspace = w.id, monitor = "l" })) end)
-      hl.bind(mainMod .. " + CTRL + right", function() local w = hl.get_active_workspace(); if not w then return end; hl.dispatch(hl.dsp.workspace.move({ workspace = w.id, monitor = "r" })) end)
-      hl.bind(mainMod .. " + CTRL + up", function() local w = hl.get_active_workspace(); if not w then return end; hl.dispatch(hl.dsp.workspace.move({ workspace = w.id, monitor = "u" })) end)
-      hl.bind(mainMod .. " + CTRL + down", function() local w = hl.get_active_workspace(); if not w then return end; hl.dispatch(hl.dsp.workspace.move({ workspace = w.id, monitor = "d" })) end)
-      hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
-      hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
-      hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.swap({ direction = "l" }))
-      hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.swap({ direction = "d" }))
-      hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.swap({ direction = "u" }))
-      hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.swap({ direction = "r" }))
-      hl.bind(mainMod .. " + CTRL + SHIFT + left", hl.dsp.window.move({ direction = "l" }))
-      hl.bind(mainMod .. " + CTRL + SHIFT + down", hl.dsp.window.move({ direction = "d" }))
-      hl.bind(mainMod .. " + CTRL + SHIFT + up", hl.dsp.window.move({ direction = "u" }))
-      hl.bind(mainMod .. " + CTRL + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
-      hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-      hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
-      hl.bind("code:107", hl.dsp.exec_cmd("${lib.getExe pkgs.grim} -g \"$(${lib.getExe pkgs.slurp})\" -t png - | ${lib.getExe' pkgs.coreutils "tee"} \"$HOME/Pictures/Screenshots/Screenshots_$(date +%Y%m%d_%H%M%S).png\" | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"))
-      hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-      hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
-      hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprlock}"))
-      hl.bind("CTRL + Escape", hl.dsp.exec_cmd("gnome-system-monitor"))
-      hl.bind(mainMod .. " + T", hl.dsp.group.toggle())
-      hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 0 }))
-      hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 0 }))
-      hl.bind(mainMod .. " + CONTROL + 0", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 0 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 0"))
-      hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
-      hl.bind(mainMod .. " + SHIFT + 1", hl.dsp.window.move({ workspace = 1 }))
-      hl.bind(mainMod .. " + CONTROL + 1", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 1 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 1"))
-      hl.bind(mainMod .. " + 2", hl.dsp.focus({ workspace = 2 }))
-      hl.bind(mainMod .. " + SHIFT + 2", hl.dsp.window.move({ workspace = 2 }))
-      hl.bind(mainMod .. " + CONTROL + 2", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 2 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 2"))
-      hl.bind(mainMod .. " + 3", hl.dsp.focus({ workspace = 3 }))
-      hl.bind(mainMod .. " + SHIFT + 3", hl.dsp.window.move({ workspace = 3 }))
-      hl.bind(mainMod .. " + CONTROL + 3", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 3 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 3"))
-      hl.bind(mainMod .. " + 4", hl.dsp.focus({ workspace = 4 }))
-      hl.bind(mainMod .. " + SHIFT + 4", hl.dsp.window.move({ workspace = 4 }))
-      hl.bind(mainMod .. " + CONTROL + 4", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 4 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 4"))
-      hl.bind(mainMod .. " + 5", hl.dsp.focus({ workspace = 5 }))
-      hl.bind(mainMod .. " + SHIFT + 5", hl.dsp.window.move({ workspace = 5 }))
-      hl.bind(mainMod .. " + CONTROL + 5", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 5 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 5"))
-      hl.bind(mainMod .. " + 6", hl.dsp.focus({ workspace = 6 }))
-      hl.bind(mainMod .. " + SHIFT + 6", hl.dsp.window.move({ workspace = 6 }))
-      hl.bind(mainMod .. " + CONTROL + 6", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 6 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 6"))
-      hl.bind(mainMod .. " + 7", hl.dsp.focus({ workspace = 7 }))
-      hl.bind(mainMod .. " + SHIFT + 7", hl.dsp.window.move({ workspace = 7 }))
-      hl.bind(mainMod .. " + CONTROL + 7", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 7 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 7"))
-      hl.bind(mainMod .. " + 8", hl.dsp.focus({ workspace = 8 }))
-      hl.bind(mainMod .. " + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
-      hl.bind(mainMod .. " + CONTROL + 8", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 8 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 8"))
+            hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+            hl.bind(mainMod .. " + C", hl.dsp.window.close())
+            hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("${confirm-before-exit} exit"))
+            hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("${confirm-before-exit} poweroff"))
+            hl.bind(mainMod .. " + CTRL + M", hl.dsp.exec_cmd("${confirm-before-exit} reboot"))
+            hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+            hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+            hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+            hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+            hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
+            hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+            hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
+            hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+            hl.bind(mainMod .. " + CTRL + left", function() local w = hl.get_active_workspace(); if not w then return end; hl.dispatch(hl.dsp.workspace.move({ workspace = w.id, monitor = "l" })) end)
+            hl.bind(mainMod .. " + CTRL + right", function() local w = hl.get_active_workspace(); if not w then return end; hl.dispatch(hl.dsp.workspace.move({ workspace = w.id, monitor = "r" })) end)
+            hl.bind(mainMod .. " + CTRL + up", function() local w = hl.get_active_workspace(); if not w then return end; hl.dispatch(hl.dsp.workspace.move({ workspace = w.id, monitor = "u" })) end)
+            hl.bind(mainMod .. " + CTRL + down", function() local w = hl.get_active_workspace(); if not w then return end; hl.dispatch(hl.dsp.workspace.move({ workspace = w.id, monitor = "d" })) end)
+            hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
+            hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+            hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.swap({ direction = "l" }))
+            hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.swap({ direction = "d" }))
+            hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.swap({ direction = "u" }))
+            hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.swap({ direction = "r" }))
+            hl.bind(mainMod .. " + CTRL + SHIFT + left", hl.dsp.window.move({ direction = "l" }))
+            hl.bind(mainMod .. " + CTRL + SHIFT + down", hl.dsp.window.move({ direction = "d" }))
+            hl.bind(mainMod .. " + CTRL + SHIFT + up", hl.dsp.window.move({ direction = "u" }))
+            hl.bind(mainMod .. " + CTRL + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
+            hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
+            hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+            hl.bind("code:107", hl.dsp.exec_cmd("${lib.getExe pkgs.grim} -g \"$(${lib.getExe pkgs.slurp})\" -t png - | ${lib.getExe' pkgs.coreutils "tee"} \"$HOME/Pictures/Screenshots/Screenshots_$(date +%Y%m%d_%H%M%S).png\" | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"))
+            hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+            hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+            hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprlock}"))
+            hl.bind("CTRL + Escape", hl.dsp.exec_cmd("gnome-system-monitor"))
+            hl.bind(mainMod .. " + T", hl.dsp.group.toggle())
+            hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 0 }))
+            hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 0 }))
+            hl.bind(mainMod .. " + CONTROL + 0", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 0 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 0"))
+            hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
+            hl.bind(mainMod .. " + SHIFT + 1", hl.dsp.window.move({ workspace = 1 }))
+            hl.bind(mainMod .. " + CONTROL + 1", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 1 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 1"))
+            hl.bind(mainMod .. " + 2", hl.dsp.focus({ workspace = 2 }))
+            hl.bind(mainMod .. " + SHIFT + 2", hl.dsp.window.move({ workspace = 2 }))
+            hl.bind(mainMod .. " + CONTROL + 2", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 2 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 2"))
+            hl.bind(mainMod .. " + 3", hl.dsp.focus({ workspace = 3 }))
+            hl.bind(mainMod .. " + SHIFT + 3", hl.dsp.window.move({ workspace = 3 }))
+            hl.bind(mainMod .. " + CONTROL + 3", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 3 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 3"))
+            hl.bind(mainMod .. " + 4", hl.dsp.focus({ workspace = 4 }))
+            hl.bind(mainMod .. " + SHIFT + 4", hl.dsp.window.move({ workspace = 4 }))
+            hl.bind(mainMod .. " + CONTROL + 4", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 4 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 4"))
+            hl.bind(mainMod .. " + 5", hl.dsp.focus({ workspace = 5 }))
+            hl.bind(mainMod .. " + SHIFT + 5", hl.dsp.window.move({ workspace = 5 }))
+            hl.bind(mainMod .. " + CONTROL + 5", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 5 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 5"))
+            hl.bind(mainMod .. " + 6", hl.dsp.focus({ workspace = 6 }))
+            hl.bind(mainMod .. " + SHIFT + 6", hl.dsp.window.move({ workspace = 6 }))
+            hl.bind(mainMod .. " + CONTROL + 6", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 6 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 6"))
+            hl.bind(mainMod .. " + 7", hl.dsp.focus({ workspace = 7 }))
+            hl.bind(mainMod .. " + SHIFT + 7", hl.dsp.window.move({ workspace = 7 }))
+            hl.bind(mainMod .. " + CONTROL + 7", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 7 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 7"))
+            hl.bind(mainMod .. " + 8", hl.dsp.focus({ workspace = 8 }))
+            hl.bind(mainMod .. " + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
+            hl.bind(mainMod .. " + CONTROL + 8", hl.dsp.exec_cmd("${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch moveworkspacetomonitor 8 $(${lib.getExe' pkgs.hyprland "hyprctrl"} activewindow | ${lib.getExe' pkgs.gnugrep "egrep"} \"monitor: [[:digit:]]+\" | ${lib.getExe' pkgs.gnugrep "egrep"} -o \"[[:digit:]]+\") && ${lib.getExe' pkgs.hyprland "hyprctrl"} dispatch workspace 8"))
 
-      hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("${volume} 5%+"), { locked = true, repeating = true })
-      hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("${volume} 5%-"), { locked = true, repeating = true })
-      hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("${volume} 1%+"), { locked = true, repeating = true })
-      hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("${volume} 1%-"), { locked = true, repeating = true })
-      hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -m s 5%+ | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"), { locked = true, repeating = true })
-      hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -m s 5%- | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"), { locked = true, repeating = true })
-      hl.bind("SHIFT + XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -m s 1%+ | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"), { locked = true, repeating = true })
-      hl.bind("SHIFT + XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -m s 1%- | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"), { locked = true, repeating = true })
+            hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("${volume} 5%+"), { locked = true, repeating = true })
+            hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("${volume} 5%-"), { locked = true, repeating = true })
+            hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("${volume} 1%+"), { locked = true, repeating = true })
+            hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("${volume} 1%-"), { locked = true, repeating = true })
+            hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -m s 5%+ | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"), { locked = true, repeating = true })
+            hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -m s 5%- | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"), { locked = true, repeating = true })
+            hl.bind("SHIFT + XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -m s 1%+ | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"), { locked = true, repeating = true })
+            hl.bind("SHIFT + XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -m s 1%- | ${lib.getExe' pkgs.gnugrep "grep"} -oP '\\d*(?=%)' > /run/user/1000/wob.sock"), { locked = true, repeating = true })
 
-      hl.bind("switch:Lid Switch", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprlock}"), { locked = true })
-      hl.bind("XF86AudioMute", hl.dsp.exec_cmd("${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_SINK@ toggle && ${lib.getExe' pkgs.pipewire "pw-cat"} $HOME/.local/share/Steam/steamui/sounds/deck_ui_volume.wav"), { locked = true })
-      hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("${lib.getExe' pkgs.wireplumber "wpctl"}set-mute @DEFAULT_SOURCE@ toggle"), { locked = true })
+            hl.bind("switch:Lid Switch", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprlock}"), { locked = true })
+            hl.bind("XF86AudioMute", hl.dsp.exec_cmd("${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_SINK@ toggle && ${lib.getExe' pkgs.pipewire "pw-cat"} $HOME/.local/share/Steam/steamui/sounds/deck_ui_volume.wav"), { locked = true })
+            hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("${lib.getExe' pkgs.wireplumber "wpctl"}set-mute @DEFAULT_SOURCE@ toggle"), { locked = true })
 
-      hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag())
-      hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
+            hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag())
+            hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
 
-      hl.device({
-          name = "epic-mouse-v1",
-          sensitivity = -0.500000,
-      })
+            hl.device({
+                name = "epic-mouse-v1",
+                sensitivity = -0.500000,
+            })
 
-      hl.env("XCURSOR_SIZE", "24")
-      hl.env("HYPRCURSOR_SIZE", "24")
-      hl.env("XCURSOR_SIZE", "24")
-      hl.env("XKB_DEFAULT_OPTIONS", "caps:super")
-      hl.env("XKB_DEFAULT_LAYOUT", "gb")
-      hl.env("_JAVA_AWT_WM_NONREPARENTING", "1")
-      hl.env("QT_QPA_PLATFORM", "wayland-egl")
-      hl.env("QT_STYLE_OVERRIDE", "gtk2")
-      hl.env("SDL_VIDEODRIVER", "wayland")
-      hl.env("MOZ_USE_XINPUT2", "1")
+            hl.env("XCURSOR_SIZE", "24")
+            hl.env("HYPRCURSOR_SIZE", "24")
+            hl.env("XCURSOR_SIZE", "24")
+            hl.env("XKB_DEFAULT_OPTIONS", "caps:super")
+            hl.env("XKB_DEFAULT_LAYOUT", "gb")
+            hl.env("_JAVA_AWT_WM_NONREPARENTING", "1")
+            hl.env("QT_QPA_PLATFORM", "wayland-egl")
+            hl.env("QT_STYLE_OVERRIDE", "gtk2")
+            hl.env("SDL_VIDEODRIVER", "wayland")
+            hl.env("MOZ_USE_XINPUT2", "1")
 
-      hl.gesture({
-          fingers = 3,
-          direction = "horizontal",
-          action = "workspace",
+            hl.gesture({
+                fingers = 3,
+                direction = "horizontal",
+                action = "workspace",
+            })
+
+            hl.window_rule({
+                match = {
+                    class = ".*",
+                },
+                suppress_event = "maximize",
+            })
+
+            hl.window_rule({
+                match = {
+                    class = "kitty",
+                },
+                workspace = "1",
+            })
+
+            hl.window_rule({
+                match = {
+                    class = "firefox",
+                },
+                workspace = "2",
+            })
+
+            hl.window_rule({
+                match = {
+                    title = "^(.*)(VSCodium)$",
+                },
+                workspace = "3",
+            })
+
+            hl.window_rule({
+                match = {
+                    class = "code",
+                },
+                workspace = "3",
+            })
+
+            hl.window_rule({
+                match = {
+                    class = "^jetbrains-.*$",
+                },
+                workspace = "3",
+            })
+
+      hl.window_rule({
+          match = {
+              class = "jetbrains-gateway",
+              title = "^Welcome to.*$"
+          },
+          group = "set"
       })
 
       hl.window_rule({
           match = {
-              class = ".*",
+              class = "jetbrains-gateway",
+              title = "^Gateway to.*$",
+              float = true
           },
-          suppress_event = "maximize",
-      })
-
-      hl.window_rule({
-          match = {
-              class = "kitty",
-          },
-          workspace = "1",
-      })
-
-      hl.window_rule({
-          match = {
-              class = "firefox",
-          },
-          workspace = "2",
-      })
-
-      hl.window_rule({
-          match = {
-              title = "^(.*)(VSCodium)$",
-          },
-          workspace = "3",
-      })
-
-      hl.window_rule({
-          match = {
-              class = "code",
-          },
-          workspace = "3",
+          tile = true
       })
 
       hl.window_rule({
           match = {
               class = "^jetbrains-.*$",
+              float = true
           },
+          no_initial_focus = true
+      })
+
+      hl.window_rule({
+          match = {
+              class = "^(.*jetbrains.*)$",
+              title = "^(win.*)$"
+          },
+          no_initial_focus = true
+      })
+
+      hl.window_rule({
+          match = {
+              class = "^(.*jetbrains.*)$",
+              title = "^$",
+              float = true
+          },
+          stay_focused = true
+      })
+
+      hl.window_rule({
+          match = {
+              class = "^(.*jetbrains.*)$",
+              title = "^\\s$"
+          },
+          no_initial_focus = true
+      })
+
+
+      hl.window_rule({
+          match = {
+              class = "^jetbrains-.*$",
+              float = 1,
+          },
+          no_initial_focus = true,
           workspace = "3",
       })
 
-hl.window_rule({
-    match = {
-        class = "jetbrains-gateway",
-        title = "^Welcome to.*$"
-    },
-    group = "set"
-})
+            hl.window_rule({
+                match = {
+                    class = "cinny$",
+                },
+                workspace = "5",
+            })
 
-hl.window_rule({
-    match = {
-        class = "jetbrains-gateway",
-        title = "^Gateway to.*$",
-        float = true
-    },
-    tile = true
-})
+            hl.window_rule({
+                match = {
+                    title = "^(.*)(Discord)$",
+                },
+                workspace = "5",
+            })
 
-hl.window_rule({
-    match = {
-        class = "^jetbrains-.*$",
-        float = true
-    },
-    no_initial_focus = true
-})
+            hl.window_rule({
+                match = {
+                    title = "^Discord Updater$",
+                },
+                workspace = "5",
+            })
 
-hl.window_rule({
-    match = {
-        class = "^(.*jetbrains.*)$",
-        title = "^(win.*)$"
-    },
-    no_initial_focus = true
-})
+            hl.window_rule({
+                match = {
+                    title = "^(Element)(.*)$",
+                },
+                workspace = "5",
+            })
 
-hl.window_rule({
-    match = {
-        class = "^(.*jetbrains.*)$",
-        title = "^$",
-        float = true
-    },
-    stay_focused = true
-})
+            hl.config({
+                animations = {
+                    enabled = true,
+                },
+                debug = {
+                    disable_logs = false,
+                },
+                decoration = {
+                    blur = {
+                        enabled = true,
+                        passes = 2,
+                        size = 5,
+                        vibrancy = 0.169600,
+                    },
+                    shadow = {
+                        color = "rgba(1a1a1aee)",
+                        enabled = true,
+                        range = 4,
+                        render_power = 3,
+                    },
+                    active_opacity = 1.000000,
+                    inactive_opacity = 1.000000,
+                    rounding = 5,
+                },
+                dwindle = {
+                    preserve_split = true,
+                },
+                general = {
+                    allow_tearing = false,
+                    border_size = 2,
+                    col = {
+                        active_border = { colors = { "rgba(ff30c7ee)", "rgba(00ff99ee)" }, angle = 45 },
+                        inactive_border = "rgba(5959b4aa)",
+                    },
+                    gaps_in = 5,
+                    gaps_out = 0,
+                    layout = "dwindle",
+                    resize_on_border = false,
+                },
+                input = {
+                    touchpad = {
+                        natural_scroll = true,
+                    },
+                    follow_mouse = 1,
+                    kb_layout = "gb",
+                    kb_model = "",
+                    kb_options = "",
+                    kb_rules = "",
+                    kb_variant = "",
+                    sensitivity = 0,
+                },
+                master = {
+                    new_status = "master",
+                },
+                misc = {
+                    disable_hyprland_logo = false,
+                    force_default_wallpaper = -1,
+                },
+            })
 
-hl.window_rule({
-    match = {
-        class = "^(.*jetbrains.*)$",
-        title = "^\\s$"
-    },
-    no_initial_focus = true
-})
-
-
-hl.window_rule({
-    match = {
-        class = "^jetbrains-.*$",
-        float = 1,
-    },
-    no_initial_focus = true,
-    workspace = "3",
-})
-
-      hl.window_rule({
-          match = {
-              class = "cinny$",
-          },
-          workspace = "5",
-      })
-
-      hl.window_rule({
-          match = {
-              title = "^(.*)(Discord)$",
-          },
-          workspace = "5",
-      })
-
-      hl.window_rule({
-          match = {
-              title = "^Discord Updater$",
-          },
-          workspace = "5",
-      })
-
-      hl.window_rule({
-          match = {
-              title = "^(Element)(.*)$",
-          },
-          workspace = "5",
-      })
-
-      hl.config({
-          animations = {
-              enabled = true,
-          },
-          debug = {
-              disable_logs = false,
-          },
-          decoration = {
-              blur = {
-                  enabled = true,
-                  passes = 2,
-                  size = 5,
-                  vibrancy = 0.169600,
-              },
-              shadow = {
-                  color = "rgba(1a1a1aee)",
-                  enabled = true,
-                  range = 4,
-                  render_power = 3,
-              },
-              active_opacity = 1.000000,
-              inactive_opacity = 1.000000,
-              rounding = 5,
-          },
-          dwindle = {
-              preserve_split = true,
-          },
-          general = {
-              allow_tearing = false,
-              border_size = 2,
-              col = {
-                  active_border = { colors = { "rgba(ff30c7ee)", "rgba(00ff99ee)" }, angle = 45 },
-                  inactive_border = "rgba(5959b4aa)",
-              },
-              gaps_in = 5,
-              gaps_out = 0,
-              layout = "dwindle",
-              resize_on_border = false,
-          },
-          input = {
-              touchpad = {
-                  natural_scroll = true,
-              },
-              follow_mouse = 1,
-              kb_layout = "gb",
-              kb_model = "",
-              kb_options = "",
-              kb_rules = "",
-              kb_variant = "",
-              sensitivity = 0,
-          },
-          master = {
-              new_status = "master",
-          },
-          misc = {
-              disable_hyprland_logo = false,
-              force_default_wallpaper = -1,
-          },
-      })
-
-      hl.on("hyprland.start", function()
-          hl.exec_cmd("${lib.getExe' pkgs._1password-gui "1password"} --silent")
-      end)
+            hl.on("hyprland.start", function()
+                hl.exec_cmd("${lib.getExe' pkgs._1password-gui "1password"} --silent")
+            end)
     '';
   };
 }

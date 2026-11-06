@@ -188,7 +188,6 @@ in {
       }
     );
 
-
     "opencode/opencode-notifier.json".source = jsonFormat.generate "opencode.json" {
       bell = true;
     };
@@ -246,7 +245,5 @@ in {
         maxContextLimit = 100000;
       };
     };
-
   };
 }
-

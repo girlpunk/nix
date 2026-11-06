@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{lib, ...}: {
   defaultGit.work = true;
 
   imports = [
@@ -31,11 +27,11 @@
             models = {
               "qwen3.8-27b" = {
                 name = "qwen3.8-27b";
-                options = { concurrency = 1; };
+                options = {concurrency = 1;};
               };
               hermes-agent = {
                 name = "Giles";
-                options = { concurrency = 1; };
+                options = {concurrency = 1;};
               };
             };
           };

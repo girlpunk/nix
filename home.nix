@@ -1,14 +1,18 @@
 {
   inputs,
-  pkgs,
+  system,
+  overlays,
   ...
 }: let
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
-  inherit (pkgs) lib;
+
+  pkgs = import inputs.nixpkgs {
+    inherit system overlays;
+    config.allowUnfree = true;
+  };
 
   modules = [
     ./home
-    inputs.nix-index.homeModules.default
     inputs._1password-shell-plugins.hmModules.default
     inputs.nix-index-database.homeModules.nix-index
     {nix.registry.nixpkgs.flake = inputs.nixpkgs;}
@@ -24,12 +28,13 @@
 
   make = host: {
     ${host} = homeManagerConfiguration {
-      inherit lib pkgs;
+      inherit pkgs;
+      inherit (pkgs) lib;
       extraSpecialArgs = {inherit inputs;};
       modules = modules ++ [./home/machine/${host}];
     };
   };
 in {
   inherit modules;
-  configs = lib.mergeAttrsList (map make hosts);
+  configs = pkgs.lib.mergeAttrsList (map make hosts);
 }

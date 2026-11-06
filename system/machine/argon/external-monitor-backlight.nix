@@ -9,7 +9,7 @@
   boot.kernelModules = ["ddcci-backlight"];
 
   services.udev.extraRules = let
-    bash = lib.getExe pkgs.bash;
+    bash = pkgs.lib.getExe pkgs.bash;
     ddcciDev = "i915 gmbus dpc";
     ddcciNode = "/sys/bus/i2c/devices/i2c-0/new_device";
   in ''
