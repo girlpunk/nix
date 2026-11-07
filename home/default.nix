@@ -118,8 +118,6 @@ in {
     };
 
     jq.enable = true;
-
-    nix-index.enable = true;
   };
 
   manual.html.enable = true;

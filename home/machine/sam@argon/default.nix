@@ -5,6 +5,7 @@ _: {
     ../../programs/discord
     ../../programs/hyprland
     ../../programs/kubernetes-client
+    ../../programs/obsidian
     ../../programs/vscode
     #../../programs/android
   ];

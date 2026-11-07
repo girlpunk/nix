@@ -93,7 +93,6 @@
 
       inputs = {
         flake-compat.follows = "flake-compat";
-        gitignore.inputs.nixpkgs.follows = "nixpkgs";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -122,6 +121,11 @@
         flake-parts.follows = "flake-parts";
         make-shell.follows = "make-shell";
       };
+    };
+
+    obsidian-extensions = {
+      url = "github:karaolidis/nix-obsidian-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Common dependencies

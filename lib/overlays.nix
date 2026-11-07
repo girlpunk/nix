@@ -19,6 +19,10 @@
       config.allowUnfree = true;
     };
 
+    #obsidianPlugins = inputs.obsidian-extensions.legacyPackages.obsidianPlugins;
+    #obsidianThemes = inputs.obsidian-extensions.legacyPackages.obsidianThemes;
+    inherit (inputs.obsidian-extensions.legacyPackages.${system}) obsidianPlugins obsidianThemes;
+
     treesitterGrammars = ts:
       ts.withPlugins (p: [
         p.tree-sitter-scala

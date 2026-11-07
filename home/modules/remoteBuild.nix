@@ -11,13 +11,13 @@
         protocol = "ssh-ng";
         maxJobs = 8;
         speedFactor = 2;
-        #supportedFeatures = [
-        #  "nixos-test"
-        #  "benchmark"
-        #  "big-parallel"
-        #  "kvm"
-        #];
-        mandatoryFeatures = [];
+        systems = ["x86_64-linux"];
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
       }
     ];
     distributedBuilds = true;

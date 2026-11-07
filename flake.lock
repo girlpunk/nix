@@ -362,6 +362,27 @@
         "type": "github"
       }
     },
+    "obsidian-extensions": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1793624785,
+        "narHash": "sha256-HE1QITxs7VhGOEGeivdxzrW38gQntnJYbPCGQnUQVQI=",
+        "owner": "karaolidis",
+        "repo": "nix-obsidian-extensions",
+        "rev": "24cc1e20cf718601a44197ab944940dc78d51ed5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "karaolidis",
+        "repo": "nix-obsidian-extensions",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "_1password-shell-plugins": "_1password-shell-plugins",
@@ -380,8 +401,9 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "obsidian-extensions": "obsidian-extensions",
         "sops-nix": "sops-nix",
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix_2"
       }
     },
     "rust-overlay": {
@@ -428,6 +450,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
+          "obsidian-extensions",
           "nixpkgs"
         ]
       },
