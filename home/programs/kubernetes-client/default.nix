@@ -10,7 +10,6 @@
       mkdir -p $out
       kubectl completion zsh > $out/kubectl.zsh
     '';
-
   #cnpgCompletions = pkgs.writeShellScriptBin "kubectl_complete-cnpg" ''
   #  # Call the __complete command passing it all arguments
   #  kubectl cnpg __complete "\$@"

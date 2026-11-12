@@ -7,7 +7,7 @@
 }: {
   home.shell.enableZshIntegration = true;
 
-  programs.zsh = {
+  programs.zsh = rec {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
 
@@ -79,51 +79,57 @@
 
     syntaxHighlighting.enable = true;
 
-    completionInit = ''
-      # compinit location
-      zstyle :compinstall filename '$HOME/.zshrc'
+    completionInit = lib.mkMerge [
+      (lib.mkOrder 1000 ''
+        # compinit location
+        zstyle :compinstall filename '${dotDir}/.zshrc'
 
-      # Enable completion
-      autoload -Uz compinit bashcompinit
-      compinit
-      bashcompinit
+        # Enable completion
+        autoload -Uz compinit bashcompinit
+        compinit
+        bashcompinit
 
-      # Do menu-driven completion.
-      zstyle ':completion:*' menu select
+        # Do menu-driven completion.
+        zstyle ':completion:*' menu select
 
-      # Color completion for some things.
-      # http://linuxshellaccount.blogspot.com/2008/12/color-completion-using-zsh-modules-on.html
-      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+        # Color completion for some things.
+        # http://linuxshellaccount.blogspot.com/2008/12/color-completion-using-zsh-modules-on.html
+        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
 
-      # formatting and messages
-      # http://www.masterzen.fr/2009/04/19/in-love-with-zsh-part-one/
-      zstyle ':completion:*' verbose yes
-      zstyle ':completion:*:descriptions' format "$fg[yellow]%B--- %d%b"
-      zstyle ':completion:*:messages' format '%d'
-      zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
-      zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
-      zstyle ':completion:*' group-name ""
+        # formatting and messages
+        # http://www.masterzen.fr/2009/04/19/in-love-with-zsh-part-one/
+        zstyle ':completion:*' verbose yes
+        zstyle ':completion:*:descriptions' format "$fg[yellow]%B--- %d%b"
+        zstyle ':completion:*:messages' format '%d'
+        zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
+        zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+        zstyle ':completion:*' group-name ""
 
-      # If Terraform is installed, setup completion
-      if command -v -- terraform > /dev/null 2>&1; then
-          complete -o nospace -C terraform terraform
-      fi
+        # If Terraform is installed, setup completion
+        if command -v -- terraform > /dev/null 2>&1; then
+            complete -o nospace -C terraform terraform
+        fi
 
-      # Add dotnet tools to path
-      if [[ -d "$HOME/.dotnet/tools" ]]; then
-        export PATH="$PATH:$HOME/.dotnet/tools"
-      fi
+        # If pipx is installed, register it
+        if command -v -- pipx > /dev/null 2>&1; then
+          eval "$(register-python-argcomplete pipx)"
+        fi
 
-      # If pipx is installed, register it
-      if command -v -- pipx > /dev/null 2>&1; then
-        eval "$(register-python-argcomplete pipx)"
-      fi
-
-      # If Azure CLI is installed, setup completion
-      if [ -f "/mnt/c/Program Files/Microsoft SDKs/Azure/CLI2/Scripts/az.completion.sh" ]; then
-        eval "$(register-python-argcomplete az)"
-      fi
-    '';
+        # If Azure CLI is installed, setup completion
+        if [ -f "/mnt/c/Program Files/Microsoft SDKs/Azure/CLI2/Scripts/az.completion.sh" ]; then
+          eval "$(register-python-argcomplete az)"
+        fi
+      '')
+      (lib.mkIf (
+          if osConfig != null
+          then osConfig.programs.dotnet.enable
+          else false
+        )
+        (lib.mkOrder 1000 ''
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          eval "$(dotnet completions script zsh)"
+        ''))
+    ];
 
     enableCompletion = true;
     enableVteIntegration = true;
