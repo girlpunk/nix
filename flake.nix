@@ -125,7 +125,11 @@
 
     obsidian-extensions = {
       url = "github:karaolidis/nix-obsidian-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
     };
 
     # Common dependencies
