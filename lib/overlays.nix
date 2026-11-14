@@ -21,7 +21,7 @@
 
     #obsidianPlugins = inputs.obsidian-extensions.legacyPackages.obsidianPlugins;
     #obsidianThemes = inputs.obsidian-extensions.legacyPackages.obsidianThemes;
-    inherit (inputs.obsidian-extensions.legacyPackages.${system}) obsidianPlugins obsidianThemes;
+    inherit (inputs.obsidian-extensions.legacyPackages.${p.system}) obsidianPlugins obsidianThemes;
 
     treesitterGrammars = ts:
       ts.withPlugins (p: [
