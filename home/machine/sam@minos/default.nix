@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ../../programs/activitywatch
     ../../programs/android
@@ -8,6 +8,9 @@
   ];
 
   programs.opencode = {
+
+    package = pkgs.unstable.opencode;
+
     settings = {
       model = "ollama/qwen3:30b";
       provider = {
@@ -18,11 +21,14 @@
             baseURL = "http://127.0.0.1:11434/v1";
           };
           models = {
-            "qwen3:30b" = {
-              name = "Qwen 3 30B MoE (coding)";
-            };
+            #"qwen3:30b" = {
+            #  name = "Qwen 3 30B MoE (coding)";
+            #};
             "qwen3:8b" = {
               name = "Qwen 3 8B (fast)";
+            };
+            "qwen3.8:27b" = {
+              name = "qwen3.8:27b";
             };
           };
         };

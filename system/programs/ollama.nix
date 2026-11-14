@@ -4,11 +4,12 @@
   # -vulkan if that ever changes.
   services.ollama = {
     enable = true;
-    package = pkgs.ollama-cpu;
+    package = pkgs.unstable.ollama-cpu;
 
     # Pulled on boot so a model is ready before the first session.
     loadModels = [
-      "qwen3:30b" # MoE (30B total, 3B active): best coding model that fits CPU-only in 48GB
+      "qwen3.8:27b"
+      #"qwen3:30b" # MoE (30B total, 3B active): best coding model that fits CPU-only in 48GB
       "qwen3:8b" # smaller, fast fallback
     ];
 
